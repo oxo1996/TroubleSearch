@@ -74,8 +74,8 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="520" />
-    <option name="width" value="979" />
-    <option name="height" value="1049" />
+    <option name="width" value="980" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -176,6 +176,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/testing.py" />
+    <entry file="file://$PROJECT_DIR$/../untitled/test.py" />
     <entry file="file://$PROJECT_DIR$/crawlable.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -197,13 +198,6 @@
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../untitled/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="46" selection-start-line="4" selection-end-line="5" />
         </state>
       </provider>
     </entry>
