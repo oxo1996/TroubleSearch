@@ -56,10 +56,13 @@ class CrawlAmore(crawlable):
         soup = BeautifulSoup(htmlTemp, "html.parser")
         ingr = soup.select("div > div> dl > dd > div > ul> li > p.txt")
 
-        ingrStr = self._removeHtmlTag(str(ingr[0]))
-        ingrStr = ingrStr.split(',')
-        for ig in ingrStr:
-            ingredients.append(ig.strip())
+        try:
+            ingrStr = self._removeHtmlTag(str(ingr[0]))
+            ingrStr = ingrStr.split(',')
+            for ig in ingrStr:
+                ingredients.append(ig.strip())
+        except IndexError:
+            print("not exist ingredients")
 
         closeBtn = self.driver.find_element_by_xpath("//*[@class='layer_btns']/a")
         closeBtn.send_keys('\n')
