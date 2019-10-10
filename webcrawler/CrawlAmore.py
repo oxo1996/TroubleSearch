@@ -58,8 +58,9 @@ class CrawlAmore(crawlable):
 
         try:
             ingrStr = self._removeHtmlTag(str(ingr[0]))
-            ingrStr = ingrStr.split(',')
+            ingrStr = ingrStr.split(', ')
             for ig in ingrStr:
+                ig = ig.replace("\n", '')   # 추가함(에러 나면 이거 볼 것)
                 ingredients.append(ig.strip())
         except IndexError:
             print("not exist ingredients")
