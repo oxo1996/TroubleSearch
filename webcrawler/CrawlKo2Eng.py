@@ -40,7 +40,8 @@ class CrawlKo2Eng(crawlable):
 
                 try:
                     engName = self.driver.find_element_by_xpath("//*[@id='content']/div/div[3]/div/div/table/tbody[2]/tr/td[3]/a")
-                    eng_dict[ingr] = engName.text
+                    #eng_dict[ingr] = engName.text      에러나면 이걸로
+                    eng_dict[ingr] = engName.text.replace('/', '&') # '/' 때문에 에러나서 수정함. 에러 나면 위
                     print(eng_dict[ingr])
                 except NoSuchElementException as e:
                     print("not found ", ingr)

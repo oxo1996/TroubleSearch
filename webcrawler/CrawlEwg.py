@@ -38,26 +38,28 @@ class CrawlEwg(crawlable):
             soup.find("div", id="Products").decompose()
             desc = soup.select("div.rightside_content2012")
             desc = self._removeHtmlTag(str(desc))
-            print(desc)
+            return desc
         except AttributeError as e:
-            print("no information description")
-            
+            #print("no information description")
+            raise AttributeError
 
     def _crawling(self):
-        ingrEwg = {}
+        category = "ewg"
+        # ingrDesc = {}
+        # ingrDesc[category]= {}
         ingrKo2Eng = self._readFile("ingrKo2Eng.json")
+        ingrDesc = self._readFile("ingrDesc.json")
         self.driver.implicitly_wait(10)
         self.driver.get(self.link)
 
         adbox = self.driver.find_element_by_xpath("//div[@class='sidebar-iframe-close']")
-        #adbox.send_keys('\n')
         adbox.click()
 
         for koName in ingrKo2Eng.keys():
             engName = ingrKo2Eng[koName]
-            searchBox = self.driver.find_element_by_xpath("//*[@id='s']")
-            #searchBox.clear()
-            
+            if engName in ingrDesc[category].keys():
+                continue
+            searchBox = self.driver.find_element_by_xpath("//*[@id='s']")            
             self.driver.implicitly_wait(5)
             searchBox.send_keys(engName)
             searchBox.submit()
@@ -67,12 +69,17 @@ class CrawlEwg(crawlable):
                 ingrBtn = self.driver.find_element_by_xpath("//*[@align='left']/a")
                 ingrBtn.send_keys('\n')
                 print(engName)
-                self._getDesc()
+                try:
+                    ingrDesc[category][engName] = self._getDesc()
+                    with open('ingrDesc.json', 'w', encoding='utf-8') as make_file:
+                        json.dump(ingrDesc, make_file, indent="\t")
+                except AttributeError:
+                    print("not found in " + category)
             except NoSuchElementException as e:
                 print("no information " + engName)
                 continue
 
-        return ingrEwg
+        return ingrDesc
 
     def getData(self):
         data = self._crawling()
