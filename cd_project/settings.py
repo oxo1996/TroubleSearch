@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'symptom.apps.SymptomConfig',
     'skincare.apps.SkincareConfig',
     'search.apps.SearchConfig',
+    'information.apps.informationConfig'
 ]
 
 MIDDLEWARE = [
@@ -125,7 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TATICFILES_DIRS=[
-    os.path.join(BASE_DIR, 'home', 'static')
+    os.path.join(BASE_DIR, 'home','skincare', 'static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
