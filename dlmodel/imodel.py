@@ -2,13 +2,9 @@ from abc import *
 
 class imodel(metaclass=ABCMeta):
     @abstractmethod
-    def loadModel(self):
-        pass
-    
-    @abstractmethod
-    def saveModel(self):
+    def mostSimilar(symptom : str, product : str, num : int, order : str):
         pass
 
     @abstractmethod
-    def getData(self):
+    def getResult(self, symptom : str, product : str):
         pass
