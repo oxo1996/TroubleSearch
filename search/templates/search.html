@@ -23,7 +23,7 @@
     
     <style>
       div{
-          text-align : right;
+          text-align : left;
       }
       </style>  
   
@@ -46,427 +46,118 @@
     </div>
   </nav>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
-	JotForm.init(function(){
-	JotForm.clearFieldOnHide="disable";
-    /*INIT-END*/
-	});
 
-   JotForm.prepareCalculationsOnTheFly([null,{"name":"input1","qid":"1","text":"자가진단","type":"control_head"},{"name":"submitForm","qid":"2","text":"완료","type":"control_button"},null,null,null,null,null,null,null,null,null,null,null,null,{"name":"input15","qid":"15","text":"세부 증상","type":"control_widget"},null,null,{"name":"input18","qid":"18","text":"성별","type":"control_widget"},{"name":"input19","qid":"19","text":"연령","type":"control_widget"},{"name":"input20","qid":"20","text":"피부타입","type":"control_widget"},{"name":"input21","qid":"21","text":"증상 타입","type":"control_widget"},{"name":"input22","qid":"22","text":"최근 사용 제품","type":"control_widget"}]);
-   setTimeout(function() {
-JotForm.paymentExtrasOnTheFly([null,{"name":"input1","qid":"1","text":"자가진단","type":"control_head"},{"name":"submitForm","qid":"2","text":"완료","type":"control_button"},null,null,null,null,null,null,null,null,null,null,null,null,{"name":"input15","qid":"15","text":"세부 증상","type":"control_widget"},null,null,{"name":"input18","qid":"18","text":"성별","type":"control_widget"},{"name":"input19","qid":"19","text":"연령","type":"control_widget"},{"name":"input20","qid":"20","text":"피부타입","type":"control_widget"},{"name":"input21","qid":"21","text":"증상 타입","type":"control_widget"},{"name":"input22","qid":"22","text":"최근 사용 제품","type":"control_widget"}]);}, 20); 
+  $(document).ready(function(){
+
+    var counter = 2;
+
+    $("#plus").click(function () {
+
+    var newTextBoxDiv = $(document.createElement('div')).attr("class", '');
+
+    newTextBoxDiv.after().html('<input name="product" type="text" class="form-control">');
+
+    newTextBoxDiv.appendTo("#using");
+    counter++;
+      });
+
+  });
 </script>
-<link href="https://cdn.jotfor.ms/static/formCss.css?3.3.13343" rel="stylesheet" type="text/css" />
-<link type="text/css" media="print" rel="stylesheet" href="https://cdn.jotfor.ms/css/printForm.css?3.3.13343" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/nova.css?3.3.13343" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/566a91c2977cdfcd478b4567.css?themeRevisionID=5d713a7304e9ed3c13620001"/>
-<style type="text/css">
-    .form-label-left{
-        width:150px;
-    }
-    .form-line{
-        padding-top:12px;
-        padding-bottom:12px;
-    }
-    .form-label-right{
-        width:150px;
-    }
-    .form-all{
-        width:590px;
-        color:#555 !important;
-        font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, sans-serif;
-        font-size:14px;
-    }
-    .form-radio-item label, .form-checkbox-item label, .form-grading-label, .form-header{
-        color: Black;
-    }
 
-</style>
-
-<style type="text/css" id="form-designer-style">
-    /* Injected CSS Code */
-.form-label.form-label-auto {
-        
-        display: inline-block;
-        float: left;
-        text-align: left;
-      
-      }/*PREFERENCES STYLE*/
-    .form-all {
-      font-family: Lucida Grande, sans-serif;
-    }
-    .form-all .qq-upload-button,
-    .form-all .form-submit-button,
-    .form-all .form-submit-reset,
-    .form-all .form-submit-print {
-      font-family: Lucida Grande, sans-serif;
-    }
-    .form-all .form-pagebreak-back-container,
-    .form-all .form-pagebreak-next-container {
-      font-family: Lucida Grande, sans-serif;
-    }
-    .form-header-group {
-      font-family: Lucida Grande, sans-serif;
-    }
-    .form-label {
-      font-family: Lucida Grande, sans-serif;
-    }
-  
-    
-  
-    .form-line {
-      margin-top: 12px 36px 12px 36px px;
-      margin-bottom: 12px 36px 12px 36px px;
-    }
-  
-    .form-all {
-      width: 590px;
-    }
-  
-    .form-label-left,
-    .form-label-right,
-    .form-label-left.form-label-auto,
-    .form-label-right.form-label-auto {
-      width: 150px;
-    }
-  
-    .form-all {
-      font-size: 14px
-    }
-    .form-all .qq-upload-button,
-    .form-all .qq-upload-button,
-    .form-all .form-submit-button,
-    .form-all .form-submit-reset,
-    .form-all .form-submit-print {
-      font-size: 14px
-    }
-    .form-all .form-pagebreak-back-container,
-    .form-all .form-pagebreak-next-container {
-      font-size: 14px
-    }
-  
-    .supernova .form-all, .form-all {
-      background-color: #fff;
-      border: 1px solid transparent;
-    }
-  
-    .form-all {
-      color: #555;
-    }
-    .form-header-group .form-header {
-      color: #555;
-    }
-    .form-header-group .form-subHeader {
-      color: #555;
-    }
-    .form-label-top,
-    .form-label-left,
-    .form-label-right,
-    .form-html,
-    .form-checkbox-item label,
-    .form-radio-item label {
-      color: #555;
-    }
-    .form-sub-label {
-      color: #6f6f6f;
-    }
-  
-    .supernova {
-      background-color: undefined;
-    }
-    .supernova body {
-      background: transparent;
-    }
-  
-    .form-textbox,
-    .form-textarea,
-    .form-radio-other-input,
-    .form-checkbox-other-input,
-    .form-captcha input,
-    .form-spinner input {
-      background-color: undefined;
-    }
-  
-    .supernova {
-      background-image: none;
-    }
-    #stage {
-      background-image: none;
-    }
-  
-    .form-all {
-      background-image: none;
-    }
-  
-  .ie-8 .form-all:before { display: none; }
-  .ie-8 {
-    margin-top: auto;
-    margin-top: initial;
-  }
-  
-  /*PREFERENCES STYLE*//*__INSPECT_SEPERATOR__*/
-    /* Injected CSS Code */
-</style>
-
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_blue.css?3.3.13343"/>
 <div class="row">
   <div class="col-md-2">
   </div>
   <div class="col-md-8">
-<form class="jotform-form " style="margin:0px; padding:0px;"action="https://submit.jotform.me/submit/92822442403451/" method="post" name="form_92822442403451" id="92822442403451" accept-charset="utf-8">
-  <input type="hidden" name="formID" value="92822442403451" />
-  <input type="hidden" id="JWTContainer" value="" />
-  <input type="hidden" id="cardinalOrderNumber" value="" />
-  <div role="main" class="form-all"  >
-    <ul class="form-section page-section">
-        <div class="form-header-group ">
-            <h1 id="header_1" class="form-header" data-component="header">
-              자가진단
-            </h1>
-        </div>
-      <li class="form-line" data-type="control_widget" id="id_18">
-        <label class="form-label form-label-top" id="label_18" for="input_18"> 성별 </label>
-        <div id="cid_18" class="form-input-wide">
-          <div style="width:100%;text-align:Left" data-component="widget-field">
-            <iframe title="Button Checkboxes" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_18" src="" style="border:none;width:600px;height:50px" data-width="600" data-height="50">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_18" class="form-hidden form-widget  " name="q18_input18" value="" />
-              <input type="hidden" id="widget_settings_18" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22options%22%2C%22value%22%3A%22%EB%82%A8%EC%84%B1%5Cn%EC%97%AC%EC%84%B1%22%7D%2C%7B%22name%22%3A%22color%22%2C%22value%22%3A%22Blue%22%7D%2C%7B%22name%22%3A%22row%22%2C%22value%22%3A%220%22%7D%2C%7B%22name%22%3A%22spacing%22%2C%22value%22%3A%221%22%7D%2C%7B%22name%22%3A%22width%22%2C%22value%22%3A%22250%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_18");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(18, {
-          "formID": 92822442403451
-        })
-      }
-    };
-    _cFieldFrame.src = "//widgets.jotform.io/buttonCheckboxes/?qid=18&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_widget" id="id_19">
-        <label class="form-label form-label-top" id="label_19" for="input_19">
-          연령
-          <span class="form-required">
-            *
-          </span>
+    <form class="search" action="{% url 'information' %}" method="POST" accept-charset="utf-8">
+      {% csrf_token %}
+      <div class="border border-secondary">
+        <h1>자가진단</h1>
+      </div>
+      <div class="border border-secondary">
+        <h3>성별</h3>
+        <label class="radio-inline">
+          <input type="radio" name="gender" id="male" value="male"> 남성
         </label>
-        <div id="cid_19" class="form-input-wide jf-required">
-          <div style="width:100%;text-align:Center" data-component="widget-field">
-            <iframe title="Button Checkboxes" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_19" src="" style="border:none;width:700px;height:50px" data-width="700" data-height="50">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_19" class="form-hidden form-widget widget-required " name="q19_input19" value="" />
-              <input type="hidden" id="widget_settings_19" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22options%22%2C%22value%22%3A%2210%EB%8C%80%5Cn20%EB%8C%80%5Cn30%EB%8C%80%5Cn40%EB%8C%80%5Cn50%EB%8C%80%22%7D%2C%7B%22name%22%3A%22color%22%2C%22value%22%3A%22Black%22%7D%2C%7B%22name%22%3A%22row%22%2C%22value%22%3A%223%22%7D%2C%7B%22name%22%3A%22spacing%22%2C%22value%22%3A%221%22%7D%2C%7B%22name%22%3A%22width%22%2C%22value%22%3A%22150%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_19");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(19, {
-          "formID": 92822442403451
-        })
-      }
-    };
-    _cFieldFrame.src = "//widgets.jotform.io/buttonCheckboxes/?qid=19&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_widget" id="id_20">
-        <label class="form-label form-label-top" id="label_20" for="input_20">
-          피부타입
-          <span class="form-required">
-            *
-          </span>
+        <label class="radio-inline">
+          <input type="radio" name="gender" id="female" value="female"> 여성
         </label>
-        <div id="cid_20" class="form-input-wide jf-required">
-          <div style="width:100%;text-align:Center" data-component="widget-field">
-            <iframe title="Button Checkboxes" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_20" src="" style="border:none;width:700px;height:50px" data-width="700" data-height="50">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_20" class="form-hidden form-widget widget-required " name="q20_input20" value="" />
-              <input type="hidden" id="widget_settings_20" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22options%22%2C%22value%22%3A%22%EB%AA%A8%EB%A6%84%5Cn%EA%B1%B4%EC%84%B1%5Cn%EC%A4%91%EC%84%B1%5Cn%EC%A7%80%EC%84%B1%5Cn%EB%B3%B5%ED%95%A9%EC%84%B1%22%7D%2C%7B%22name%22%3A%22color%22%2C%22value%22%3A%22Black%22%7D%2C%7B%22name%22%3A%22row%22%2C%22value%22%3A%223%22%7D%2C%7B%22name%22%3A%22spacing%22%2C%22value%22%3A%221%22%7D%2C%7B%22name%22%3A%22width%22%2C%22value%22%3A%22150%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_20");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(20, {
-          "formID": 92822442403451
-        })
-      }
-    };
-    _cFieldFrame.src = "//widgets.jotform.io/buttonCheckboxes/?qid=20&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_widget" id="id_22">
-        <label class="form-label form-label-right form-label-auto" id="label_22" for="input_22"> 최근 사용 제품 </label>
-        <div id="cid_22" class="form-input">
-          <div style="width:100%;text-align:Left" data-component="widget-field">
-            <iframe title="Dynamic Textbox" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_22" src="" style="border:none;width:300px;height:70px" data-width="300" data-height="70">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_22" class="form-hidden form-widget  " name="q22_input22" value="" />
-              <input type="hidden" id="widget_settings_22" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22existing%22%2C%22value%22%3A%221%22%7D%2C%7B%22name%22%3A%22buttontext%22%2C%22value%22%3A%22Add%20More%22%7D%2C%7B%22name%22%3A%22size%22%2C%22value%22%3A%2225%22%7D%2C%7B%22name%22%3A%22theme%22%2C%22value%22%3A%22Default%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_22");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(22, {
-          "formID": 92822442403451
-        })
-      }
-    };
-    _cFieldFrame.src = "//widgets.jotform.io/dynamicFields/?qid=22&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_widget" id="id_21">
-        <label class="form-label form-label-top" id="label_21" for="input_21">
-          증상 타입
-          <span class="form-required">
-            *
-          </span>
+      </div>
+      <div class="border border-secondary">
+        <h3>연령</h3>
+        <label class="radio-inline">
+          <input type="radio" name="age" id="10s" value="10s"> 10대
         </label>
-        <div id="cid_21" class="form-input-wide jf-required">
-          <div style="width:100%;text-align:Center" data-component="widget-field">
-            <iframe title="Button Checkboxes" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_21" src="" style="border:none;width:700px;height:50px" data-width="700" data-height="50">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_21" class="form-hidden form-widget widget-required " name="q21_input21" value="" />
-              <input type="hidden" id="widget_settings_21" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22options%22%2C%22value%22%3A%22%EC%97%AC%EB%93%9C%EB%A6%84%5Cn%EC%95%84%ED%86%A0%ED%94%BC%5Cn%EB%91%90%EB%93%9C%EB%9F%AC%EA%B8%B0%5Cn%EA%B8%B0%ED%83%80%22%7D%2C%7B%22name%22%3A%22color%22%2C%22value%22%3A%22Black%22%7D%2C%7B%22name%22%3A%22row%22%2C%22value%22%3A%223%22%7D%2C%7B%22name%22%3A%22spacing%22%2C%22value%22%3A%221%22%7D%2C%7B%22name%22%3A%22width%22%2C%22value%22%3A%22150%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_21");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(21, {
-          "formID": 92822442403451
-        })
-      }
-    };
-    _cFieldFrame.src = "//widgets.jotform.io/buttonCheckboxes/?qid=21&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
+        <label class="radio-inline">
+          <input type="radio" name="age" id="20s" value="20s"> 20대
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="age" id="30s" value="30s"> 30대
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="age" id="40s" value="40s"> 40대
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="age" id="50s" value="50s"> 50대
+        </label>
+      </div>
+      <div class="border border-secondary">
+        <h3>피부 타입</h3>
+        <label class="radio-inline">
+          <input type="radio" name="skintype" id="option1" value="option1"> 모름
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="skintype" id="option2" value="option2"> 건성
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="skintype" id="option3" value="option3"> 중성
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="skintype" id="option4" value="option4"> 지성
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="skintype" id="option5" value="option5"> 복합성
+        </label>
+      </div>
+      <div  id="using"class="border border-secondary form-group">
+        <div class="form-inline">
+          <label for="exampleInputName2"><h4>사용 제품</h4></label>
+          <input type="text" name="product" class="form-control" id="" placeholder="">
+          <input type="button" class="btn btn-default " id="plus"value="+">
         </div>
-      </li>
-      <li class="form-line" data-type="control_widget" id="id_15">
-        <label class="form-label form-label-right form-label-auto" id="label_15" for="input_15"> 세부 증상 </label>
-        <div id="cid_15" class="form-input">
-          <div style="width:100%;text-align:Left" data-component="widget-field">
-            <iframe title="Dynamic Textbox" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_15" src="" style="border:none;width:300px;height:70px" data-width="300" data-height="70">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_15" class="form-hidden form-widget  " name="q15_input15" value="" />
-              <input type="hidden" id="widget_settings_15" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22existing%22%2C%22value%22%3A%221%22%7D%2C%7B%22name%22%3A%22buttontext%22%2C%22value%22%3A%22Add%20More%22%7D%2C%7B%22name%22%3A%22size%22%2C%22value%22%3A%2225%22%7D%2C%7B%22name%22%3A%22theme%22%2C%22value%22%3A%22Default%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_15");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(15, {
-          "formID": 92822442403451
-        })
-      }
-    };
-    _cFieldFrame.src = "//widgets.jotform.io/dynamicFields/?qid=15&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_button" id="id_2">
-        <div id="cid_2" class="form-input-wide">
-          <div style="text-align:center" class="form-buttons-wrapper ">
-            <button id="input_2" type="submit" class="form-submit-button form-submit-button-simple_blue" data-component="button">
-              완료
-            </button>
-          </div>
-        </div>
-      </li>
-      <li style="display:none">
-        Should be Empty:
-        <input type="text" name="website" value="" />
-      </li>
-    </ul>
-  </div>
-  <script>
-  JotForm.showJotFormPowered = "new_footer";
-  </script>
-  <input type="hidden" id="simple_spc" name="simple_spc" value="92822442403451" />
-  <script type="text/javascript">
-  document.getElementById("si" + "mple" + "_spc").value = "92822442403451-92822442403451";
-  </script>
-  <script src="https://cdn.jotfor.ms/js/widgetResizer.js?REV=3.3.13343" type="text/javascript"></script>
-  <div class="formFooter-heightMask">
-  </div>
-
-</form>
+      </div>
+      <div class="border border-secondary">
+        <h3>증상 타입</h3>
+        <label class="radio-inline">
+          <input type="radio" name="symptom" id="inlineRadio1" value="pimple"> 여드름
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="symptom" id="inlineRadio2" value="atopy"> 아토피
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="symptom" id="inlineRadio3" value="toxicity"> 두드러기
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="symptom" id="inlineRadio4" value="allergy"> 알레르기
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="symptom" id="inlineRadio5" value="toxicity"> 기타
+        </label>
+      </div>
+      <div class="form-inline border border-secondary">
+        <label for="exampleInputName2"><h4>세부 증상</h4></label>
+        <input type="text" class="form-control" id="" placeholder="">
+        <input type="button" class="btn btn-default" id="plus"value="+">
+      </div>
+      <div class="text-center"style="margin-top:100px">
+        <input type="submit" class ="btn btn-primary btn-lg"value="완료">
+      </div>
+    </form>
   </div>
   <div class="col-md-2">
 
   </div>
 </div>
+

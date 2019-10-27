@@ -147,10 +147,11 @@ class Ingrko2Eng(models.Model):
         unique_together = (('ko_name', 'eng_name'),)
 
 
-class Items(models.Model):
+class Item(models.Model):
     name = models.CharField(primary_key=True, max_length=40)
     categories = models.CharField(max_length=20)
     brand = models.CharField(max_length=30)
+    sim = models.FloatField(null=True, blank=True)
 
     class Meta:
         managed = False

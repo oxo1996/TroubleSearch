@@ -63,19 +63,27 @@
     </div>
 
     <div class = "col-md-8">
+
+      {%for item in item%}
+  
       <div class = "row">
+        
+
         <div class = "col-md-4 border border-secondary"> <!-- 이미지넣는곳-->
-          <img src="{% static 'toner.jpg' %}">
+          <img src="/static/{{item.brand}}_{{item.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
         </div>
         <div class = "col-md-4 border border-secondary"> <!--제품 설명-->
-          <h1>제품명</h1>
-          <h1>브랜드</h1>
-          <h1>카테고리</h1>
+
+      <a> {{item.name}} </a><br>
+      <a> {{item.categories}} </a><br>
+      <a> {{item.brand}} </a><br>
         </div>
       </div>
         <div class = "row">
           <div class = "col-md-8 border border-secondary"> <!--제품 상세 설명-->
-            <h1> 제품 상세 설명</h1>
+            <p> {{item.sim}}</p>
           </div>
         </div>
+
+        {%endfor%}
     </div>
