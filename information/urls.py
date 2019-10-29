@@ -5,4 +5,4 @@ from . import views
 urlpatterns = [
     path('', views.information, name="information"),
     path('inform/', views.inform, name="inform"),
-]
+]py

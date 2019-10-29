@@ -151,7 +151,6 @@ class Item(models.Model):
     name = models.CharField(primary_key=True, max_length=40)
     categories = models.CharField(max_length=20)
     brand = models.CharField(max_length=30)
-    sim = models.FloatField(null=True, blank=True)
 
     class Meta:
         managed = False
