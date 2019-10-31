@@ -64,6 +64,12 @@ class SVM_model(detector):
         
         return localDict
 
-    def predict(self, reviewSamples):
+    def predict(self, review):
         # reviewSamples = ([rating, verified purchases, category, preprocessed token], label)
-        return self.model.classify_many(map(lambda t: t[0], reviewSamples))
+        print(review)
+        token = self.toFeatureVector(review[0], review[1], review[2], self.preProcess(review[3]))
+        print([token])
+        return self.model.classify_many(map(lambda t: t, [token]))
+        
+        # 원본
+        #return self.model.classify_many(map(lambda t: t, review))
