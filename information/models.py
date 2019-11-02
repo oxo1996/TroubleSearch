@@ -146,9 +146,6 @@ class Ingrko2Eng(models.Model):
         db_table = 'ingrko2eng'
         unique_together = (('ko_name', 'eng_name'),)
 
-class component(models.Model):
-    component_name = models.CharField(max_length=50)
-    component_sim = models.CharField(max_length=50)
 class Items(models.Model):
     name = models.CharField(primary_key=True, max_length=40)
     categories = models.CharField(max_length=20)
@@ -157,3 +154,7 @@ class Items(models.Model):
     class Meta:
         managed = False
         db_table = 'items'
+
+class component(models.Model):
+    component_name = models.CharField(max_length=50)
+    component_sim = models.CharField(max_length=50)

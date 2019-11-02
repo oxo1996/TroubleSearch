@@ -16,6 +16,7 @@ def information(request):
 
     imodel = avgtfw2v("dlmodel/symptom_w2v.json", "dlmodel/avgw2v_model.json")
     result = imodel.getResult(symptom,product)
+    print(type(result))
 
     components = component.objects.all()
     components.delete()
@@ -23,11 +24,11 @@ def information(request):
 
     temp = Items.objects.all()
     item = Items.objects.none()
-    for pname in result.keys():
+    for elem in result:
         
-        temp.filter(name = pname).sim = result[pname]["sim"]
-        item |= temp.filter(name = pname)
-        for ing in result[pname]["ingr"]:
+        #temp.filter(name = elem[0]).sim = result[pname]["sim"]
+        item |= temp.filter(name = elem[0])
+        for ing in elem[1]["ingr"]:
             component.objects.create(component_name=ing[0],component_sim=str(round(ing[1],3)))
             
         
