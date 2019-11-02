@@ -1,4 +1,4 @@
-from .imodel import imodel
+from imodel import imodel
 import json
 import math
 import numpy as np
@@ -23,12 +23,12 @@ class avgtfw2v(imodel):
         return ingrW2v
 
     def _loadIngrKo2Eng(self):
-        with open("webcrawler/ingrKo2Eng.json") as data_file:    
+        with open("../webcrawler/ingrKo2Eng.json") as data_file:    
             ingrKo2Eng = json.load(data_file)
         return ingrKo2Eng
         
     def _loadItems(self):
-        with open("webcrawler/items.json") as data_file:    
+        with open("../webcrawler/items.json") as data_file:    
             items = json.load(data_file)
         return items
 
@@ -60,7 +60,32 @@ class avgtfw2v(imodel):
         res = sorted(calc_cs.items(), key=(lambda x: x[1]), reverse = order)
         return res[:topn]
 
+    def _productTotSim(self, similarities):
+        # 현재 sim이 높은 topn개의 성분의 평균으로 상품과 증상 간의 유사도 계산
+        topn = 3
+        sum = 0
+        
+        for idx in range(topn):
+            sum += similarities[idx][1]
+
+        return sum / topn
+
+    def recommendProduct(self, symptom):
+        vecList = []
+        for pname in self.items.keys():
+            if len(self.items[pname]["ingredients"]) < 2:
+                print("not exist ingredients data")
+                continue
+            similarities = self.mostSimilar(symptom, pname, len(self.items[pname]["ingredients"]))
+            totSim = self._productTotSim(similarities)
+            print(pname, totSim)
+            vecList.append((pname, totSim))
+        
+        vecList = sorted(vecList, key=(lambda x: x[1]), reverse = False)
+        return vecList
+
     def getResult(self, symptom, products):
+        # products는 str의 list
         topn = 3
         temp = {}
         vecDict = {}
@@ -68,18 +93,10 @@ class avgtfw2v(imodel):
         
         for pname in products:
             vecDict[pname] = {}
-            vecDict[pname]["ingr"] = []
-            sum = 0
             similarity = self.mostSimilar(symptom, pname, topn)
-            for idx in range(topn):
-                vecDict[pname]["ingr"].append(similarity[idx])
-                sum += similarity[idx][1]
-            temp[pname] = sum / len(similarity)
-            vecDict[pname]["sim"] = sum / len(similarity)
+            vecDict[pname]["igrd"] = similarity
+            vecDict[pname]["sim"] = self._productTotSim(similarity)
 
-        sorting = sorted(temp.items(), key=(lambda x: x[1]), reverse = True)
+        vecDict = sorted(vecDict.items(), key=(lambda x: x[1]["sim"]), reverse = True)
 
-        for pname in sorting:
-            result[pname[0]] = vecDict[pname[0]]
-
-        return result
+        return vecDict
