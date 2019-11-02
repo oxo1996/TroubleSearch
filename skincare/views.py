@@ -9,3 +9,14 @@ def skincare(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'skin.html',{'items' : items, 'posts' : posts})
+
+def changeItem(request):
+    print("됐음@@@@@@@@@@@@@@")
+    item_name = request.POST['product']
+    items = Item.objects.filter(name=item_name)
+    item_list = Item.objects.filter(name=item_name)
+    paginator = Paginator(item_list, 1)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'skin.html',{'items' : items, 'posts' : posts})
+    

@@ -70,7 +70,15 @@
 
 
 <div class = "wrapper">
+    <div>
+      <form class="skincare_search form-inline" action="{% url 'searchSkincare' %}" method="POST" accept-charset="utf-8">
+        {% csrf_token %}
+        <input class="form-control" name ="product" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
     <div class="row">
+      
     {%for item in posts %}
     <div class="col-md-4">
         <div class="card mb-4 shadow-sm">

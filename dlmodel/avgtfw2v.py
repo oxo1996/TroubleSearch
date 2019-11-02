@@ -1,4 +1,4 @@
-from imodel import imodel
+from .imodel import imodel
 import json
 import math
 import numpy as np
@@ -74,11 +74,11 @@ class avgtfw2v(imodel):
         vecList = []
         for pname in self.items.keys():
             if len(self.items[pname]["ingredients"]) < 2:
-                print("not exist ingredients data")
+                #print("not exist ingredients data")
                 continue
             similarities = self.mostSimilar(symptom, pname, len(self.items[pname]["ingredients"]))
             totSim = self._productTotSim(similarities)
-            print(pname, totSim)
+            #print(pname, totSim)
             vecList.append((pname, totSim))
         
         vecList = sorted(vecList, key=(lambda x: x[1]), reverse = False)
