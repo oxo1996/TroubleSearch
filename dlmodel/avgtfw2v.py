@@ -1,4 +1,4 @@
-from .imodel import imodel
+from imodel import imodel
 import json
 import math
 import numpy as np
@@ -23,12 +23,12 @@ class avgtfw2v(imodel):
         return ingrW2v
 
     def _loadIngrKo2Eng(self):
-        with open("webcrawler/ingrKo2Eng.json") as data_file:    
+        with open("../webcrawler/ingrKo2Eng.json") as data_file:    
             ingrKo2Eng = json.load(data_file)
         return ingrKo2Eng
         
     def _loadItems(self):
-        with open("webcrawler/items.json") as data_file:    
+        with open("../webcrawler/items.json") as data_file:    
             items = json.load(data_file)
         return items
 
