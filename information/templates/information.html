@@ -91,7 +91,7 @@
 
     </div>
     <div class="col-md-2 border border-secondary">
-      <div class="row border border-secondary" style="heisght:33.3%">
+      <div class="row border border-secondary" style="height:33.3%">
           {%for compo in components1%}
           <h3>{{compo.component_name}}</h3><br>
           <h3>{{compo.component_sim}}</h3><br>
@@ -110,6 +110,9 @@
         {%endfor%}
       </div>
     </div>
+    {%for recommendItem in recommendItems%}
+    <p>{{recommendItem.name}}</p>
+    {%endfor%}
       
     </div>
     

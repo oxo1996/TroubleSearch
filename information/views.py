@@ -16,7 +16,6 @@ def information(request):
 
     imodel = avgtfw2v("dlmodel/symptom_w2v.json", "dlmodel/avgw2v_model.json")
     result = imodel.getResult(symptom,product)
-    print(type(result))
 
     components = component.objects.all()
     components.delete()
@@ -24,6 +23,8 @@ def information(request):
 
     temp = Items.objects.all()
     item = Items.objects.none()
+
+    recommendItems = _recommendItems(symptom,imodel)
     for elem in result:
         
         #temp.filter(name = elem[0]).sim = result[pname]["sim"]
@@ -41,21 +42,14 @@ def information(request):
 
 
 
-    return render(request, 'information.html', {'item' : item ,'components1':components1,'components2':components2,'components3':components3})
+    return render(request, 'information.html', {'item' : item ,'components1':components1,'components2':components2,'components3':components3,'recommendItems':recommendItems})
 
+def _recommendItems(symptoms,imodel:avgtfw2v):
+    item = Items.objects.none()
+    temp = Items.objects.all()
+    recommendList = imodel.recommendProduct(symptoms)
+    for elem in recommendList:
+        item|= temp.filter(name = elem[0])
 
+    return item
 
-def inform(request):
-
-    
-
-    #imodel = avgtfw2v("symptom_w2v.json", "avgw2v_model.json")
-    
-   # result = {}
-    #for name in product:
-     #   result[name] = imodel.mostSimilar(symptom, name, 3)
-
-
-
-    # print(request.POST['product'])
-    return render(request, 'information.html')
