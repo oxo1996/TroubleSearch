@@ -74,7 +74,7 @@ class avgtfw2v(imodel):
         vecList = []
         for pname in self.items.keys():
             if len(self.items[pname]["ingredients"]) < 2:
-                print("not exist ingredients data")
+                #print("not exist ingredients data")
                 continue
             similarities = self.mostSimilar(symptom, pname, len(self.items[pname]["ingredients"]))
             totSim = self._productTotSim(similarities)
@@ -92,7 +92,7 @@ class avgtfw2v(imodel):
         
         for pname in products:
             if len(self.items[pname]["ingredients"]) < 2:
-                print("not exist ingredients data")
+                #print("not exist ingredients data")
                 continue
             vecDict[pname] = {}
             similarity = self.mostSimilar(symptom, pname, topn)
