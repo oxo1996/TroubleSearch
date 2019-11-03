@@ -1,132 +1,144 @@
-{% load staticfiles %}
 <!doctype html>
+{% load staticfiles %}
+<html>
 <head>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href={%url 'home' %}>TroubleSearch</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    
-    <style>
-      div{
-          text-align : right;
-      }
-      </style>  
-  
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'search' %}>자가진단</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'skin' %}>스킨케어</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'comp' %}>성분정보</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'symp' %}>증상정보</a>
-        </li>
+  <title>TroubleSearch</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <style>
+    *{
+      margin: 0;
+      padding : 0;
+    }
+    header{
+      background-image:url("{%static 'cosmetic.png'%}");
+      height: 100vh;
+      background-size : cover;
+      background-repeat:no-repeat;
+      background-position: center;
+      /*min-height: 100%;
+      min-width: 100%;*/
+    }
+    ul{
+      float:right;
+      list-style-type: none;
+      margin-top: 30px;
+    }
+    ul li{
+      display : inline-block;
+    }
+    ul li a{
+      text-decoration: none;
+      font-family: Noto Sans KR;
+      font-size: 15px;
+      font-weight: bold;
+      color:white;
+      padding : 5px 20px;
+      border : 1px solid transparent;
+      transition: 0.6s ease;
+    }
+    ul li a:hover{
+      background-color: #fff;
+      color : #000;
+    }
+    .logo img{
+      position: absolute;
+      margin-top: 30px;
+      margin-left: 25px;
+      float:left;
+      width:25px;
+      height: auto;
+      left:30px;
+    }
+    .logo a{
+      position: absolute;
+      margin-top: 28px;
+      margin-left: 60px;
+      left:30px;
+      text-decoration: none;
+      font-family: Roboto;
+      font-size: 20px;
+      font-weight: bold;
+      color:white;
+    }
+    .main{
+      max-width: 1200px;
+      margin: auto;
+    }
+    .title{
+      position: absolute;
+      top : 35%;
+      left : 30%;
+      transform: translate(-30%,-50%);
+    }
+    .title2{
+      position: absolute;
+      top : 57%;
+      left : 30%;
+      transform: translate(-30%,-50%);
+    }
+    .title h1{
+      color:white;
+      font-family: Roboto;
+      font-size:50px;
+      font-weight: bolder;
+    }
+    .title2 h2{
+      color:white;
+      font-family: Roboto;
+      font-size:30px;
+      font-weight: 900;
+      line-height:1.5em;
+    }
+    .button{
+      position: absolute;
+      top : 75%;
+      left : 43%;
+      transform: translate(-50%,-50%);
+    }
+    button{
+      width: 150px;
+      height: 60px;
+    }
+    .btnfont{
+      font-family: Roboto;
+      font-weight: bold;
+      color: white;
+      font-size : 20px;
+    }
+    .btn btn-primary{
+      text-decoration: none;
+      transition: 0.6s ease;
+    }
+    .btn btn-primary:hover{
+      background-color: #fff;
+      color : #000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class = "main">
+      <div class="logo">
+        <img src = "{%static 'TSicon.png'%}"><a href={%url 'home'%}>TroubleSearch</a>
+      </div>
+      <ul>
+        <li><a href={%url 'search'%}>자가진단</a></li>
+        <li><a href={%url 'skin'%}>제품정보</a></li>
+        <li><a href={%url 'symp'%}>증상정보</a></li>
+        <li><a href={%url 'comp'%}>성분정보</a></li>
       </ul>
     </div>
-  </nav>
-</head>
-
-<body>
-  <div class=" w3-wide"  width="100%" height="100%">
-    <div class="mySlides w3-contaner">
-        <img class="w3-opacity" src="{% static 'checkList.jpg' %}" width="100%" height="100%">
-        <div class="w3-display-middle">
-          <p class="w3-xxlarge w3-text-white"style="text-shadow:1px 1px 0 white">빠르게 자기의 상태를
-            진단 해보세요!
-          </p>
-          
-        </div>
-        <p class="w3-display-middle"style="float:left; color:#DD5050; padding:500px 2px 0 30px; font-size:45px; font-weight:bold;"><a href={%url 'search' %}>자가진단</a></p>
-        
+    <div class="title">
+      <h1><strong>Find out the cause of</br> your trouble with a click.</strong></h1>
     </div>
-
-  <div class="w3-wide" width="100%" height="100%">
-   <div class="mySlides w3-contaner">
-      <img class="w3-opacity" src="{% static 'cosmetic.jpg' %}" width="100%" height="100%">
-        <div class="w3-display-middle">
-          <p class="w3-xxlarge w3-text-white"style="text-shadow:1px 1px 0 #444">내 화장품의 성분을 알아보세요!
-          </p>
-       </div>
-          <p class="w3-display-middle"style="float:left; color:#E5D2B0; padding:500px 2px 0 30px; font-size:45px; font-weight:bold;"><a href={%url 'skin' %}>제품정보</a></p>
-   </div>
-  </div>
-
-  <div class="w3-wide" width="100%" height="100%">
-    <div class="mySlides w3-contaner">
-      <img class="w3-opacity" src="{% static 'search.jpg' %}" width="100%" height="100%">
-         <div class="w3-display-middle">
-           <p class="w3-xxlarge w3-text-white"style="text-shadow:1px 1px 0 #444">궁금했던 성분을 검색해보세요!
-           </p>
-        </div>
-           <p class="w3-display-middle"style="float:left; color:#155555; padding:500px 2px 0 30px; font-size:45px; font-weight:bold;"><a href={%url 'comp' %}>성분정보</a></p>
+    <div class = "title2">
+      <h2>If you enter your symptoms </br>and the product you use,</br>
+        you can easily find the cause </br>by analyzing the ingredients.</h2>
     </div>
-   </div>
-
-   <div class="w3-wide" width="100%" height="100%">
-    <div class="mySlides w3-contaner">
-      <img class="w3-opacity" src="{% static 'disease.jpg' %}" width="100%" height="100%">
-         <div class="w3-display-middle">
-           <p class="w3-xxlarge w3-text-white"style="text-shadow:1px 1px 0 #444">내 증상의 원인을 찾아보세요!
-           </p>
-        </div>
-           <p class="w3-display-middle"style="float:left; color:#727272; padding:500px 2px 0 30px; font-size:45px; font-weight:bold;"><a href={%url 'symp' %}>증상정보</a></p>
+    <div class = "button">
+      <button class="btn btn-primary" type="submit"><a class = "btnfont" href={%url 'search'%}>Find now</a></button>
     </div>
-   </div>
-
-    
-    
-    <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-      <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-      <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-      <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-      <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-      <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-      <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
-    </div>
-  </div>
-  
-  <script>
-  var slideIndex = 1;
-  showDivs(slideIndex);
-  
-  function plusDivs(n) {
-    showDivs(slideIndex += n);
-  }
-  
-  function currentDiv(n) {
-    showDivs(slideIndex = n);
-  }
-  
-  function showDivs(n) {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("demo");
-    if (n > x.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = x.length}
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";  
-    }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" w3-white", "");
-    }
-    x[slideIndex-1].style.display = "block";  
-    dots[slideIndex-1].className += " w3-white";
-  }
-  </script>
-</body>
+ </body>
+</html>

@@ -1,37 +1,130 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+  <title>증상정보</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <style>
+    body{
+      background-color: #3B4560;
+    }
+   
+    ul{
+      float:right;
+      list-style-type: none;
+      margin-top: 30px;
+    }
+    ul li{
+      display : inline-block;
+    }
+    ul li a{
+      text-decoration: none;
+      font-family: Noto Sans KR;
+      font-size: 15px;
+      font-weight: bold;
+      color:white;
+      padding : 5px 20px;
+      border : 1px solid transparent;
+      transition: 0.6s ease;
+    }
+    ul li a:hover{
+      background-color: #fff;
+      color : #000;
+      text-decoration: none;
+    }
+    .logo img{
+      position: absolute;
+      margin-top: 30px;
+      margin-left: 25px;
+      float:left;
+      width:25px;
+      height: auto;
+      left:30px;
+    }
+    .logo a{
+      position: absolute;
+      margin-top: 28px;
+      margin-left: 60px;
+      left:30px;
+      text-decoration: none;
+      font-family: Roboto;
+      font-size: 20px;
+      font-weight: bold;
+      color:white;
+    }
+    .main{
+      max-width: 1200px;
+      margin: auto;
+    }
+    .title{
+      margin : 100px;
+      position:absolute;
+      top : 10%;
+      left : 10%;
+    }
+    h1{
+      color : white;
+      font-family : Noto Sans KR;
+      font-weight : bold;
+      font-size : 25px;
+    }
+    p{
+      color : white;
+      font-family : Noto Sans KR;
+      font-weight : bold;
+      font-size : 20px;
+    }
+  </style>
+</head>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href={%url 'home' %}>TroubleSearch</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    
-    <style>
-      div{
-          text-align : right;
-      }
-      </style>  
-  
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'search' %}>자가진단</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'skin' %}>스킨케어</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'comp' %}>성분정보</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href={%url 'symp' %}>증상정보</a>
-        </li>
-      </ul>
+<body>
+  <header>
+    <div class = "main">
+  <div class="logo">
+    <img src = "{%static 'TSicon.png'%}"><a href={%url 'home'%}>TroubleSearch</a>
+  </div>
+  <ul>
+    <li><a href={%url 'search'%}>자가진단</a></li>
+    <li><a href={%url 'skin'%}>제품정보</a></li>
+    <li><a href={%url 'symp'%}>증상정보</a></li>
+    <li><a href={%url 'comp'%}>성분정보</a></li>
+    </ul>
     </div>
-  </nav>
+
+  <div class = "title">
+    <h1>주요 증상</h1>
+    </br>
+      <p> 알레르기 비염</p>
+      <p>알레르기비염은 발작적인 재채기, 맑은 콧물, 코막힘 등이 주된 증상인데 눈과 코 주위의 가려움증이 동반되는 경우도 흔히 있습니다.
+      또한 후각 감소, 두통 등이 있을 수 있으며 부비동염이나 중이염, 인두염 등이 동반될 수 있습니다. 굴염(부비동염)은 부비동의 점막에
+      염증성 변화가 나타난 것으로 보통 축농증이라고도 부릅니다.
+      알레르기비염은 천식, 아토피피부염, 결막염 등의 다른 알레르기 질환과 같이 나타나는 경우가 많습니다.</p>
+      </br>
+      <p>두드러기</p>
+      <p>두드러기는 주로 피부의 상부진피에서 발생되어 팽진과 가려움증을 보이지만 피부의 하부진피에 발생될 경우를 혈관부종이라 하며 피부팽창의 정도가심하고
+      가려움증보다는 통증을 느끼며 점막을 흔히 침범하며 심한 경우 호흡기계, 위장관계나 심혈관계의 증상도 동반될 수 있습니다.
+      두드러기는 아주 흔한 피부질환으로 전 인구의 약 20%에서 일생에 한번 이상 두드러기를 경험합니다</p>
+      </br>
+      <p>여드름</p>
+      <p>여드름의 근본적인 증상은 면포(모낭 속에 고여 딱딱해진 피지)이며 면포에는 입구가 열려있는 개방 면포와 입구가 닫혀있는 폐쇄 면포의 두 가지 형태가 있는데
+        개방 면포는 멜라닌의 침착으로 검은 색깔을 띠며 폐쇄 면포는 흰 색깔을 띤다. 면포가 오래 되면 주위에 염증이 생기는데 염증의 정도에 따라 붉은 여드름(구진성),
+        곪는 여드름(화농성), 결절, 낭종 등이 형성되며 이 중 어느 한 형태가 주로 나타나는 경우도 있으나 많은 경우 여러 형태의 발진이 섞여 있는 것이 특징이다.</br>
+        여드름에 염증이 생기면 처음에는 붉은 기가 돌다가 시간이 흐르면서 갈색으로 변하게 된다. 여드름을 방치해서 염증이 심해지거나, 잘못 짜서 피지가 피부 안쪽으로
+        터지게 되면 피부가 울퉁불퉁하게 튀어나오거나 패인 흉터(볼록 흉터, 오목 흉터)가 생긴다. 여드름 흉터는 다른 흉터에 비해 흉터 가장자리가 매우 날카로우며
+        깊이 패여 있고 실제로 수술을 해보면 흉터 바닥이 지방층까지 연결되어 있는 경우도 많다. 그만큼 피부손상이 광범위하며 흉터끼리 서로 연결되어 있는 경우가 흔하다.</p>
+        </br>
+      <p>아토피 피부염</P>
+      <p>심한 소양증(가려움증)과 피부건조증, 피부염(습진)이 주요 증상이다.
+        피부 건조는 가려움증을 유발하고 악화시킨다. 낮 동안에는 간헐적으로 가렵다가 대개 초저녁이나 한밤중에 심해진다.
+        가려워서 긁게 되면 습진성 피부 병변이 발생하고 이러한 병변이 진행되면서 다시 더 심한 가려움이 유발되는 악순환이 반복된다.</p>
+      </br>
+      <p>안면홍조</p>
+      <p>안면홍조는 얼굴, 목, 상체에 달아오르는 느낌이 들고, 피부가 붉어지는 현상을 말합니다.
+        피부가 장시간 동안 붉은 상태로 유지되는 홍반과는 달리, 안면홍조는 짧은 시간동안 반복적으로 나타납니다.
+        피부가 붉어지는 것은 피부 밑 작은 혈관들의 수가 많아지거나 작은 혈관 속으로 흐르는 피의 양이 많아지기 때문입니다.</P>
+      </div>
+  </header>
+</body>
+</html>
