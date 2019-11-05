@@ -1,4 +1,4 @@
-from imodel import imodel
+from .imodel import imodel
 import json
 import math
 import numpy as np
