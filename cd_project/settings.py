@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'troublesearch', # DB명
         'USER': 'root', # 데이터베이스 계정
-        'PASSWORD': 'tjdals7337', # 계정 비밀번호
+        'PASSWORD': 'dkstmdwo5!', # 계정 비밀번호
         'HOST': '127.0.0.1', # 데이테베이스 주소(IP)
         'PORT': '3306'
 }
