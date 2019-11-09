@@ -1,6 +1,6 @@
 from abc import *
 
-class imodel(metaclass=ABCMeta):
+class iRecomProduct(metaclass=ABCMeta):
     @abstractmethod
     def mostSimilar(symptom, product : str, num : int, order : str):
         pass

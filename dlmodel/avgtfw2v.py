@@ -1,10 +1,10 @@
-from .imodel import imodel
+from iRecomProduct import iRecomProduct
 import json
 import math
 import numpy as np
-from scipy.spatial import distance
+from utils import cosineSimilarity
 
-class avgtfw2v(imodel):
+class avgtfw2v(iRecomProduct):
     def __init__(self, word2vecPath : str, modelPath : str):
         self.w2vPath = word2vecPath # 현재 특정 증상에 관한 벡터만 받아옴. 보완해야 함.
         self.mPath = modelPath
@@ -33,22 +33,16 @@ class avgtfw2v(imodel):
             items = json.load(data_file)
         return items
 
-    def _l2Norm(self, a : float):
-        return math.sqrt(np.dot(a, a))
-
-    def _cosine_similarity(self, a : float, b : float):
-        #print(np.dot(a,b) / (self._l2Norm(a) * self._l2Norm(b)))
-        return np.dot(a,b) / (self._l2Norm(a) * self._l2Norm(b))
-
-    def mostSimilar(self, symptomVec, product, topn : int, order = True):
+    def mostSimilar(self, symptom, product, topn : int, order = True):
         calc_cs = {}
         koIngrList = self.items[product]["ingredients"]
+        symptomVec = self.w2v[symptom]
 
         for koName in koIngrList:
             try: 
                 engName = self.ingrKo2Eng[koName]
                 iwv = self.ingrW2v[engName]
-                calc_cs[koName] = self._cosine_similarity(iwv, symptomVec)
+                calc_cs[koName] = cosineSimilarity(iwv, symptomVec)
                 #calc_cs[engName] = self._cosine_similarity(iwv, symptomVec)
             except KeyError as e:
                 #print(e)
@@ -75,12 +69,9 @@ class avgtfw2v(imodel):
             realSims.append(sim[1])
         return realSims
 
-    def _productTotSim(self, symptom, similarities):
+    def _productTotSim(self, similarities):
         realSims = self._getRealSims(similarities)
         w = self._weights(realSims)
-        #print("w: ", w)
-        #print("\n")
-        #print("s: ", similarities)
         return np.dot(w, realSims)
 
     def recommendProduct(self, symptom):
@@ -91,8 +82,8 @@ class avgtfw2v(imodel):
             if len(self.items[pname]["ingredients"]) < 2:
                 print("not exist ingredients data")
                 continue
-            similarities = self.mostSimilar(symptomVec, pname, len(self.items[pname]["ingredients"]))
-            totSim = self._productTotSim(symptomVec, similarities)
+            similarities = self.mostSimilar(symptom, pname, len(self.items[pname]["ingredients"]))
+            totSim = self._productTotSim(similarities)
             #print(pname, totSim)
             vecList.append((pname, totSim))
         
@@ -104,6 +95,7 @@ class avgtfw2v(imodel):
         topn = 3
         vecDict = {}
         result = {}
+        symptomVec = self.w2v[symptom]
         
         for pname in products:
             if len(self.items[pname]["ingredients"]) < 2:
