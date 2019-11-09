@@ -24,12 +24,12 @@ class avgtfw2v(iRecomProduct):
         return ingrW2v
 
     def _loadIngrKo2Eng(self):
-        with open("../webcrawler/ingrKo2Eng.json") as data_file:    
+        with open("webcrawler/ingrKo2Eng.json") as data_file:    
             ingrKo2Eng = json.load(data_file)
         return ingrKo2Eng
         
     def _loadItems(self):
-        with open("../webcrawler/items.json") as data_file:    
+        with open("webcrawler/items.json") as data_file:    
             items = json.load(data_file)
         return items
 
@@ -80,7 +80,7 @@ class avgtfw2v(iRecomProduct):
 
         for pname in self.items.keys():
             if len(self.items[pname]["ingredients"]) < 2:
-                print("not exist ingredients data")
+                #print("not exist ingredients data")
                 continue
             similarities = self.mostSimilar(symptom, pname, len(self.items[pname]["ingredients"]))
             totSim = self._productTotSim(similarities)
@@ -99,7 +99,7 @@ class avgtfw2v(iRecomProduct):
         
         for pname in products:
             if len(self.items[pname]["ingredients"]) < 2:
-                print("not exist ingredients data")
+                #print("not exist ingredients data")
                 continue
             vecDict[pname] = {}
             similarity = self.mostSimilar(symptom, pname, topn)

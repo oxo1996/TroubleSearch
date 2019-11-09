@@ -110,9 +110,22 @@
         {%endfor%}
       </div>
     </div>
-    {%for recommendItem in recommendItems%}
-    <p>{{recommendItem.name}}</p>
-    {%endfor%}
+
+    <div class="row">
+      {%for recommendItem in recommendItems %}
+      <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src= "/static/{{recommendItem.brand}}_{{recommendItem.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+            <div class="card-body">
+                <a> {{recommendItem.name}} </a><br>
+                <a> {{recommendItem.categories}} </a><br>
+                <a> {{recommendItem.brand}} </a><br>
+              <div class="d-flex justify-content-between align-items-center"></div>
+            </div>
+          </div>
+      </div>
+      {%endfor%}
+    </div>
       
     </div>
     
