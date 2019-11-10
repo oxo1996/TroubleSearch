@@ -3,79 +3,183 @@
 <html>
 <head>
   <title>증상정보</title>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <meta charset="utf-8">
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+  <link rel="stylesheet" href="style/css">
+  <script>
+    function wrapWindowByMask() {
+    //화면의 높이와 너비를 구한다.
+    var maskHeight = $(document).height();
+    var maskWidth = $(window).width();
+
+    //문서영역의 크기
+    console.log( "document 사이즈:"+ $(document).width() + "*" + $(document).height());
+    //브라우저에서 문서가 보여지는 영역의 크기
+    console.log( "window 사이즈:"+ $(window).width() + "*" + $(window).height());
+
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+    $('#mask').css({
+        'width' : maskWidth,
+        'height' : maskHeight
+    });
+
+    //애니메이션 효과
+    //$('#mask').fadeIn(1000);
+    $('#mask').fadeTo("slow", 0.5);
+}
+
+function popupOpen(name) {
+    $('.layerpop').css("position", "absolute");
+    //영역 가운에데 레이어를 뛰우기 위해 위치 계산
+    $('.layerpop').css("top",(($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
+    $('.layerpop').css("left",(($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft());
+    $('.layerpop').draggable();
+    $(name).show();
+}
+
+function popupClose(name) {
+    $(name).hide();
+    $('#mask').hide();
+}
+
+function goDetail(name) {
+
+    /*팝업 오픈전 별도의 작업이 있을경우 구현*/
+
+    popupOpen(name); //레이어 팝업창 오픈
+    wrapWindowByMask(); //화면 마스크 효과
+}
+
+  </script>
   <style>
-    body{
-      background-color: #3B4560;
-    }
-   
-    ul{
-      float:right;
-      list-style-type: none;
-      margin-top: 30px;
-    }
-    ul li{
-      display : inline-block;
-    }
-    ul li a{
-      text-decoration: none;
-      font-family: Noto Sans KR;
-      font-size: 15px;
-      font-weight: bold;
-      color:white;
-      padding : 5px 20px;
-      border : 1px solid transparent;
-      transition: 0.6s ease;
-    }
-    ul li a:hover{
-      background-color: #fff;
-      color : #000;
-      text-decoration: none;
-    }
-    .logo img{
-      position: absolute;
-      margin-top: 30px;
-      margin-left: 25px;
-      float:left;
-      width:25px;
-      height: auto;
-      left:30px;
-    }
-    .logo a{
-      position: absolute;
-      margin-top: 28px;
-      margin-left: 60px;
-      left:30px;
-      text-decoration: none;
-      font-family: Roboto;
-      font-size: 20px;
-      font-weight: bold;
-      color:white;
-    }
+  ul{
+    float:right;
+    list-style-type: none;
+    margin-top: 30px;
+  }
+  ul li{
+    display : inline-block;
+  }
+  ul li a{
+    text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color:black;
+    padding : 5px 20px;
+    border : 1px solid transparent;
+    transition: 0.6s ease;
+  }
+  ul li a:hover{
+    background-color: black;
+    color : white;
+    text-decoration: none;
+  }
+  .logo img{
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 25px;
+    float:left;
+    width:25px;
+    height: auto;
+    left:30px;
+  }
+  .logo a{
+    position: absolute;
+    margin-top: 28px;
+    margin-left: 60px;
+    left:30px;
+    text-decoration: none;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: bold;
+    color:black;
+  }
+  .main{
+    max-width: 1200px;
+    margin: auto;
+  }
+  .title{
+    margin : 100px;
+    position:absolute;
+    top : 8%;
+    left : 10%;
+    color : black;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight : 1000;
+    font-size : 25px;
+  }
+  p{
+    color : black;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight : bold;
+    font-size : 20px;
+  }
+  .card-body{
+    text-align: center;
+    color : black;
+    font-family :'Noto Sans KR', sans-serif;
+    font-weight : bold;
+  }
+  .row{
+    position:absolute;
+    top:10%;
+    margin: 10%;
+  }
+  .col-md-3{
+    padding: 20px;
+  }
+
+  #mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color: #000000;
+    display: none; }
+
+.layerpop {
+    display: none;
+    z-index: 1000;
+    border: 2px solid #ccc;
+    background: #fff;
+    cursor: move; }
+
+.layerpop_area .pop_title {
+    padding: 10px 10px 10px 10px;
+    border: 0px solid #aaaaaa;
+    background: #f1f1f1;
+    color: #3eb0ce;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 24px; }
+
+.layerpop_area .layerpop_close {
+    width: 25px;
+    height: 25px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent url('btn_exit_off.png') no-repeat; }
+
+.layerpop_area .layerpop_close:hover {
+    background: transparent url('btn_exit_on.png') no-repeat;
+    cursor: pointer; }
+
+  .layerpop_area .content {
+    width: 90%;
+    margin: 5%;
+    color: #828282; }
+  
     .main{
-      max-width: 1200px;
-      margin: auto;
-    }
-    .title{
-      margin : 100px;
-      position:absolute;
-      top : 10%;
-      left : 10%;
-    }
-    h1{
-      color : white;
-      font-family : Noto Sans KR;
-      font-weight : bold;
-      font-size : 25px;
-    }
-    p{
-      color : white;
-      font-family : Noto Sans KR;
-      font-weight : bold;
-      font-size : 20px;
-    }
+    background-color: #3B4560;
+  }
   </style>
 </head>
 
@@ -92,39 +196,197 @@
     <li><a href={%url 'comp'%}>성분정보</a></li>
     </ul>
     </div>
-
-  <div class = "title">
-    <h1>주요 증상</h1>
-    </br>
-      <p> 알레르기 비염</p>
-      <p>알레르기비염은 발작적인 재채기, 맑은 콧물, 코막힘 등이 주된 증상인데 눈과 코 주위의 가려움증이 동반되는 경우도 흔히 있습니다.
-      또한 후각 감소, 두통 등이 있을 수 있으며 부비동염이나 중이염, 인두염 등이 동반될 수 있습니다. 굴염(부비동염)은 부비동의 점막에
-      염증성 변화가 나타난 것으로 보통 축농증이라고도 부릅니다.
-      알레르기비염은 천식, 아토피피부염, 결막염 등의 다른 알레르기 질환과 같이 나타나는 경우가 많습니다.</p>
-      </br>
-      <p>두드러기</p>
-      <p>두드러기는 주로 피부의 상부진피에서 발생되어 팽진과 가려움증을 보이지만 피부의 하부진피에 발생될 경우를 혈관부종이라 하며 피부팽창의 정도가심하고
-      가려움증보다는 통증을 느끼며 점막을 흔히 침범하며 심한 경우 호흡기계, 위장관계나 심혈관계의 증상도 동반될 수 있습니다.
-      두드러기는 아주 흔한 피부질환으로 전 인구의 약 20%에서 일생에 한번 이상 두드러기를 경험합니다</p>
-      </br>
-      <p>여드름</p>
-      <p>여드름의 근본적인 증상은 면포(모낭 속에 고여 딱딱해진 피지)이며 면포에는 입구가 열려있는 개방 면포와 입구가 닫혀있는 폐쇄 면포의 두 가지 형태가 있는데
-        개방 면포는 멜라닌의 침착으로 검은 색깔을 띠며 폐쇄 면포는 흰 색깔을 띤다. 면포가 오래 되면 주위에 염증이 생기는데 염증의 정도에 따라 붉은 여드름(구진성),
-        곪는 여드름(화농성), 결절, 낭종 등이 형성되며 이 중 어느 한 형태가 주로 나타나는 경우도 있으나 많은 경우 여러 형태의 발진이 섞여 있는 것이 특징이다.</br>
-        여드름에 염증이 생기면 처음에는 붉은 기가 돌다가 시간이 흐르면서 갈색으로 변하게 된다. 여드름을 방치해서 염증이 심해지거나, 잘못 짜서 피지가 피부 안쪽으로
-        터지게 되면 피부가 울퉁불퉁하게 튀어나오거나 패인 흉터(볼록 흉터, 오목 흉터)가 생긴다. 여드름 흉터는 다른 흉터에 비해 흉터 가장자리가 매우 날카로우며
-        깊이 패여 있고 실제로 수술을 해보면 흉터 바닥이 지방층까지 연결되어 있는 경우도 많다. 그만큼 피부손상이 광범위하며 흉터끼리 서로 연결되어 있는 경우가 흔하다.</p>
-        </br>
-      <p>아토피 피부염</P>
-      <p>심한 소양증(가려움증)과 피부건조증, 피부염(습진)이 주요 증상이다.
-        피부 건조는 가려움증을 유발하고 악화시킨다. 낮 동안에는 간헐적으로 가렵다가 대개 초저녁이나 한밤중에 심해진다.
-        가려워서 긁게 되면 습진성 피부 병변이 발생하고 이러한 병변이 진행되면서 다시 더 심한 가려움이 유발되는 악순환이 반복된다.</p>
-      </br>
-      <p>안면홍조</p>
-      <p>안면홍조는 얼굴, 목, 상체에 달아오르는 느낌이 들고, 피부가 붉어지는 현상을 말합니다.
-        피부가 장시간 동안 붉은 상태로 유지되는 홍반과는 달리, 안면홍조는 짧은 시간동안 반복적으로 나타납니다.
-        피부가 붉어지는 것은 피부 밑 작은 혈관들의 수가 많아지거나 작은 혈관 속으로 흐르는 피의 양이 많아지기 때문입니다.</P>
+    <h1 class = "title">주요 증상</h1>
+ 
+      <div class="row"> 
+      <div class="col-md-3">
+          <div class="card mb-4 shadow-sm">
+            <button onClick="javascript:goDetail('#layerbox1');"><img src= "{%static '알레르기비염.jpg'%}" style="place-self: center;" width = 100% height = 200 alt="증상사진"></button>
+            <div class="card-body">
+                <a>알레르기비염 </a>
+              <div class="d-flex justify-content-between align-items-center"></div>
+          </div>
+        </div>
       </div>
+
+      <div class="col-md-3 offset-1">
+        <div class="card mb-4 shadow-sm">
+          <button onClick="javascript:goDetail('#layerbox2');"><img src= "{%static '두드러기.jpg'%}" style="place-self: center;" width = 100% height = 200 alt="증상사진"></button>
+          <div class="card-body">
+              <a>두드러기 </a>
+            <div class="d-flex justify-content-between align-items-center"></div>
+        </div>
+      </div>
+      </div>
+
+      <div class="col-md-3 offset-1">
+      <div class="card mb-4 shadow-sm">
+        <button onClick="javascript:goDetail('#layerbox3');"><img src= "{%static '여드름.jpg'%}" style="place-self: center;" width = 100% height = 200 alt="증상사진"></button>
+        <div class="card-body">
+            <a>여드름 </a>
+          <div class="d-flex justify-content-between align-items-center"></div>
+      </div>
+    </div>
+      </div>
+
+      <div class="col-md-3">
+    <div class="card mb-4 shadow-sm">
+        <button onClick="javascript:goDetail('#layerbox4');"><img src= "{%static '안면홍조.jpg'%}" style="place-self: center;" width = 100% height = 200 alt="증상사진"></button>
+      <div class="card-body">
+          <a>안면홍조 </a>
+        <div class="d-flex justify-content-between align-items-center"></div>
+    </div>
+  </div>
+      </div>
+
+      <div class="col-md-3 offset-1">
+  <div class="card mb-4 shadow-sm">
+      <button onClick="javascript:goDetail('#layerbox5');"><img src= "{%static '아토피.jpg'%}" style="place-self: center;" width = 100% height = 200 alt="증상사진"></button>
+    <div class="card-body">
+        <a>아토피 </a>
+      <div class="d-flex justify-content-between align-items-center"></div>
+  </div>
+</div>
+      </div>
+
+      <div class="col-md-3 offset-1">
+      <div class="card mb-4 shadow-sm">
+        <button onClick="javascript:goDetail('#layerbox6');"><img src= "{%static '모낭염.jpg'%}" style="place-self: center;" width =100% height = 200 alt="증상사진"></button>
+       <div class="card-body">
+          <a>모낭염 </a>
+        <div class="d-flex justify-content-between align-items-center"></div>
+      </div>
+      </div>
+      </div>     
+      </div>
+
   </header>
+
+  <div id="mask"></div>
+  <div id="layerbox1" class="layerpop"
+      style="width: 700px; height: 500px;">
+      <article class="layerpop_area">
+      <div class="pop_title">알레르기 비염</div>
+      <a href="javascript:popupClose('#layerbox1');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+      <div class="content">
+        연속적인 재채기, 계속 흘러 내리는 맑은 콧물, 코막힘, 가려움증 등의 증상을 보이는 코 점막의 질환</br></br>
+        발작적인 재채기를 연속적으로 하게 되고, 동시에 물처럼 맑은 콧물이 흐르며, 눈과 코가 가렵고 코가 막히는 것이 알레르기 비염의 대표적인 증상으로 꼽힌다. 재채기와 콧물이 흐르는 증상은 보통 아침기상 시에 심했다가 오후로 되면서 감소하게 되며, 코막힘 증상을 계속 보이게 된다. 가려움증은 코뿐 아니라 눈, 목, 귀 등에도 발생하므로 치료 시 고려하여야 한다.
+      </br></br>
+      갑자기 찬 공기에 노출되면 비염을 악화시킬 수 있으므로 특히 겨울철 외출 시 마스크와 스카프를 착용하고 여름이나 겨울철에 실내 외 온도가 많이 차이나지 않도록 실내온도를 유지해야 한다.
+      </div>
+      </article>
+  </div>
+
+  <div id="mask"></div>
+  <div id="layerbox2" class="layerpop"
+      style="width: 750px; height: 500px;">
+      <article class="layerpop_area">
+      <div class="pop_title">두드러기</div>
+      <a href="javascript:popupClose('#layerbox2');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+      <div class="content">
+        부 상층의 부분적인 부종으로 인해서 생긴 다양한 크기의 팽진(부종)</br></br>
+        급격하게 피부가 부어 오르면서 심한 가려움증을 동반하고, 피부의 증상이 3~4시간 이내에 사라졌다가 다시 다른 자리에 생긴다. 대개의 경우 각각의 피부의 변화는 12~24시간 이내에 사라지지만, 두드러기 혈관염이나 구진 두드러기 등은 하루 이상 지속되기도 한다. 몸 속 체온이 상승했을 때 나타나는 콜린성 두드러기는 전형적인 두드러기보다 훨씬 작은 수 mm의 크기로 생기는 것이 특징적이다.
+      </br></br>
+      1) 몸에 열이 나게 하거나, 덥게 하는 것들, 스트레스 등을 피해야 한다.</br>
+      2) 두드러기가 난 부위를 긁는 것을 피해야 한다.</br>
+      3) 지나친 온도 자극은 좋지 않아, 미지근한 물이나 약간 따뜻한 물로 샤워를 하는 것이 좋다.</br>
+      4) 건조함이 가려움증을 악화시키므로 충분한 보습이 필요하다.
+      </div>
+      </article>
+  </div>
+
+  <div id="mask"></div>
+  <div id="layerbox1" class="layerpop"
+      style="width: 700px; height: 500px;">
+      <article class="layerpop_area">
+      <div class="pop_title">알레르기 비염</div>
+      <a href="javascript:popupClose('#layerbox1');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+      <div class="content">
+        연속적인 재채기, 계속 흘러 내리는 맑은 콧물, 코막힘, 가려움증 등의 증상을 보이는 코 점막의 질환</br></br>
+        발작적인 재채기를 연속적으로 하게 되고, 동시에 물처럼 맑은 콧물이 흐르며, 눈과 코가 가렵고 코가 막히는 것이 알레르기 비염의 대표적인 증상으로 꼽힌다. 재채기와 콧물이 흐르는 증상은 보통 아침기상 시에 심했다가 오후로 되면서 감소하게 되며, 코막힘 증상을 계속 보이게 된다. 가려움증은 코뿐 아니라 눈, 목, 귀 등에도 발생하므로 치료 시 고려하여야 한다.
+      </br></br>
+      갑자기 찬 공기에 노출되면 비염을 악화시킬 수 있으므로 특히 겨울철 외출 시 마스크와 스카프를 착용하고 여름이나 겨울철에 실내 외 온도가 많이 차이나지 않도록 실내온도를 유지해야 한다.
+      </div>
+      </article>
+  </div>
+
+  <div id="mask"></div>
+  <div id="layerbox3" class="layerpop"
+      style="width: 750px; height: 500px;">
+      <article class="layerpop_area">
+      <div class="pop_title">여드름</div>
+      <a href="javascript:popupClose('#layerbox3');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+      <div class="content">
+          여드름은 막힌 털구멍(개방 면포와 폐쇄 면포), 뾰루지, 깊은 종기(낭종 또는 결절)들을 말하는 것으로 얼굴, 목, 가슴, 등, 어깨 심지어는 팔에도 발생할 수 있습니다.</br></br>
+          여드름에 염증이 생기면 처음에는 붉은 기가 돌다가 시간이 흐르면서 갈색으로 변하게 된다. 여드름을 방치해서 염증이 심해지거나, 잘못 짜서 피지가 피부 안쪽으로 터지게 되면 피부가 울퉁불퉁하게 튀어나오거나 패인 흉터(볼록 흉터, 오목 흉터)가 생긴다. 여드름 흉터는 다른 흉터에 비해 흉터 가장자리가 매우 날카로우며 깊이 패여 있고 실제로 수술을 해보면 흉터 바닥이 지방층까지 연결되어 있는 경우도 많다. 그만큼 피부손상이 광범위하며 흉터끼리 서로 연결되어 있는 경우가 흔하다.
+        </br></br>
+        스트레스나 과로, 흡연 및 음주를 피하는 것이 좋으며 너무 강하고 잦은 세안은 피하는 것이 좋다. 턱을 괴고 있는 다든지 엎드려서 자는 것 등 압박을 가하거나 마찰과 같은 기계적인 자극들도 여드름을 심하게 발전시킬 수 있어 피하는 것이 좋다. 함부로 손을 이용해 짜는 것은 여드름 염증을 유발시키며 흉터를 남기기 쉬우므로 피해야 한다.
+      </div>
+      </article>
+  </div>
+
+  <div id="mask"></div>
+  <div id="layerbox4" class="layerpop"
+      style="width: 750px; height: 550px;">
+      <article class="layerpop_area">
+      <div class="pop_title">안면홍조</div>
+      <a href="javascript:popupClose('#layerbox4');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+      <div class="content">
+          안면홍조는 얼굴, 목, 상체에 달아오르는 느낌이 들고, 피부가 붉어지는 현상을 말합니다. 피부가 장시간 동안 붉은 상태로 유지되는 홍반과는 달리, 안면홍조는 짧은 시간동안 반복적으로 나타납니다. 피부가 붉어지는 것은 피부 밑 작은 혈관들의 수가 많아지거나 작은 혈관 속으로 흐르는 피의 양이 많아지기 때문입니다.
+      </br></br>
+      술은 안면홍조를 악화 시킬 수 있다. 알코올은 피부의 혈관을 확장 시킬 뿐만 아니라 체내 대사에서 발생하는 아세트알데하이드가 안면홍조를 유발한다. 따라서 안면홍조 치료 시에는 가급적 금주를 하는 것이 안면홍조 증상을 완화시키는데 효과적이다. </br>
+      안면홍조는 모세혈관의 확장과 수축과 관련이 있기 때문에 급격한 온도 변화 또한 안면홍조를 악화시키는 주요 원인이다. 따라서 안면홍조가 있을 시 사우나나 찜질방은 가지 않는 것이 증상 완화에 도움이 된다. </br>
+      자외선에 장시간 노출 되는 것 또한 안면홍조를 악화시킬 수 있기 때문에 외출 시에는 반드시 자외선 차단제를 발라주는 것이 좋다. </br>
+      화장품은 알코올 성분이 없고 자극이 적은 제품을 쓴다면 안면홍조 증상을 악화시키는 것을 방지 할 수 있다.</br>
+
+      </div>
+      </article>
+  </div>
+
+  <div id="mask"></div>
+  <div id="layerbox5" class="layerpop"
+      style="width: 750px; height: 700px;">
+      <article class="layerpop_area">
+      <div class="pop_title">아토피</div>
+      <a href="javascript:popupClose('#layerbox5');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+      <div class="content">
+        가려움증과 피부건조증을 주된 증상으로 하는 만성 염증성 피부질환으로 주로 영유아기에 시작됨. 성장하면서 알레르기 비염, 천식 같은 호흡기 아토피 질환이 동반되는 경우가 많음</br></br>
+        심한 소양증(가려움증)과 피부건조증, 피부염(습진)이 주요 증상이다.</br>
+        피부 건조는 가려움증을 유발하고 악화시킨다. 낮 동안에는 간헐적으로 가렵다가 대개 초저녁이나 한밤중에 심해진다. 가려워서 긁게 되면 습진성 피부 병변이 발생하고 이러한 병변이 진행되면서 다시 더 심한 가려움이 유발되는 악순환이 반복된다
+        </br></br>
+        1) 피부보습이 매우 중요하다. 지나친 목욕, 과다한 비누 사용, 습도가 낮은 환경에서 악화될 수 있다.</br>
+        2) 면제품이 아닌 속옷, 거친 화학섬유 옷 등과 목욕 시 타올로 밀거나 손으로 긁는 자체가 병변을 유발 또는 악화시킬 수 있다.</br>
+        3) 세탁 후 옷에 세제가 남지 않도록 잘 헹구는 것이 좋으며 모직이나 나일론 등의 합성섬유로 된 의류는 가능한 한 피하는 것이 좋다.</br>
+        4) 가족 간이나 학교에서의 긴장 상태, 입시준비에 대한 긴장감 등 스트레스가 긁는 행위를 유발할 수 있다.</br>
+        5) 피부 감염 특히 피부의 황색포도알균(Staphylococcus aureus) 감염이 피부 병변을 악화시킬 수 있다.</br>
+        6) 더운 실내 환경, 밀봉이 강한 의복, 기타 땀을 유발하는 상태와 고열 등이 아토피 피부염의 악화 요인이 된다.</br>
+        7) 알레르겐(원인 알레르기 물질)이 악화시킬 수 있다. 소아의 경우에는 음식물이, 성장하면서는 흡입 알레르겐이 악화원인일 수 있다
+      </div>
+      </article>
+  </div>
+
+  <div id="mask"></div>
+  <div id="layerbox6" class="layerpop"
+      style="width: 750px; height: 550px;">
+      <article class="layerpop_area">
+      <div class="pop_title">모낭염</div>
+      <a href="javascript:popupClose('#layerbox6');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+      <div class="content">
+          세균에 의해 모낭에 발생한 염증 질환</br></br>
+          1) 얕은 고름물집 모낭염</br>
+          1~4mm 크기의 농포, 딱지로 덮인 구진이 모낭과 일치하여 붉은 피부 위에 발생한다. 여러 개의 모낭이 합쳐지기도 하며 병변이 나은 후 흉터를 남기지 않는다. 가끔 경미한 통증이나 소양증을 호소하기도 하나 전신 증상을 동반하지는 않는다.</br></br>
+          2) 깊은 고름물집 모낭염</br>
+          안면 부위 콧수염이 나는 부위나 윗입술 부위에 잘 발생한다. 염증성의 구진이나 농포가 자주 재발하는 모습이며, 면도 후 주변부로 번져가고 염증이 깊어지면서 만성적으로 진행한다.</br></br>
+          당뇨, 비만, 불결한 위생 상태가 종기나 세균 감염의 원인으로 작용할 수 있으므로 이를 개선하기 위해 노력한다. 만성적으로 코 주변에 모낭염이 재발하는 경우는 코를 후비는 습관이 원인일 수 있으므로 이를 고치도록 한다. 제대로 소독을 하지 않고 손으로 농포를 짜거나 터트리거나 불결한 손으로 병변을 자주 만지는 경우에는 세균 감염을 더 악화시킬 수 있으므로 삼가도록 한다.
+      </div>
+      </article>
+  </div>
 </body>
 </html>
