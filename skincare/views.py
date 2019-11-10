@@ -18,4 +18,37 @@ def changeItem(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'skin.html',{'items' : items, 'posts' : posts})
+
+def toner(request):
+    items = Item.objects
+    item_list = Item.objects.filter(categories = 'toner')
+    paginator = Paginator(item_list, 9)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'skin.html',{'items' : items, 'posts' : posts})
+
+def essence(request):
+    items = Item.objects
+    item_list = Item.objects.filter(categories = 'essence')
+    paginator = Paginator(item_list, 9)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'skin.html',{'items' : items, 'posts' : posts})
+
+def lotion(request):
+    items = Item.objects
+    item_list = Item.objects.filter(categories = 'lotion')
+    paginator = Paginator(item_list, 9)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'skin.html',{'items' : items, 'posts' : posts})
+
+def cream(request):
+    items = Item.objects
+    item_list = Item.objects.filter(categories = 'cream')
+    paginator = Paginator(item_list, 9)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'skin.html',{'items' : items, 'posts' : posts})
+
     
