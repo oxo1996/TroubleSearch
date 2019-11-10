@@ -1,8 +1,8 @@
-from iRecomProduct import iRecomProduct
+from .iRecomProduct import iRecomProduct
 import json
 import math
 import numpy as np
-from utils import cosineSimilarity
+from .utils import cosineSimilarity
 
 class avgtfw2v(iRecomProduct):
     def __init__(self, word2vecPath : str, modelPath : str):

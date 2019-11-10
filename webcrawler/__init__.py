@@ -2,6 +2,7 @@ from webcrawler import webcrawler
 from CrawlAmore import CrawlAmore
 from CrawlKo2Eng import CrawlKo2Eng
 from CrawlEwg import CrawlEwg
+from CrawlDaumIngr import CrawlDaumIngr
 
 def crawlAmore():
     allCategory = "https://www.amorepacificmall.com/kr/ko/display/category/CTG001?upperMenuId=CTG001&categoryType=category"
@@ -28,7 +29,9 @@ def crawlEwg():
     data = webcrawler.crawlData(ewg)
 
 if __name__ == '__main__':
-    crawlEwg()
+    cdi = CrawlDaumIngr()
+    ingrDesc = webcrawler.crawlData(cdi)
+    print(len(ingrDesc.keys()))
     # crawlKo2Eng()
     # Ko2Eng = CrawlKo2Eng()
     # data = webcrawler.crawlData(Ko2Eng)

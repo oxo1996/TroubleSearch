@@ -1,8 +1,8 @@
 #from dlmodel import dlmodel
-from iRecomProduct import iRecomProduct
-from iDetectReview import iDetectReview
-from avgtfw2v import avgtfw2v
-from sktkobert import sktkobert
+from .iRecomProduct import iRecomProduct
+from .iDetectReview import iDetectReview
+from .avgtfw2v import avgtfw2v
+from .sktkobert import sktkobert
 import torch
 from kobert.pytorch_kobert import get_pytorch_kobert_model
 from gluonnlp.data import SentencepieceTokenizer
