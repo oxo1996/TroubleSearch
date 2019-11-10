@@ -1,64 +1,100 @@
+{%load staticfiles%}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href={%url 'home' %}>TroubleSearch</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     
-    
-    <style>
-      .wrapper{
-        display: grid;
-        padding-top: 30px;
-        width : 90%;
-        float: right;
-        padding : 20px;
-        margin-top : 20px;
-        margin-bottom: 50px;
-        border-left : 1px solid darkgreen;
-      }
-      .categories{
-        display: grid;
-        width: 8%;
-        float : left;
-        padding-top: 100px;
-        padding-left: 10px;
-        margin : auto;
-      }
-      div{
-          text-align : center;
-          float: center;
-      }
-      .page{
-        place-self: center;
-      }
+  <style>
+    .wrapper{
+      display: grid;
+      padding-top: 30px;
+      width : 90%;
+      float: right;
+      padding : 20px;
+      margin-top : 20px;
+      margin-bottom: 50px;
+      border-left : 1px solid darkgreen;
+    }
+    .categories{
+      display: grid;
+      width: 8%;
+      float : left;
+      padding-top: 100px;
+      padding-left: 10px;
+      margin : auto;
+    }
+    div{
+      text-align : center;
+      float: center;
+    }
+    .page{
+      place-self: center;
+    }
+    ul{
+      float:right;
+      list-style-type: none;
+      margin-top: 30px;
+    }
+    ul li{
+      display : inline-block;
+    }
+    ul li a{
+      text-decoration: none;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      font-weight: bold;
+      color:black;
+      padding : 5px 20px;
+      border : 1px solid transparent;
+      transition: 0.6s ease;
+    }
+    ul li a:hover{
+      background-color: black;
+      color : white;
+      text-decoration: none;
+    }
+    .logo img{
+      position: absolute;
+      margin-top: 30px;
+      margin-left: 25px;
+      float:left;
+      width:25px;
+      height: auto;
+      left:30px;
+    }
+    .logo a{
+      position: absolute;
+      margin-top: 28px;
+      margin-left: 60px;
+      left:30px;
+      text-decoration: none;
+      font-family: Roboto;
+      font-size: 20px;
+      font-weight: bold;
+      color:black;
+    }
+    .main{
+      max-width: 1200px;
+      margin: auto;
+    }
       
       </style>  
   
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'search' %}>자가진단</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href={%url 'skin' %}>스킨케어</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'comp' %}>성분정보</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'symp' %}>증상정보</a>
-        </li>
-      </ul>
+  <header>
+    <div class = "main">
+  <div class="logo">
+    <img src = "{%static 'TSicon.png'%}"><a href={%url 'home'%}>TroubleSearch</a>
+  </div>
+  <ul>
+    <li><a href={%url 'search'%}>자가진단</a></li>
+    <li><a href={%url 'skin'%}>제품정보</a></li>
+    <li><a href={%url 'symp'%}>증상정보</a></li>
+    <li><a href={%url 'comp'%}>성분정보</a></li>
+    </ul>
     </div>
-  </nav>
-{%load staticfiles%}
+  </header>
+
 <div class = "categories">
   <p>스킨</p>
   <p>로션</p>
