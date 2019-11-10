@@ -3,26 +3,82 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+        function wrapWindowByMask() {
+    //화면의 높이와 너비를 구한다.
+    var maskHeight = $(document).height();
+    var maskWidth = $(window).width();
 
+    //문서영역의 크기
+    console.log( "document 사이즈:"+ $(document).width() + "*" + $(document).height());
+    //브라우저에서 문서가 보여지는 영역의 크기
+    console.log( "window 사이즈:"+ $(window).width() + "*" + $(window).height());
+
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+    $('#mask').css({
+        'width' : maskWidth,
+        'height' : maskHeight
+    });
+
+    //애니메이션 효과
+    //$('#mask').fadeIn(1000);
+    $('#mask').fadeTo("slow", 0.5);
+}
+
+function popupOpen(name) {
+    $('.layerpop').css("position", "absolute");
+    //영역 가운에데 레이어를 뛰우기 위해 위치 계산
+    $('.layerpop').css("top",(($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
+    $('.layerpop').css("left",(($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft());
+    $('.layerpop').draggable();
+    $(name).show();
+}
+
+function popupClose(name) {
+    $(name).hide();
+    $('#mask').hide();
+}
+
+function goDetail(name) {
+
+    /*팝업 오픈전 별도의 작업이 있을경우 구현*/
+
+    popupOpen(name); //레이어 팝업창 오픈
+    wrapWindowByMask(); //화면 마스크 효과
+}
+
+  </script>
     
   <style>
     .wrapper{
+      position : absolute;
+      width : 100%;
+      height: 100%;
       display: grid;
-      padding-top: 30px;
-      width : 90%;
       float: right;
-      padding : 20px;
-      margin-top : 20px;
+      padding : 5%;
+      margin-top : 5%;
       margin-bottom: 50px;
-      border-left : 1px solid darkgreen;
+    }
+    .searchform{
+      position: relative;
+      top:0;
+      left : 20%;
+      padding-bottom: 5%;
+    }
+    .row{
+      position : relative;
+      width : 80%;
+      left : 20%;
     }
     .categories{
       display: grid;
-      width: 8%;
-      float : left;
-      padding-top: 100px;
-      padding-left: 10px;
-      margin : auto;
+      position: absolute;
+      width: 15%;
+      padding-top: 200px;
+      left : 3%;
+      font-family: Noto Sans KR;
+      font-weight: bold;
     }
     div{
       text-align : center;
@@ -78,8 +134,48 @@
       max-width: 1200px;
       margin: auto;
     }
-      
-      </style>  
+    #mask {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 999;
+      background-color: #000000;
+      display: none; }
+
+    .layerpop {
+      display: none;
+      z-index: 1000;
+      border: 2px solid #ccc;
+      background: #fff;
+      cursor: move; }
+
+    .layerpop_area .pop_title {
+      padding: 10px 10px 10px 10px;
+      border: 0px solid #aaaaaa;
+      background: #f1f1f1;
+      color: #3eb0ce;
+      font-size: 1.3em;
+      font-weight: bold;
+      line-height: 24px; }
+
+    .layerpop_area .layerpop_close {
+      width: 25px;
+      height: 25px;
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent url('btn_exit_off.png') no-repeat; }
+
+    .layerpop_area .layerpop_close:hover {
+      background: transparent url('btn_exit_on.png') no-repeat;
+      cursor: pointer; }
+
+    .layerpop_area .content {
+      width: 90%;
+      margin: 5%;
+      color: #828282; }
+  </style>  
   
   <header>
     <div class = "main">
@@ -95,18 +191,16 @@
     </div>
   </header>
 
-<div class = "categories">
-  <p>스킨</p>
-  <p>로션</p>
-  <p>에센스</p>
-  <p>크림</p>
-  <p>미스트</p>
-</div>
+  <div class = "wrapper">
+    <div class = "categories">
+          <p>스킨</p>
+          <p>로션</p>
+          <p>에센스</p>
+          <p>크림</p>
+          <p>미스트</p>
+    </div>
 
-
-
-<div class = "wrapper">
-    <div>
+    <div class = "searchform">
       <form class="skincare_search form-inline" action="{% url 'searchSkincare' %}" method="POST" accept-charset="utf-8">
         {% csrf_token %}
         <input class="form-control" name ="product" type="text" placeholder="Search" aria-label="Search">
@@ -145,4 +239,17 @@
           {%endif%}
         </ul>
       </div>
+</div>
+
+<div id="mask"></div>
+  <div id="layerbox" class="layerpop"
+    style="width: 750px; height: 700px;">
+    <article class="layerpop_area">
+    <div class="pop_title">아토피</div>
+      <a href="javascript:popupClose('#layerbox');" class="layerpop_close"
+          id="layerbox_close">X</a> <br>
+     <div class="content">
+        
+    </div>
+    </article>
 </div>
