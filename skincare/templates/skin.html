@@ -22,7 +22,8 @@
     .row{
       position : relative;
       width : 85%;
-      left : 15%;
+      margin : 5%;
+      left : 3%;
     }
     .categories{
       display: grid;
@@ -64,25 +65,7 @@
       color : white;
       text-decoration: none;
     }
-    .catelist li a{
-      text-decoration: none;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 15px;
-      font-weight: bold;
-      color:black;
-      padding : 5px 20px;
-      border : 1px solid transparent;
-      transition: 0.6s ease;
-    }
-    .catelist li a:hover{
-      background-color: #024110;
-      color : white;
-      text-decoration: none;
-    }
-    .catelist li{
-      list-style: none;
-      padding : 15px;
-    }
+   
     .logo img{
       position: absolute;
       margin-top: 30px;
@@ -114,8 +97,24 @@
       height: 70%;
       background-image:url("{%static 'skincareimg.jpg'%}");
     }
-    .he{
-      position: relative;
+    .custom-select{
+      margin:10px;
+    }
+    .searchbox{
+      position : relative;
+      left : 15%;
+    }
+    #search1, #search2{
+      margin:10px;
+    }
+    #selection1{
+      margin-right: 5%;
+    }
+    #selection2{
+      margin-right: 7%;
+    }
+    .custom{
+      width : 100px;
     }
   </style>  
   <header>
@@ -127,33 +126,38 @@
     <li><a href={%url 'search'%}>자가진단</a></li>
     <li><a href={%url 'skin'%}>제품정보</a></li>
     <li><a href={%url 'symp'%}>증상정보</a></li>
-    <li><a href={%url 'comp'%}>성분정보</a></li>
     </ul>
   </header>
 </div>
  
 <img src = "{%static 'skincareimg.png'%}" width = "100%" height=500px style = "margin-top : 3%;">
   
-
-  <div class = "wrapper">
-  
-    <div class = "categories">
-      <ul class = "catelist">
-          <li><a href={%url 'toner'%}>토너</a></li>
-          <li><a href={%url 'lotion'%}>로션</a></li>
-          <li><a href={%url 'essence'%}>에센스</a></li>
-          <li><a href={%url 'cream'%}>크림</a></li>
-      </ul>
-    </div>
-
-    <div class = "searchform">
-      <form class="skincare_search form-inline" action="{% url 'searchSkincare' %}" method="POST" accept-charset="utf-8">
+  <div class = "wrapper"> 
+    <div class = "searchbox">
+    <form class="skincare_search form-inline" action="{% url 'productSearch' %}" method="POST" accept-charset="utf-8">
         {% csrf_token %}
-        <input class="form-control" name ="product" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
-    </div>
-    
+        <p id = "search1">브랜드 </p>
+      <select class = "custom-select" id = "selection1" name = "brand" type="text">
+        <option value="전체">전체</option>
+        {%for brand in brand_list %}
+        <option value={{brand}}>{{brand}}</option>
+        {% endfor %}
+    </select>
+
+    <p id = "search2">카테고리 </p>
+    <select class="custom-select" id = "selection2" name = "categories" type="text">
+        <option value="전체">전체</option>
+        <option value="toner">토너</option>
+        <option value="lotion">로션</option>
+        <option value="essence">에센스</option>
+        <option value="cream">크림</option>
+    </select>
+<!--
+      <button type="button" class="btn btn-primary" onclick="myFunction()">Search</button>-->
+      <button class="btn btn-primary custom" type="submit">Search</button>
+    </form>
+  </div>
+
     <div class="row">
     {%for item in posts %}
       <div class="col-md-4">
