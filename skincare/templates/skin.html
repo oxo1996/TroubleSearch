@@ -3,26 +3,36 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
   <style>
     .wrapper{
+      position : absolute;
+      width : 100%;
+      height: 100%;
       display: grid;
-      padding-top: 30px;
-      width : 90%;
-      float: right;
-      padding : 20px;
-      margin-top : 20px;
-      margin-bottom: 50px;
-      border-left : 1px solid darkgreen;
+      padding : 5%;
+      margin-bottom: 10%;
+    }
+    .searchform{
+      position: relative;
+      top:0;
+      left : 20%;
+      padding-bottom: 5%;
+    }
+    .row{
+      position : relative;
+      width : 85%;
+      margin : 5%;
+      left : 3%;
     }
     .categories{
       display: grid;
-      width: 8%;
-      float : left;
-      padding-top: 100px;
-      padding-left: 10px;
-      margin : auto;
+      position: absolute;
+      width: 12%;
+      padding-top: 200px;
+      left : 2%;
+      font-family: Noto Sans KR;
+      font-weight: bold;
     }
     div{
       text-align : center;
@@ -30,16 +40,17 @@
     }
     .page{
       place-self: center;
+      margin-bottom: 5%;
     }
-    ul{
+    .headlist{
       float:right;
       list-style-type: none;
       margin-top: 30px;
     }
-    ul li{
+    .headlist li{
       display : inline-block;
     }
-    ul li a{
+    .headlist li a{
       text-decoration: none;
       font-family: 'Noto Sans KR', sans-serif;
       font-size: 15px;
@@ -49,11 +60,12 @@
       border : 1px solid transparent;
       transition: 0.6s ease;
     }
-    ul li a:hover{
+    .headlist li a:hover{
       background-color: black;
       color : white;
       text-decoration: none;
     }
+   
     .logo img{
       position: absolute;
       margin-top: 30px;
@@ -78,51 +90,83 @@
       max-width: 1200px;
       margin: auto;
     }
-      
-      </style>  
-  
+    #container{
+      position: relative;
+      margin-top : 10%;
+      width : 100%;
+      height: 70%;
+      background-image:url("{%static 'skincareimg.jpg'%}");
+    }
+    .custom-select{
+      margin:10px;
+    }
+    .searchbox{
+      position : relative;
+      left : 15%;
+    }
+    #search1, #search2{
+      margin:10px;
+    }
+    #selection1{
+      margin-right: 5%;
+    }
+    #selection2{
+      margin-right: 7%;
+    }
+    .custom{
+      width : 100px;
+    }
+  </style>  
   <header>
     <div class = "main">
   <div class="logo">
     <img src = "{%static 'TSicon.png'%}"><a href={%url 'home'%}>TroubleSearch</a>
   </div>
-  <ul>
+  <ul class = "headlist">
     <li><a href={%url 'search'%}>자가진단</a></li>
     <li><a href={%url 'skin'%}>제품정보</a></li>
     <li><a href={%url 'symp'%}>증상정보</a></li>
-    <li><a href={%url 'comp'%}>성분정보</a></li>
     </ul>
-    </div>
   </header>
-
-<div class = "categories">
-  <p>스킨</p>
-  <p>로션</p>
-  <p>에센스</p>
-  <p>크림</p>
-  <p>미스트</p>
 </div>
-
-
-
-<div class = "wrapper">
-    <div>
-      <form class="skincare_search form-inline" action="{% url 'searchSkincare' %}" method="POST" accept-charset="utf-8">
+ 
+<img src = "{%static 'skincareimg.png'%}" width = "100%" height=500px style = "margin-top : 3%;">
+  
+  <div class = "wrapper"> 
+    <div class = "searchbox">
+    <form class="skincare_search form-inline" action="{% url 'productSearch' %}" method="POST" accept-charset="utf-8">
         {% csrf_token %}
-        <input class="form-control" name ="product" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
-    </div>
-    
+        <p id = "search1">브랜드 </p>
+      <select class = "custom-select" id = "selection1" name = "brand" type="text">
+        <option value="전체">전체</option>
+        {%for brand in brand_list %}
+        <option value={{brand}}>{{brand}}</option>
+        {% endfor %}
+    </select>
+
+    <p id = "search2">카테고리 </p>
+    <select class="custom-select" id = "selection2" name = "categories" type="text">
+        <option value="전체">전체</option>
+        <option value="toner">토너</option>
+        <option value="lotion">로션</option>
+        <option value="essence">에센스</option>
+        <option value="cream">크림</option>
+    </select>
+<!--
+      <button type="button" class="btn btn-primary" onclick="myFunction()">Search</button>-->
+      <button class="btn btn-primary custom" type="submit">Search</button>
+    </form>
+  </div>
+
     <div class="row">
     {%for item in posts %}
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
           <img src= "/static/{{item.brand}}_{{item.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
           <div class="card-body">
-              <a> {{item.name}} </a><br>
-              <a> {{item.categories}} </a><br>
-              <a> {{item.brand}} </a><br>
+              <a style="font-size: small;"> {{item.name}} </a><br>
+              <a style="font-size: small;"> {{item.categories}} </a><br>
+              <a style="font-size: small;"> {{item.brand}} </a><br>
               <div class="d-flex justify-content-between align-items-center"></div>
           </div>
         </div>
