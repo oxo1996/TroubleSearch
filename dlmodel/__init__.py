@@ -4,13 +4,13 @@ from .iDetectReview import iDetectReview
 from .avgtfw2v import avgtfw2v
 from .sktkobert import sktkobert
 import torch
-from kobert.pytorch_kobert import get_pytorch_kobert_model
+from .KoBERT.kobert.pytorch_kobert import get_pytorch_kobert_model
 from gluonnlp.data import SentencepieceTokenizer
-from kobert.utils import get_tokenizer
+from .KoBERT.kobert.utils import get_tokenizer
 import numpy as np
 import math
-from bm25 import bm25
-from bert_bm25 import bert_bm25
+from .bm25 import bm25
+from .bert_bm25 import bert_bm25
 
 import json
 

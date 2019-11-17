@@ -1,7 +1,7 @@
 import torch
-from kobert.pytorch_kobert import get_pytorch_kobert_model
+from .KoBERT.kobert.pytorch_kobert import get_pytorch_kobert_model
 from gluonnlp.data import SentencepieceTokenizer
-from kobert.utils import get_tokenizer
+from .KoBERT.kobert.utils import get_tokenizer
 
 class sktkobert:
     def __init__(self):

@@ -1,7 +1,7 @@
-from iDetectReview import iDetectReview
-from sktkobert import sktkobert
-from bm25 import bm25
-from utils import cosineSimilarity
+from .iDetectReview import iDetectReview
+from .sktkobert import sktkobert
+from .bm25 import bm25
+from .utils import cosineSimilarity
 
 class bert_bm25(iDetectReview):
     def __init__(self):

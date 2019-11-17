@@ -9,56 +9,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles.css">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href={%url 'home' %}>TroubleSearch</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    
-    <style>
-      div{
-          text-align : left;
-      }
-      </style>  
-  
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href={%url 'search' %}>자가진단</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'skin' %}>스킨케어</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'comp' %}>성분정보</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={%url 'symp' %}>증상정보</a>
-        </li>
-      </ul>
+  <div class = "main">
+    <div class="logo">
+      <a href={%url 'home'%}>TroubleSearch</a>
     </div>
-  </nav>
+  <ul>
+    <li><a href={%url 'search'%}>자가진단</a></li>
+    <li><a href={%url 'skin'%}>제품정보</a></li>
+    <li><a href={%url 'symp'%}>증상정보</a></li>
+    <li><a href={%url 'comp'%}>성분정보</a></li>
+  </ul>
+  </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
+  
 
   $(document).ready(function(){
-
-    var counter = 2;
+    var searchProduct = $('#searchProduct').clone();
 
     $("#plus").click(function () {
 
-    var newTextBoxDiv = $(document.createElement('div')).attr("class", '');
-
-    newTextBoxDiv.after().html('<input name="product" type="text" class="form-control">');
-
-    newTextBoxDiv.appendTo("#using");
-    counter++;
+    searchProduct.appendTo("#using");
       });
+
+      
 
   });
 </script>
@@ -69,56 +47,51 @@
   <div class="col-md-8">
     <form class="search" action="{% url 'information' %}" method="POST" accept-charset="utf-8">
       {% csrf_token %}
-      <div class="border border-secondary">
-        <h1>자가진단</h1>
+      <div class="searchComponent">
+        <h1>Self-diagnosis</h1>
       </div>
-      <div class="border border-secondary">
-        <h3>성별</h3>
-        <label class="radio-inline">
-          <input type="radio" name="gender" id="male" value="male"> 남성
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="gender" id="female" value="female"> 여성
-        </label>
+      <div class="searchComponent" style="font-size:17px;">
+        <h3>Gender</h3>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="gender1" name="gender"value="male"  class="custom-control-input">
+          <label class="custom-control-label" for="gender1">Male</label>
+        </div>
+        
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="gender2" name="gender"value="female" class="custom-control-input">
+          <label class="custom-control-label" for="gender2">Female</label>
+        </div>
       </div>
-      <div class="border border-secondary">
-        <h3>연령</h3>
-        <label class="radio-inline">
-          <input type="radio" name="age" id="10s" value="10s"> 10대
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="age" id="20s" value="20s"> 20대
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="age" id="30s" value="30s"> 30대
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="age" id="40s" value="40s"> 40대
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="age" id="50s" value="50s"> 50대
-        </label>
-      </div>
-      <div class="border border-secondary">
+
+      
+      <div class="searchComponent" style="font-size:17px; ">
         <h3>피부 타입</h3>
-        <label class="radio-inline">
-          <input type="radio" name="skintype" id="option1" value="option1"> 모름
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="skintype" id="option2" value="option2"> 건성
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="skintype" id="option3" value="option3"> 중성
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="skintype" id="option4" value="option4"> 지성
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="skintype" id="option5" value="option5"> 복합성
-        </label>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="option1" name="skintype"value="option1"  class="custom-control-input">
+          <label class="custom-control-label" for="option1">모름</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="option2" name="skintype"value="option2"  class="custom-control-input">
+          <label class="custom-control-label" for="option2">건성</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="option3" name="skintype"value="option3"  class="custom-control-input">
+          <label class="custom-control-label" for="option3">중성</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="option4" name="skintype"value="option4"  class="custom-control-input">
+          <label class="custom-control-label" for="option4">지성</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="option5" name="skintype"value="option5"  class="custom-control-input">
+          <label class="custom-control-label" for="option5">복합성</label>
+        </div>
       </div>
-      <div  id="using"class="border border-secondary form-group">
-        <div class="form-inline">
+      
+      <div  id="using"class="searchComponent">
+        
+        <div class="form-inline" id="searchProduct">
+          <!--
           <label for="exampleInputName2"><h4>사용 제품</h4></label>
           <div class="dropdown">
             <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -155,29 +128,37 @@
               <li role="presentation"><a role="menuitem" tabindex="-1" href="#">서플프레퍼레이션 올오버 로션</a></li>
             </ul>
           </div>
-          <!--<input type="text" name="product" class="form-control" id="" placeholder="">
-          <input type="button" class="btn btn-default " id="plus"value="+">-->
+          <input type="button" class="btn btn-default" id="plus"value="+">
+          -->
+
+          <input type="text" name="product" class="form-control" id="" placeholder="">
+          <input type="button" class="btn btn-default " id="plus"value="+">
         </div>
       </div>
-      <div class="border border-secondary">
+      <div class="searchComponent" style="font-size:17px;">
         <h3>증상 타입</h3>
-        <label class="radio-inline">
-          <input type="radio" name="symptom" id="inlineRadio1" value="pimple"> 여드름
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="symptom" id="inlineRadio2" value="atopy"> 아토피
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="symptom" id="inlineRadio3" value="toxicity"> 두드러기
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="symptom" id="inlineRadio4" value="allergy"> 알레르기
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="symptom" id="inlineRadio5" value="toxicity"> 기타
-        </label>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="pimple" name="symptom"value="pimple"  class="custom-control-input">
+          <label class="custom-control-label" for="pimple">여드름</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="atopy" name="symptom"value="atopy"  class="custom-control-input">
+          <label class="custom-control-label" for="atopy">아토피</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="toxicity" name="symptom"value="toxicity"  class="custom-control-input">
+          <label class="custom-control-label" for="toxicity">두드러기</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="allergy" name="symptom"value="allergy"  class="custom-control-input">
+          <label class="custom-control-label" for="allergy">알레르기</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" >
+          <input type="radio" id="other" name="symptom" value="toxicity"  class="custom-control-input">
+          <label class="custom-control-label" for="other">기타</label>
+        </div> 
       </div>
-      <div class="form-inline border border-secondary">
+      <div class="form-inline  ">
         <label for="exampleInputName2"><h4>세부 증상</h4></label>
         <input type="text" class="form-control" id="" placeholder="">
         <input type="button" class="btn btn-default" id="plus"value="+">
