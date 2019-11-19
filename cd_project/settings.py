@@ -25,7 +25,7 @@ SECRET_KEY = 'r_ue8pr)#4@fmp=x9q*x^o896346(f3n1=u$b^)d73j^eonmz-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['15.165.88.153', 'localhost', '127.0.0.1','www.troublesearch.com','172.26.15.149']
 
 
 # Application definition
@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'symptom.apps.SymptomConfig',
     'skincare.apps.SkincareConfig',
     'search.apps.SearchConfig',
-    'information.apps.informationConfig'
+    'information.apps.informationConfig',
+    'django.contrib.sites',
+    'django.contrib.sitemaps'
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'troublesearch', # DB명
         'USER': 'root', # 데이터베이스 계정
-        'PASSWORD': 'rhwk6925', # 계정 비밀번호
+        'PASSWORD': 'tjdals7337', # 계정 비밀번호
         'HOST': '127.0.0.1', # 데이테베이스 주소(IP)
         'PORT': '3306'
 }
