@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
 import json
-from dlmodel.avgtfw2v import *
+from dlmodel.embedding.w2v_tfidf import W2vTfidf
 
 def load(self):
     with open("/webcrawler/ingredients_in_items") as data_file:
@@ -14,8 +14,8 @@ def information(request):
     product = request.POST.getlist('product')
     symptom = request.POST['symptom']
 
-    imodel = avgtfw2v("dlmodel/symptom_w2v.json", "dlmodel/avgw2v_model.json")
-    result = imodel.getResult(symptom,product)
+    imodel = W2vTfidf("dlmodel/embedding/symptom_w2v.json", "dlmodel/embedding/avgw2v_model.json")
+    result = imodel.get_result(symptom,product)
 
     components = component.objects.all()
     components.delete()
@@ -44,10 +44,10 @@ def information(request):
 
     return render(request, 'information.html', {'item' : item ,'components1':components1,'components2':components2,'components3':components3,'recommendItems':recommendItems})
 
-def _recommendItems(symptoms,imodel:avgtfw2v):
+def _recommendItems(symptoms, imodel:W2vTfidf):
     item = Items.objects.none()
     temp = Items.objects.all()
-    recommendList = imodel.recommendProduct(symptoms)
+    recommendList = imodel.recommend_product(symptoms)
     for elem in recommendList:
         item|= temp.filter(name = elem[0])
 
