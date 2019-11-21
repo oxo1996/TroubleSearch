@@ -33,6 +33,10 @@ def information(request):
         productReviews.append((_mostReview(symptom,product[productIdx],items)))
 
     recommendItems = _recommendItems(symptom,imodel)
+    recommend1 = recommendItems.filter(categories = "toner")[:1]
+    recommend2 = recommendItems.filter(categories = "lotion")[:1]
+    recommend3 = recommendItems.filter(categories = "cream")[:1]
+
     for elem in result:
         
         #temp.filter(name = elem[0]).sim = result[pname]["sim"]
@@ -47,7 +51,7 @@ def information(request):
     components2 = components[3:6]
     components3 = components[6:9]
 
-    return render(request, 'information.html', {'item' : item ,'components1':components1,'components2':components2,'components3':components3,'recommendItems':recommendItems ,'productReviews':productReviews})
+    return render(request, 'information.html', {'item' : item ,'components1':components1,'components2':components2,'components3':components3,'recommend1':recommend1, 'recommend2':recommend2, 'recommend3':recommend3 ,'productReviews':productReviews})
 
 def _recommendItems(symptoms, imodel:W2vTfidf):
     item = Items.objects.none()
