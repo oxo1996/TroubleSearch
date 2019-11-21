@@ -1,3 +1,9 @@
+from json2sql import iJson2Sql
+from item import Item
+from items_in_category import ItemsInCategory
+
 if __name__ == '__main__':
-    j2s = json2sql("items.json")
-    j2s.makeDB("items")
+    # iJson2Sql = Item("../items.json")
+    # iJson2Sql.insert_data()
+    iJson2Sql = ItemsInCategory("../items.json")
+    iJson2Sql.insert_data()

@@ -2,13 +2,13 @@ from abc import *
 
 class iRecomProduct(metaclass=ABCMeta):
     @abstractmethod
-    def mostSimilar(symptom, product : str, num : int, order : str):
+    def most_similar(symptom, product : str, num : int, order : str):
         pass
 
     @abstractmethod
-    def recommendProduct(symptom):
+    def recommend_product(symptom):
         pass
 
     @abstractmethod
-    def getResult(self, symptom, product : str):
+    def get_result(self, symptom, product : str):
         pass

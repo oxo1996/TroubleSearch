@@ -1,5 +1,6 @@
 from crawlable import crawlable
 
+
 class webcrawler:
-    def crawlData(c: crawlable):
-        return c.getData()
+    def crawl_data(c: crawlable):
+        return c.get_data()
