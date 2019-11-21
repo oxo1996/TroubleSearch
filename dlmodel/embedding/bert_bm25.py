@@ -1,4 +1,4 @@
-from dlmodel.idetectreview import iDetectReview
+from dlmodel.iDetectReview import iDetectReview
 from dlmodel.embedding.sktkobert import SktKobert
 from dlmodel.feature_extract.bm25 import Bm25
 from dlmodel.utils import cosine_similarity

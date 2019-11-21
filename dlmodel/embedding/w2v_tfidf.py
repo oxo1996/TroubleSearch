@@ -1,4 +1,4 @@
-from dlmodel.irecomproduct import iRecomProduct
+from dlmodel.iRecomProduct import iRecomProduct
 import json
 import math
 import numpy as np
