@@ -4,6 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <!DOCTYPE html>
 <head>
@@ -67,7 +68,7 @@
     position: relative;
     top : 13%;
     left : 12%;
-    color : white;
+    color : black;
     font-family: Noto Sans KR;
   }
   .searchComponent{
@@ -110,6 +111,32 @@
 
     searchProduct.appendTo("#using");
       });
+    
+    $("#categories").change(function(){
+    var brandName = $("#brand option:selected").val();
+    var categoriesName = $("#categories option:selected").val();
+    
+    $.ajax({
+      method:"GET",
+      url : "{% url 'ajax' %}",
+      dataType:"json",
+      data : {brand:brandName, categories:categoriesName},
+      success:function(data){ 
+        for(var productName in data){
+          
+          $("#product").append("<option value = productName>"+data[productName]+"</option>");
+        }
+      },
+      error: function(request, status, error){
+      alert("브랜드와 카테고리를 다시 설정해주세요!");
+      }
+      
+    });
+
+    
+
+
+    });
   });
 </script>
 
@@ -160,56 +187,32 @@
           <label class="custom-control-label" for="option5">복합성</label>
         </div>
       </div>
-      
+
       <div  id="using"class="searchComponent">
+
           <h3>사용 제품</h3>
-        <div class="form-inline" id="searchProduct">
-          <input type="text" name="product" class="form-control" id="" placeholder="">
-          <input type="button" class="btn btn-default " id="plus"value="+">
-        </div>       
+          <select class = "brand" id = "brand" name = "brand" type="text">
+            {%for brand in brand_list %}
+            <option value={{brand}}>{{brand}}</option>
+            {% endfor %}
+          </select>
+          <select class="categories" id = "categories" name = "categories" type="text">
+            <option value="toner">토너</option>
+            <option value="lotion">로션</option>
+            <option value="essence">에센스</option>
+            <option value="cream">크림</option>
+          </select>
+          <select class="product" id = "product" name = "product" type="text">
+            
+          </select>
+
+        
+          <input type="button" class="btn btn-default " id="plus"value="+"> 
       </div>
-<!--
-      <div  id="using"class="form-group">
-          <div class="form-inline">
-              <h3 style="margin-right: 20px; margin-left:30px;">사용 제품</h3>
-            <div class="dropdown">
-              <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="margin-right: 10px; margin-top:20px;">
-                로션
-              </button>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-              </ul>
-            </div>
-            <div class="dropdown">
-              <button class="btn btn-default  btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="margin-right: 10px; margin-top:20px;">
-                이니스프리
-              </button>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-              </ul>
-            </div>
-            <div class="dropdown">
-              <button class="btn btn-default  btn-lg  dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style = "margin-top:20px;">
-                제품명
-              </button>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">19' 한란로션 160ml</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ac 클린업 젤로션</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">로즈 앱솔루트 바이탈 플루이드</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">마이에센셜바디그린바디로션</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">모이스트젠 에멀젼</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">서플프레퍼레이션 올오버 로션</a></li>
-              </ul>
-              <input type="button" class="btn btn-default " id="plus"value="+" style = "margin-top:20px;">
-            </div>
-          </div>
-        </div>-->
+
+
+      
+
 
       <div class="searchComponent" style="font-size:17px;">
           <div class = "title"><h3>증상 타입</h3></div>
