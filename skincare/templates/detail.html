@@ -1,0 +1,198 @@
+{%load staticfiles%}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
+  
+<script>
+    function wrapWindowByMask() {
+    //화면의 높이와 너비를 구한다.
+    var maskHeight = $(document).height();
+    var maskWidth = $(window).width();
+
+    //문서영역의 크기
+    console.log( "document 사이즈:"+ $(document).width() + "*" + $(document).height());
+    //브라우저에서 문서가 보여지는 영역의 크기
+    console.log( "window 사이즈:"+ $(window).width() + "*" + $(window).height());
+
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+    $('#mask').css({
+        'width' : maskWidth,
+        'height' : maskHeight
+    });
+
+    //애니메이션 효과
+    //$('#mask').fadeIn(1000);
+    $('#mask').fadeTo("slow", 0.5);
+}
+
+function popupOpen(name) {
+    $('.layerpop').css("position", "absolute");
+    //영역 가운에데 레이어를 뛰우기 위해 위치 계산
+    $('.layerpop').css("top",(($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
+    $('.layerpop').css("left",(($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft());
+    $('.layerpop').draggable();
+    $(name).show();
+}
+
+function popupClose(name) {
+    $(name).hide();
+    $('#mask').hide();
+}
+
+function goDetail(name) {
+
+    /*팝업 오픈전 별도의 작업이 있을경우 구현*/
+
+    popupOpen(name); //레이어 팝업창 오픈
+    wrapWindowByMask(); //화면 마스크 효과
+}
+
+  </script>  
+
+  <style>
+    .wrapper{
+      position : absolute;
+      width : 100%;
+      height: 100%;
+      display: grid;
+      padding : 5%;
+      margin-bottom: 10%;
+    }
+    .searchform{
+      position: relative;
+      top:0;
+      left : 20%;
+      padding-bottom: 5%;
+    }
+    .card{
+      position : relative;
+      width : 1200px;
+      line-height: 30px;
+      margin : 10px;
+    }
+    .categories{
+      display: grid;
+      position: absolute;
+      width: 12%;
+      padding-top: 200px;
+      left : 2%;
+      font-family: Noto Sans KR;
+      font-weight: bold;
+    }
+
+    .page{
+      place-self: center;
+      margin-bottom: 5%;
+    }
+    .headlist{
+      float:right;
+      list-style-type: none;
+      margin-top: 30px;
+    }
+    .headlist li{
+      display : inline-block;
+    }
+    .headlist li a{
+      text-decoration: none;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      font-weight: bold;
+      color:black;
+      padding : 5px 20px;
+      border : 1px solid transparent;
+      transition: 0.6s ease;
+    }
+    .headlist li a:hover{
+      background-color: black;
+      color : white;
+      text-decoration: none;
+    }
+   
+    .logo img{
+      position: absolute;
+      margin-top: 30px;
+      margin-left: 25px;
+      float:left;
+      width:25px;
+      height: auto;
+      left:30px;
+    }
+    .logo a{
+      position: absolute;
+      margin-top: 28px;
+      margin-left: 60px;
+      left:30px;
+      text-decoration: none;
+      font-family: Roboto;
+      font-size: 20px;
+      font-weight: bold;
+      color:black;
+    }
+    .main{
+      max-width: 1200px;
+      margin: auto;
+    }
+    .t{
+        position: relative;
+        width : 1300;
+        top : 15%;
+        left : 10%;
+        margin-bottom: 100px;
+    }
+    h5{
+      font-size: 15px;
+      font-weight: bold;
+    }
+    h3{
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>  
+  <header>
+    <div class = "main">
+  <div class="logo">
+    <img src = "{%static 'TSicon.png'%}"><a href={%url 'home'%}>TroubleSearch</a>
+  </div>
+  <ul class = "headlist">
+    <li><a href={%url 'search'%}>자가진단</a></li>
+    <li><a href={%url 'skin'%}>제품정보</a></li>
+    <li><a href={%url 'symp'%}>증상정보</a></li>
+    </ul>
+  </div>
+  </header>
+  <body>
+    <div class = "t">
+        <table class = "t1" style="margin-bottom: 20px;">
+            <tr>
+                <td width = "350">
+                    <img src="/static/{{brand}}_{{name}}.png" style="place-self: center; margin : 30px;" width = 300 height = 300 alt="제품사진">
+                </td>
+                <td width = "500">
+                    <h5>{{brand}}</h3></h5><br>
+                    <h5>{{categories}}</h3><br>
+                    <h5>{{name}}</h3>
+                </td>
+            </tr>
+            <tr><td height = "50"></td></tr>
+              <td colspan = "2">
+                <h3>전성분</h3><br>
+                {% for ingr in ingrlist %}
+                  <span>{{ingr.ingredient}} &nbsp; </span>
+                {% endfor %}
+              </td>
+            <tr><td height = "80"></td></tr>
+        </table>
+        
+      <h3>상품 리뷰</h3><br>
+        {% for review in reviews %}
+    <div class="card">
+      <div class="card-body">
+        <p style = "font-size: 15px;">{{review}}</p>
+      </div>
+    </div>
+    {% endfor %}  
+    
+      </div>      
+  </body>

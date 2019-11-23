@@ -106,20 +106,55 @@ function goDetail(name) {
     max-width: 1200px;
     margin: auto;
     }
-
-    .container-fluid{
-      position: relative;
-      top : 20%;
-      left : 20%;
-    }
-    #reviewlist{
-      position : relative;
-
-    }
-    .review{
-      padding : 10px;
-      font-size:10px; 
+   
+    .review, .recommendproduct{
+      margin : 0 30 100 30;
+      font-size:12px; 
       line-height: 20px;
+    }
+    h3{
+      font-size : 15px;
+      font-weight: bold;
+    }
+    .t{
+      width : 1300px;
+      position: relative;
+      top : 15%;
+      left : 10%;
+    }
+    td{
+      height: 300;
+      text-align: center;
+    }
+    .t1{
+      float: left;
+    }
+    .t2{
+      float: right;
+    }
+
+    h2{
+      font-size: 20px;
+      font-weight: bold;
+    }
+    #titletd{
+      height: 50;
+    }
+    .review td{
+      height: 70;
+    }
+
+    .recommendproduct .card{
+      position : relative;
+      height: 300px;
+      width : 300px;
+      margin : 10px;
+    }
+    .review .card{
+      position : relative;
+      width : 1200px;
+      line-height: 30px;
+      margin : 10px;
     }
     </style>  
   
@@ -138,88 +173,92 @@ function goDetail(name) {
     </header>
   
   <body>
+    <div class = "t">
+      <div class = "cause">
+      <table class = "t1" style="margin-bottom: 20px;">
+          <tr><td id = "titletd" colspan = "2"><h2>원인분석</h2></td></tr>
+        {%for item in item%}
+          <tr>
+            <td width = "200"><h2>{{forloop.counter}}순위</h2></td>
+            <td>
+              <img src="/static/{{item.brand}}_{{item.name}}.png" style="place-self: center; margin : 30px;" width = 200 height = 200 alt="제품사진">
+            </td>
+            <td width = "200">
+              <h3>{{item.brand}}</h3>
+              <h3>{{item.categories}}</h3>
+              <h3>{{item.name}}</h3>
+            </td>
+            <td width = "100"></td>
+          </tr>
+          {%endfor%}
+        </table>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class = "col-md-7">
-
-      {%for item in item%}
-  
-      <div class = "row">
-        <div class = "deco">
-        <div class="col-md-3">
-          <h1>{{forloop.counter}}순위</h1>
-
-        </div>
-
-        <div class = "col-md-5"> <!-- 이미지넣는곳-->
-          <img src="/static/{{item.brand}}_{{item.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-        </div>
-        <div class = "col-md-3"> <!--제품 설명-->
-          <h3> {{item.name}} </h3><br>
-          <h3> {{item.categories}} </h3><br>
-          <h3> {{item.brand}} </h3><br>
-        </div>
+        <table class = "t2">
+          <tr><td id = "titletd" colspan = "2"><h2>원인성분</h2></td></tr>
+          <tr><td>
+              {%for compo in components1%}
+              <h3>{{compo.component_name}} {{compo.component_sim}}</h3>
+              {%endfor%}
+          </td></tr>
+          <tr><td>
+              {%for compo in components2%}
+              <h3>{{compo.component_name}} {{compo.component_sim}}</h3>
+              {%endfor%}
+          </td></tr>
+        </table>
       </div>
-      </div>
 
-      
-
+    <div class = "recommendproduct" style="clear:both;">
+      <h2>대체 제품</h2><br>
+    <div class = "card-deck" style="clear:both; text-align: center;">
+      {%for recommend in recommend1 %}
+        <div class="card">
+          <div class="card-body">
+            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.name}}</p>
+              <p style = "font-size: 15px;">{{recommend.categories}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+          </div>
+        </div>
       {%endfor%}
-      
+     
+      {%for recommend in recommend2 %}
+        <div class="card">
+          <div class="card-body">
+            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.name}}</p>
+              <p style = "font-size: 15px;">{{recommend.categories}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+          </div>
+        </div>
+      {%endfor%}
 
-    </div>
-    <div class="col-md-4 border border-secondary">
-      <div class="row border border-secondary" style="height:50%;" >
-          {%for compo in components1%}
-          <h3>{{compo.component_name}}</h3>
-          <h3>{{compo.component_sim}}</h3>
-      </br>
-          {%endfor%}
-      </div>
-      <div class="row border border-secondary" style="height:50%;">
-          {%for compo in components2%}
-          <h3>{{compo.component_name}}</h3><br>
-          <h3>{{compo.component_sim}}</h3>
-        </br>
-          {%endfor%}
-      </div>
-      <!--
-      <div class="row border border-secondary"style="height:33.3%">
-        {%for compo in components3%}
-        <h3>{{compo.component_name}}</h3><br>
-        <h3>{{compo.component_sim}}</h3><br>
-        {%endfor%}
-      </div>
-      -->
-    </div>
-    
-    
+      {%for recommend in recommend3 %}
+        <div class="card">
+          <div class="card-body">
+            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.name}}</p>
+              <p style = "font-size: 15px;">{{recommend.categories}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+          </div>
+        </div>
+      {%endfor%}
+    </div>    
+    </div>    
+      
+      
+  <div class = "review" style="clear:both;">
+    <h2>상품 리뷰</h2><br>
     {%for productReview in productReviews%}
       {%for productR in productReview%}
-        <div id = "reviewlist" class="col-md-9 border border-secondary">
-          <p class = "review">{{productR}}</p>
+        <div class="card">
+          <div class="card-body">
+            <p style = "font-size: 15px;">{{productR}}</p>
+          </div>
         </div>
       {%endfor%}
     {%endfor%}
-
-    <div class="row">
-      {%for recommendItem in recommendItems %}
-      <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img src= "/static/{{recommendItem.brand}}_{{recommendItem.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-            <div class="card-body">
-                <a> {{recommendItem.name}} </a><br>
-                <a> {{recommendItem.categories}} </a><br>
-                <a> {{recommendItem.brand}} </a><br>
-              <div class="d-flex justify-content-between align-items-center"></div>
-            </div>
-          </div>
-      </div>
-      {%endfor%}
-    </div>
-      
-    </div>
-    </div>
+  </div>
+</div>
   </body>
     
