@@ -173,9 +173,12 @@ function goDetail(name) {
                   <span>{{ingr.ingredient}} &nbsp; </span>
                 {% endfor %}
               </td>
+            <tr><td height = "100"></td></tr>
             <tr>
                 <td colspan = "2">
-                   
+                  {% for review in reviews %}
+                    <p>{{review}}</p>
+                  {% endfor %}
                   </td>
             </tr>
         </table>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Item
 from .models import IngredientsInItems
 from django.core.paginator import Paginator
+import json
 
 def skincare(request):
     items = Item.objects
@@ -36,6 +37,14 @@ def detail(request):
     name = request.POST.get('iname', False)
     ingrlist =IngredientsInItems.objects.all().filter(item_name = name)
     
+    with open("webcrawler/items.json") as data_file:
+        items = json.load(data_file)
+    temp_reviews = items[name]["reviews"]
+    raw_reviews = []
+    for data in temp_reviews:
+        raw_reviews.append(data[1])
+
+    
     item_brand = request.POST.get('brand',False)
     item_categories = request.POST.get('categories',False)
-    return render(request, 'detail.html', {'ingrlist':ingrlist, 'name': name, 'brand' : item_brand, 'categories' : item_categories})
+    return render(request, 'detail.html', {'ingrlist':ingrlist, 'reviews':raw_reviews, 'name': name, 'brand' : item_brand, 'categories' : item_categories})
