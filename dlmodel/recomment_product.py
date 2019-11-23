@@ -1,4 +1,3 @@
-from embedding.iembedding import iEmbedding
 import numpy as np
 import json
 
@@ -6,8 +5,8 @@ import json
 class RecommentProduct:
     def __init__(self, input_embedding):
         self._embedding = input_embedding
-        self._items = self._read_file("../webcrawler/items.json")
-        self._ingr_ko2eng = self._read_file("../webcrawler/ingrKo2Eng.json")
+        self._items = self._read_file("webcrawler/items.json")
+        self._ingr_ko2eng = self._read_file("webcrawler/ingrKo2Eng.json")
 
     @staticmethod
     def _read_file(path):
@@ -21,12 +20,12 @@ class RecommentProduct:
 
     def _weights(self, real_sims):
         w = []
-        print(real_sims)
+        # print(real_sims)
         _variance = np.var(real_sims)
-        print(_variance)
+        # print(_variance)
         for sim in real_sims:
             w.append(self._norm_sim(sim, _variance))
-        print(w)
+        # print(w)
         return w
 
     @staticmethod
@@ -45,7 +44,7 @@ class RecommentProduct:
         vec_list = []
         for pname in self._items.keys():
             if len(self._items[pname]["ingredients"]) < 2:
-                # print("not exist ingredients data")
+                print("not exist ingredients data")
                 continue
             eng_name_list = []
             for ko_name in self._items[pname]["ingredients"]:
@@ -64,28 +63,34 @@ class RecommentProduct:
         return vec_list
 
     def get_result(self, symptom, products):
+        print("get_result 실행: ", symptom, products)
         # products는 str의 list
         _topn = 3
         vec_dict = {}
-        _symtom_vec = self._w2v[symptom]
+        _symtom_vec = self._embedding.calc_vec([symptom], 300, 0)
 
         for pname in products:
             if len(self._items[pname]["ingredients"]) < 2:
-                # print("not exist ingredients data")
+                print("not exist ingredients data")
                 continue
             vec_dict[pname] = {}
 
             eng_name_list = []
             eng2ko = {}
             for ko_name in self._items[pname]["ingredients"]:
-                eng_name = self._ingr_ko2eng[ko_name]
-                eng_name_list.append(eng_name)
-                eng2ko[eng_name] = ko_name
+                try:
+                    print(ko_name)
+                    eng_name = self._ingr_ko2eng[ko_name]
+                    print(eng_name)
+                    eng_name_list.append(eng_name)
+                    eng2ko[eng_name] = ko_name
+                except KeyError as e:
+                    continue
 
-            similarities = self.most_similar(symptom, eng_name_list, _topn)
+            similarities = self._embedding.most_similar(symptom, eng_name_list, _topn)
             result_vec = {}
             for sim in similarities:
-                eng_name = sim[0]
+                eng_name = eng_name_list[sim[0]]
                 ko_name = eng2ko[eng_name]
                 result_vec[ko_name] = sim[1]
 
@@ -93,6 +98,6 @@ class RecommentProduct:
             vec_dict[pname]["sim"] = self._product_tot_sim(similarities)
 
         vec_dict = sorted(vec_dict.items(), key=(lambda x: x[1]["sim"]), reverse=True)
-        # print(vec_dict)
+        print("result: ", vec_dict)
 
         return vec_dict

@@ -1,7 +1,7 @@
-from embedding.iembedding import iEmbedding
-from embedding.sktkobert import SktKobert
-from feature_extract.bm25 import Bm25
-from utils import cosine_similarity
+from dlmodel.embedding.iembedding import iEmbedding
+from dlmodel.embedding.sktkobert import SktKobert
+from dlmodel.feature_extract.bm25 import Bm25
+from dlmodel.utils import cosine_similarity
 from konlpy.tag import Kkma
 import json
 import re
@@ -15,7 +15,7 @@ class BertBm25(iEmbedding):
         self._sent_splitter = Kkma()
 
     def _read_stopwords(self):
-        with open("embedding/ko_stopwords.json") as json_file:
+        with open("dlmodel/embedding/ko_stopwords.json") as json_file:
             json_data = json.load(json_file)
         return json_data
 

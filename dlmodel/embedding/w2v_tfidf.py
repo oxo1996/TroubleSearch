@@ -1,18 +1,17 @@
-from embedding.iembedding import iEmbedding
+from dlmodel.embedding.iembedding import iEmbedding
+from dlmodel.utils import cosine_similarity
 import json
-import math
 import re
 import numpy as np
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
-from utils import cosine_similarity
 
 
 class W2vTfidf(iEmbedding):
     def __init__(self):
         # 현재 특정 증상에 관한 벡터만 받아옴. 보완해야 함.
-        self._w2v = self._read_file("embedding/temp_w2v.json")
+        self._w2v = self._read_file("dlmodel/embedding/temp_w2v.json")
         # self._ingr_w2v = self._load_model()
         # self._ingr_ko2eng = self._load_ingr_ko2eng()
         # self._items = self._load_items()
@@ -96,7 +95,8 @@ class W2vTfidf(iEmbedding):
             try:
                 vec_list.append([idx, self._w2v[key]])
             except KeyError as e:
-                print("not found ingr vec in temp_w2v")
+                # print("not found ingr vec in temp_w2v")
+                continue
         return vec_list
 
     def calc_vec(self, docs, dim, type):

@@ -1,10 +1,10 @@
-from feature_extract.bm25 import Bm25
-from embedding.sktkobert import SktKobert
-from utils import cosine_similarity
-from embedding.bert_bm25 import BertBm25
-from detect_review import DetectReview
-from embedding.w2v_tfidf import W2vTfidf
-from recomment_product import RecommentProduct
+from dlmodel.feature_extract.bm25 import Bm25
+from dlmodel.embedding.sktkobert import SktKobert
+from dlmodel.utils import cosine_similarity
+from dlmodel.embedding.bert_bm25 import BertBm25
+from dlmodel.detect_review import DetectReview
+from dlmodel.embedding.w2v_tfidf import W2vTfidf
+from dlmodel.recomment_product import RecommentProduct
 import json
 from konlpy.tag import Kkma
 
@@ -41,5 +41,6 @@ if __name__ == '__main__':
         items = json.load(json_file)
     w2vtfidf = W2vTfidf()
     recom = RecommentProduct(w2vtfidf)
-    result = recom.recommend_product("allergy")
+    #result = recom.recommend_product("allergy")
+    result = recom.get_result("allergy", ["오가니언스 에멀젼", "어린쑥 수분진정 플루이드"])
     print(result)

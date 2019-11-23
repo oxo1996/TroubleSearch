@@ -1,4 +1,4 @@
-from embedding.iembedding import iEmbedding
+from dlmodel.embedding.iembedding import iEmbedding
 
 
 class DetectReview:
