@@ -5,6 +5,7 @@ from ko2eng import Ko2Eng
 from ewg import Ewg
 from daumIngr import DaumIngr
 from glowpick import Glowpick
+from ko2eng import Ko2Eng
 
 
 def crawl_amore():
@@ -45,15 +46,18 @@ def crawl_glowpick():
 
     # execList = [(skinCategory, "skin"), (lotionCategory, "lotion"), (tonerCategory, "toner"), (essenceCategory, "essence"), \
     # (creamCategory, "cream"), (mistCategory, "mist")]
-    execList = [(essenceCategory, "essence"), (creamCategory, "cream"), (mistCategory, "mist")]
+    execList = [(mistCategory, "mist")]
 
     for exc in execList:
         glowpick = Glowpick(exc[0], exc[1])
-        data = webcrawler.crawlData(glowpick)
+        data = webcrawler.crawl_data(glowpick)
 
     print("fully success")
 
 
 if __name__ == '__main__':
-    ewg = Ewg()
-    webcrawler.crawl_data(ewg)
+    # ewg = Ewg()
+    # webcrawler.crawl_data(ewg)
+    # crawl_glowpick()
+    ko2eng = Ko2Eng()
+    ko2eng.get_data()

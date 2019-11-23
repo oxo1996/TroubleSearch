@@ -25,7 +25,7 @@ class Ewg(crawlable):
     def _get_image(self, img_name):
         _opener = urllib.request.build_opener()
         _opener.addheaders = [('User-Agent',
-                              'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
+                               'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
         urllib.request.install_opener(_opener)
 
         _image_link = self._driver.find_element_by_xpath("//*[@id='chemical']/div/img").get_attribute("src")

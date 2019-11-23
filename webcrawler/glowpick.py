@@ -118,6 +118,7 @@ class Glowpick(crawlable):
         self._getEachRankReview(reviews, -1, sosoBtn, 3)
         self._getEachRankReview(reviews, sosoBtn, notgoodBtn, 2)
         self._getEachRankReview(reviews, notgoodBtn, worstBtn, 1)
+        return reviews
 
     def _crawling(self):
         items = self._readFile("items.json")
