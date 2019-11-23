@@ -107,9 +107,8 @@ function goDetail(name) {
     margin: auto;
     }
    
-    .review{
-      margin : 0 30 0 30;
-      padding : 30px;
+    .review, .recommendproduct{
+      margin : 0 30 100 30;
       font-size:12px; 
       line-height: 20px;
     }
@@ -133,11 +132,7 @@ function goDetail(name) {
     .t2{
       float: right;
     }
-    .tdreview{
-      margin : 0 30 0 30;
-      height: 100;
-      text-align:unset;
-    }
+
     h2{
       font-size: 20px;
       font-weight: bold;
@@ -148,9 +143,18 @@ function goDetail(name) {
     .review td{
       height: 70;
     }
-    #recommendtable td{
-      height: 100;
-      width : 400;
+
+    .recommendproduct .card{
+      position : relative;
+      height: 300px;
+      width : 300px;
+      margin : 10px;
+    }
+    .review .card{
+      position : relative;
+      width : 1200px;
+      line-height: 30px;
+      margin : 10px;
     }
     </style>  
   
@@ -170,6 +174,7 @@ function goDetail(name) {
   
   <body>
     <div class = "t">
+      <div class = "cause">
       <table class = "t1" style="margin-bottom: 20px;">
           <tr><td id = "titletd" colspan = "2"><h2>원인분석</h2></td></tr>
         {%for item in item%}
@@ -187,6 +192,7 @@ function goDetail(name) {
           </tr>
           {%endfor%}
         </table>
+
         <table class = "t2">
           <tr><td id = "titletd" colspan = "2"><h2>원인성분</h2></td></tr>
           <tr><td>
@@ -200,71 +206,59 @@ function goDetail(name) {
               {%endfor%}
           </td></tr>
         </table>
-      
-    
-   <div class = "review" style="clear:both;">
-        <table width = "1100">
-            <tr><td colspan = "2" height = "100"><h2>관련 리뷰</h2></td></tr>
-    {%for productReview in productReviews%}
-      {%for productR in productReview%}
-          <tr style="margin-bottom: 10px;"><td class = "tdreview">
-          <p id = "reviewtext">{{productR}}</p>
-        </td></tr>
-      {%endfor%}
-    {%endfor%}
-      </table>
       </div>
-    
-    <table id = "recommendtable">
-      <tr><td id = "titletd" colspan = "3"><h2>대체제품</h2></td></tr>
-      <tr>
-        {%for recommend in recommend1 %}
-        <td>
-            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-        </td>
-        {%endfor%}
 
-        {%for recommend in recommend2 %}
-        <td>
-          <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-        </td>
-        {%endfor%}
+    <div class = "recommendproduct" style="clear:both;">
+      <h2>대체 제품</h2><br>
+    <div class = "card-deck" style="clear:both; text-align: center;">
+      {%for recommend in recommend1 %}
+        <div class="card">
+          <div class="card-body">
+            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.name}}</p>
+              <p style = "font-size: 15px;">{{recommend.categories}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+          </div>
+        </div>
+      {%endfor%}
+     
+      {%for recommend in recommend2 %}
+        <div class="card">
+          <div class="card-body">
+            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.name}}</p>
+              <p style = "font-size: 15px;">{{recommend.categories}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+          </div>
+        </div>
+      {%endfor%}
 
       {%for recommend in recommend3 %}
-      <td>
-        <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-      </td>    
+        <div class="card">
+          <div class="card-body">
+            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.name}}</p>
+              <p style = "font-size: 15px;">{{recommend.categories}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+          </div>
+        </div>
       {%endfor%}
-      </tr>
-
-      <tr>
-          {%for recommend in recommend1 %}
-          <td>
-              <a> {{recommend.name}} </a><br>
-              <a> {{recommend.categories}} </a><br>
-              <a> {{recommend.brand}} </a><br>
-          </td>
-          {%endfor%}
-
-          {%for recommend in recommend2 %}
-          <td>
-              <a> {{recommend.name}} </a><br>
-              <a> {{recommend.categories}} </a><br>
-              <a> {{recommend.brand}} </a><br>
-          </td>
-          {%endfor%}
-
-          {%for recommend in recommend3 %}
-          <td>
-              <a> {{recommend.name}} </a><br>
-              <a> {{recommend.categories}} </a><br>
-              <a> {{recommend.brand}} </a><br>
-          </td>
-          {%endfor%}
-      </tr>
-      <tr><td height = "50"></td></tr>
-    </table>
-
+    </div>    
+    </div>    
+      
+      
+  <div class = "review" style="clear:both;">
+    <h2>상품 리뷰</h2><br>
+    {%for productReview in productReviews%}
+      {%for productR in productReview%}
+        <div class="card">
+          <div class="card-body">
+            <p style = "font-size: 15px;">{{productR}}</p>
+          </div>
+        </div>
+      {%endfor%}
+    {%endfor%}
   </div>
+</div>
   </body>
     
