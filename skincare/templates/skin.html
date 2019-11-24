@@ -117,6 +117,7 @@
       width : 100px;
     }
   </style>  
+  
   <header>
     <div class = "main">
   <div class="logo">
@@ -158,9 +159,20 @@
         <div class="card mb-4 shadow-sm">
           <img src= "/static/{{item.brand}}_{{item.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
           <div class="card-body">
-              <a style="font-size: small;"> {{item.name}} </a><br>
               <a style="font-size: small;"> {{item.categories}} </a><br>
               <a style="font-size: small;"> {{item.brand}} </a><br>
+              <a style="font-size: small;"> {{item.name}} </a><br>
+
+              <div style="text-align: right;">
+                <form id="godetail" action="{% url 'detail' %}" method="post" accept-charset="utf-8">
+                  {% csrf_token %}             
+                  <input type="hidden" name="iname" value="{{item.name}}">
+                  <input type="hidden" name="categories" value={{item.categories}}>
+                  <input type="hidden" name="brand" value={{item.brand}}>
+                  <a href="javascript:;" onclick="document.getElementById('godetail').submit();"><br>자세히보기</a>
+                </form>
+              </div>
+
               <div class="d-flex justify-content-between align-items-center"></div>
           </div>
         </div>

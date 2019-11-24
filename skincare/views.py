@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Item
+from .models import IngredientsInItems
 from django.core.paginator import Paginator
+import json
 
 def skincare(request):
     items = Item.objects
@@ -16,7 +18,7 @@ def productSearch(request):
     item_categories = request.POST.get('categories',False)
     brand_list = Item.objects.all().values_list('brand', flat = True).distinct()
     items = Item.objects
-    
+
     if(item_brand == "전체" and item_categories == "전체"):
         item_list = Item.objects.all()
     elif(item_brand != "전체" and item_categories == "전체"):
@@ -30,3 +32,19 @@ def productSearch(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'skin.html',{'brand_list': brand_list, 'items' : item_list, 'posts' : posts})
+
+def detail(request):
+    name = request.POST.get('iname', False)
+    ingrlist =IngredientsInItems.objects.all().filter(item_name = name)
+    
+    with open("webcrawler/items.json") as data_file:
+        items = json.load(data_file)
+    temp_reviews = items[name]["reviews"]
+    raw_reviews = []
+    for data in temp_reviews:
+        raw_reviews.append(data[1])
+
+    
+    item_brand = request.POST.get('brand',False)
+    item_categories = request.POST.get('categories',False)
+    return render(request, 'detail.html', {'ingrlist':ingrlist, 'reviews':raw_reviews, 'name': name, 'brand' : item_brand, 'categories' : item_categories})
