@@ -5,7 +5,6 @@ from ko2eng import Ko2Eng
 from ewg import Ewg
 from daumIngr import DaumIngr
 from glowpick import Glowpick
-from ko2eng import Ko2Eng
 
 
 def crawl_amore():

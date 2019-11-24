@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # iJson2Sql = Review(items_path)
     # iJson2Sql.insert_data()
 
-    iJson2Sql = IngredientsInItem(items_path)
+    iJson2Sql = IngredientsInItem()
     iJson2Sql.insert_data()
 
     # iJson2Sql = Ingredient("../ingrDesc.json")

@@ -9,13 +9,14 @@ from pymysql.err import IntegrityError
 
 
 class IngredientsInItem(iJson2Sql):
-    def __init__(self, path):
-        self._jsonpath = path
+    def __init__(self):
         self._conn = pymysql.connect(host='localhost', user='root', password='rhwk6925', db='tsdb', charset='utf8')
-        self.data = self._read_data()
+        self.items = self._read_data("../items.json")
+        self.ingr_ko2eng = self._read_data("../ingrKo2Eng.json")
 
-    def _read_data(self):
-        with open(self._jsonpath) as json_file:
+    @staticmethod
+    def _read_data(path):
+        with open(path) as json_file:
             data = json.load(json_file)
         return data
 
@@ -28,19 +29,26 @@ class IngredientsInItem(iJson2Sql):
 
     def insert_data(self):
         try:
-            for pname in self.data.keys():
-                ingr_list = self.data[pname]["ingredients"]
+            for pname in self.items.keys():
+                ko_name_ingr_list = self.items[pname]["ingredients"]
                 item_id = self._find_attr_in_table("item", "id", "name", pname)
-                for ingr in ingr_list:
+                for ko_name in ko_name_ingr_list:
                     # print(ingr)
                     try:
-                        ingr_id = self._find_attr_in_table("ingredient", "id", "ko_name", ingr)
+                        eng_name = self.ingr_ko2eng[ko_name]
+                    except KeyError as e:
+                        print("not exist ingredient information")
+                        continue
+
+                    try:
+                        ingr_id = self._find_attr_in_table("ingredient", "id", "eng_name", eng_name)
                         cursor = self._conn.cursor()
                         query = """insert into ingredients_in_item (item_id, ingredient_id) values (%s, %s)"""
                         cursor.execute(query, (item_id, ingr_id))
                         self._conn.commit()
+                        print(ko_name + " insert success")
                     except IntegrityError as e:
-                        print(ingr, e)
+                        print(eng_name, e)
                         continue
         finally:
             self._conn.close()
