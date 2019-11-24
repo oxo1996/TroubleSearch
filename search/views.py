@@ -11,11 +11,9 @@ def search(request):
 def ajax(request):
     brandName = request.GET['brand']
     categoriesName = request.GET['categories']
-    print(brandName)
     output = Items.objects.filter(brand = brandName, categories = categoriesName)
     result = {}
     for itemResult in output:
         result[itemResult.name] = itemResult.name
-        print(itemResult.name)
     
     return HttpResponse(json.dumps(result),content_type="application/json")

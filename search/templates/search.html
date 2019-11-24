@@ -36,7 +36,7 @@
   }
   ul li a:hover{
     background-color: white;
-    color : black;
+    color : white;
     text-decoration: none;
   }
  
@@ -68,7 +68,7 @@
     position: relative;
     top : 13%;
     left : 12%;
-    color : black;
+    color : white;
     font-family: Noto Sans KR;
   }
   .searchComponent{
@@ -104,17 +104,33 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
+
+
   $(document).ready(function(){
-    var searchProduct = $('#searchProduct').clone();
+    var productCount = 1;
+    
+    
+    
+    
+    
 
     $("#plus").click(function () {
-
-    searchProduct.appendTo("#using");
-      });
+      var searchProduct = $('#product1').clone();
+      searchProduct.children('#product').empty();
+      searchProduct.children('#plus').remove();
+      var productId = 'product'+String(++productCount);
+      searchProduct.attr('id',productId);
+      //searchProduct.children("#categories").attr("name","새로운네임")
+      searchProduct.appendTo("#using");
     
+    });
+
+
     $("#categories").change(function(){
-    var brandName = $("#brand option:selected").val();
-    var categoriesName = $("#categories option:selected").val();
+    var parentProduct = $("#categories").closest("div").attr('id');
+
+    var brandName = $("#"+parentProduct+" #brand option:selected").val();
+    var categoriesName = $("#"+parentProduct+" #categories option:selected").val();
     
     $.ajax({
       method:"GET",
@@ -122,9 +138,10 @@
       dataType:"json",
       data : {brand:brandName, categories:categoriesName},
       success:function(data){ 
+        $( "#"+parentProduct+" #product" ).empty();
         for(var productName in data){
           
-          $("#product").append("<option value = productName>"+data[productName]+"</option>");
+          $("#"+parentProduct+" #product").append("<option value = productName>"+data[productName]+"</option>");
         }
       },
       error: function(request, status, error){
@@ -132,9 +149,6 @@
       }
       
     });
-
-    
-
 
     });
   });
@@ -190,7 +204,8 @@
 
       <div  id="using"class="searchComponent">
 
-          <h3>사용 제품</h3>
+        <h3>사용 제품</h3>
+        <div id= "product1" display="inline-block" style="color:black;">
           <select class = "brand" id = "brand" name = "brand" type="text">
             {%for brand in brand_list %}
             <option value={{brand}}>{{brand}}</option>
@@ -205,9 +220,12 @@
           <select class="product" id = "product" name = "product" type="text">
             
           </select>
+          <input type="button" class="btn btn-default " id="plus"value="+"> 
+        </div>
+
 
         
-          <input type="button" class="btn btn-default " id="plus"value="+"> 
+        
       </div>
 
 
