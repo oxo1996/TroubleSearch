@@ -16,5 +16,6 @@ urlpatterns = [
     path('symp/', include('symptom.urls')),
     path('skin/', include('skincare.urls')),
     path('information/',include('information.urls')),
-    path('search/', search.views.search, name = "search")
+    path('search/', search.views.search, name = "search"),
+    path('ajax/',search.views.ajax,name="ajax"),
 ]

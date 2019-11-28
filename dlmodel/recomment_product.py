@@ -1,9 +1,10 @@
+from dlmodel.embedding.iembedding import iEmbedding
 import numpy as np
 import json
 
 
 class RecommentProduct:
-    def __init__(self, input_embedding):
+    def __init__(self, input_embedding: iEmbedding):
         self._embedding = input_embedding
         self._items = self._read_file("webcrawler/items.json")
         self._ingr_ko2eng = self._read_file("webcrawler/ingrKo2Eng.json")
