@@ -2,6 +2,7 @@ from dlmodel.embedding.iembedding import iEmbedding
 from dlmodel.embedding.sktkobert import SktKobert
 from dlmodel.feature_extract.bm25 import Bm25
 from dlmodel.utils import cosine_similarity
+# from dlmodel import *
 from konlpy.tag import Kkma
 import json
 import re
