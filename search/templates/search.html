@@ -115,7 +115,7 @@
     
 
     $("#plus").click(function () {
-      var searchProduct = $('#product1').clone();
+      var searchProduct = $('#product1').clone(true);
       searchProduct.children('#product').empty();
       searchProduct.children('#plus').remove();
       var productId = 'product'+String(++productCount);
@@ -127,8 +127,8 @@
 
 
     $("#categories").change(function(){
-    var parentProduct = $("#categories").closest("div").attr('id');
-
+    
+    var parentProduct = $(this).closest("div").attr('id');
     var brandName = $("#"+parentProduct+" #brand option:selected").val();
     var categoriesName = $("#"+parentProduct+" #categories option:selected").val();
     
@@ -139,9 +139,9 @@
       data : {brand:brandName, categories:categoriesName},
       success:function(data){ 
         $( "#"+parentProduct+" #product" ).empty();
-        for(var productName in data){
-          
-          $("#"+parentProduct+" #product").append("<option value = productName>"+data[productName]+"</option>");
+        for(var productName in data){          
+          //$("#"+parentProduct+" #product").append("<option value="+"\'"+data[productName]+"\'"+">"+data[productName]+"</option>");
+          $("#"+parentProduct+" #product").append("<option value=\""+data[productName]+"\">"+data[productName]+"</option>");
         }
       },
       error: function(request, status, error){
@@ -217,7 +217,7 @@
             <option value="essence">에센스</option>
             <option value="cream">크림</option>
           </select>
-          <select class="product" id = "product" name = "product" type="text">
+          <select class="product" id = "product" name = "product" >
             
           </select>
           <input type="button" class="btn btn-default " id="plus"value="+"> 

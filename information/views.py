@@ -18,6 +18,7 @@ def information(request):
         items = json.load(data_file)
 
     # gender = request.POST['gender']
+    #product = request.POST.getlist('product[]')
     product = request.POST.getlist('product')
     symptom = request.POST['symptom']
 
