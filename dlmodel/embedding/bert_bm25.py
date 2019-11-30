@@ -51,7 +51,7 @@ class BertBm25(iEmbedding):
         for doc in docs:
             _doc_idx += 1
             # doc = self._preprocess(doc)
-            print(doc)
+            #print(doc)
             try:
                 tokenized_doc, all_encoder_layers, pooled_output = self._model.get_embedding(doc)
             except RuntimeError as e:

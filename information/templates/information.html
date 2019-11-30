@@ -10,6 +10,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script>
@@ -56,8 +61,9 @@ function goDetail(name) {
     wrapWindowByMask(); //화면 마스크 효과
 }
 
-  </script>    
-    <style>
+</script>    
+<style>
+
     .headlist{
     float:right;
     list-style-type: none;
@@ -117,6 +123,7 @@ function goDetail(name) {
       font-weight: bold;
     }
     .t{
+      font-family: "Nanum Gothic";
       width : 1300px;
       position: relative;
       top : 15%;
@@ -156,8 +163,86 @@ function goDetail(name) {
       line-height: 30px;
       margin : 10px;
     }
-    </style>  
+    .more{
+      display: block;
+      font-family: "Nanum Gothic";
+      font-weight: 700;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border: 1px solid #259ce0;
+      text-align: center;
+    }
+</style>  
+<style>
+  #mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color: #000000;
+    display: none; }
+
+.layerpop {
+    display: none;
+    z-index: 1000;
+    border: 2px solid #ccc;
+    background: #fff;
+    cursor: move; }
+
+.layerpop_area .pop_title {
+    padding: 10px 10px 10px 10px;
+    border: 0px solid #aaaaaa;
+    background: #f1f1f1;
+    color: #3eb0ce;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 24px; }
+
+.layerpop_area .layerpop_close {
+    width: 25px;
+    height: 25px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px; }
+
+.layerpop_area .layerpop_close:hover {
+    cursor: pointer; }
+
+  .layerpop_area .content {
+    width: 90%;
+    margin: 5%;
+    color: #828282; }
   
+    .main{
+    background-color: #3B4560;
+  }
+  .sympa{
+    text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color:black;
+    padding : 5px 20px;
+    border : 1px solid transparent;
+    transition: 0.6s ease;
+  }
+  .sympa:hover{
+    color : lightskyblue;
+    text-decoration: none;
+  }
+  .symptable{
+    position:absolute;
+    top : 20%;
+    left : 6%;
+  }
+  .cate{
+    text-align: center; 
+  }
+  .back{
+    background-color: lightsteelblue;
+  }
+</style>
   
   <header>
       <div class = "main">
@@ -170,46 +255,51 @@ function goDetail(name) {
       <li><a href={%url 'symp'%}>증상정보</a></li>
       </ul>
     </div>
-    </header>
+  </header>
   
   <body>
     <div class = "t">
       <div class = "cause">
       <table class = "t1" style="margin-bottom: 20px;">
-          <tr><td id = "titletd" colspan = "2"><h2>원인분석</h2></td></tr>
+        <tr><td id = "titletd" colspan = "1"><h2>의심제품</h2><h2>(위험도)</h2></td></tr>
         {%for item in item%}
           <tr>
-            <td width = "200"><h2>{{forloop.counter}}순위</h2></td>
+            <td id = "rank{{forloop.counter}}" width = "200"><h2>{{forloop.counter}}순위</h2><h2 id="danger"></h2></td>
             <td>
               <img src="/static/{{item.brand}}_{{item.name}}.png" style="place-self: center; margin : 30px;" width = 200 height = 200 alt="제품사진">
             </td>
-            <td width = "200">
+            <td id="reviewCom"width = "300">
               <h3>{{item.brand}}</h3>
               <h3>{{item.categories}}</h3>
               <h3>{{item.name}}</h3>
+              <a  href="#" id="review{{forloop.counter}}" onclick="goDetail('#layerbox'+'{{forloop.counter}}')"><span>{{symptom}}관련 리뷰보기</span></a>
             </td>
-            <td width = "100"></td>
           </tr>
-          {%endfor%}
-        </table>
+        {%endfor%}
+      </table>
 
-        <table class = "t2">
-          <tr><td id = "titletd" colspan = "2"><h2>원인성분</h2></td></tr>
-          <tr><td>
-              {%for compo in components1%}
-              <h3>{{compo.component_name}} {{compo.component_sim}}</h3>
-              {%endfor%}
-          </td></tr>
-          <tr><td>
-              {%for compo in components2%}
-              <h3>{{compo.component_name}} {{compo.component_sim}}</h3>
-              {%endfor%}
-          </td></tr>
-        </table>
-      </div>
-
-    <div class = "recommendproduct" style="clear:both;">
-      <h2>대체 제품</h2><br>
+      <table class = "t2" style="margin-top: 20px;">
+        <tr><td id = "titletd" colspan = "2"><h2>원인성분(위험도)</h2></td></tr>
+        <tr id="compo1"><td>
+            {%for compo in components1%}
+            <h3>{{compo.component_name}} ({{compo.component_sim}}%)</h3>
+            {%endfor%}
+        </td></tr>
+        <tr id="compo2"><td>
+            {%for compo in components2%}
+            <h3>{{compo.component_name}} ({{compo.component_sim}}%)</h3>
+            {%endfor%}
+        </td></tr>
+        <tr id="compo3"><td>
+            {%for compo in components3%}
+            <h3>{{compo.component_name}} ({{compo.component_sim}}%)</h3>
+            {%endfor%}
+        </td></tr>
+      </table>
+    </div>
+    
+  <div class = "recommendproduct" style="clear:both;">
+      <a href="#"><span class = "more"id ="recommendH"></span></a>
     <div class = "card-deck" style="clear:both; text-align: center;">
       {%for recommend in recommend1 %}
         <div class="card">
@@ -244,21 +334,141 @@ function goDetail(name) {
         </div>
       {%endfor%}
     </div>    
-    </div>    
-      
-      
-  <div class = "review" style="clear:both;">
-    <h2>상품 리뷰</h2><br>
-    {%for productReview in productReviews%}
-      {%for productR in productReview%}
-        <div class="card">
-          <div class="card-body">
-            <p style = "font-size: 15px;">{{productR}}</p>
-          </div>
-        </div>
-      {%endfor%}
-    {%endfor%}
   </div>
 </div>
+
+<div id="mask"></div>
+<div id="layerbox1" class="layerpop"
+    style="width: 750px; height: 500px;">
+    <article class="layerpop_area">
+    <div class="pop_title">{{symptom}}관련 리뷰</div>
+    <a href="javascript:popupClose('#layerbox1');" class="layerpop_close"
+        id="layerbox_close">X</a> <br>
+    <div class="content">
+        {%for productR in productReview1%}
+          <div class="card">
+            <div class="card-body">
+              <p style = "font-size: 15px;">{{productR}}</p>
+            </div>
+          </div>
+        {%endfor%}
+    </article>
+</div>
+<div id="layerbox2" class="layerpop"
+    style="width: 750px; height: 500px;">
+    <article class="layerpop_area">
+    <div class="pop_title">{{symptom}}관련 리뷰</div>
+    <a href="javascript:popupClose('#layerbox2');" class="layerpop_close"
+        id="layerbox_close">X</a> <br>
+    <div class="content">
+        {%for productR in productReview2%}
+          <div class="card">
+            <div class="card-body">
+              <p style = "font-size: 15px;">{{productR}}</p>
+            </div>
+          </div>
+        {%endfor%}
+    </article>
+</div>
+<div id="layerbox3" class="layerpop"
+    style="width: 750px; height: 500px;">
+    <article class="layerpop_area">
+    <div class="pop_title">{{symptom}}관련 리뷰</div>
+    <a href="javascript:popupClose('#layerbox3');" class="layerpop_close"
+        id="layerbox_close">X</a> <br>
+    <div class="content">
+        {%for productR in productReview3%}
+          <div class="card">
+            <div class="card-body">
+              <p style = "font-size: 15px;">{{productR}}</p>
+            </div>
+          </div>
+        {%endfor%}
+    </article>
+</div>
   </body>
-    
+  
+
+
+<script type="text/javascript">
+    count = 1;
+    var symptom = '{{symptom}}'.split(",");
+    var dangerous = '{{dangerous}}'.split(",");
+    for(var danger in dangerous){
+      $("#rank"+String(count)).children("#danger").text(dangerous[count-1]);
+      count++;
+    }
+    if(count==3){
+      $("#rank"+String(count)).closest("tr").hide();
+      $("#compo"+String(count)).hide();
+    }
+    if(count==2){
+      $("#rank"+String(count)).closest("tr").hide();
+      $("#compo"+String(count)).hide();
+      $("#rank"+String(count+1)).closest("tr").hide();
+      $("#compo"+String(count+1)).hide();
+    }
+    $(".review").hide();
+    $(".card-deck").hide();
+    $("#recommendH").text(symptom+"에 나쁜 성분들만 뺀 추천제품▼");
+
+    $("#recommendH").click(function(){
+      var text = $("#recommendH").text();
+      if(text == (symptom+"에 나쁜 성분들만 뺀 추천제품▼")){
+        $("#recommendH").text(symptom+"에 나쁜 성분들만 뺀 추천제품▲");
+        $(".card-deck").show();
+        return false;
+      }else{
+        $("#recommendH").text(symptom+"에 나쁜 성분들만 뺀 추천제품▼");
+        $(".card-deck").hide();
+        return false;
+      }
+      
+    })
+</script>
+
+<script>
+
+    function wrapWindowByMask() {
+    //화면의 높이와 너비를 구한다.
+    var maskHeight = $(document).height();
+    var maskWidth = $(window).width();
+
+    //문서영역의 크기
+    console.log( "document 사이즈:"+ $(document).width() + "*" + $(document).height());
+    //브라우저에서 문서가 보여지는 영역의 크기
+    console.log( "window 사이즈:"+ $(window).width() + "*" + $(window).height());
+
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+    $('#mask').css({
+        'width' : maskWidth,
+        'height' : maskHeight
+    });
+
+    //애니메이션 효과
+    //$('#mask').fadeIn(1000);
+    $('#mask').fadeTo("slow", 0.5);
+}
+
+function popupOpen(name) {
+    $('.layerpop').css("position", "absolute");
+    //영역 가운에데 레이어를 뛰우기 위해 위치 계산
+    $('.layerpop').css("top",(($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
+    $('.layerpop').css("left",(($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft());
+    $('.layerpop').draggable();
+    $(name).show();
+}
+
+function popupClose(name) {
+    $(name).hide();
+    $('#mask').hide();
+}
+
+function goDetail(name) {
+
+
+    popupOpen(name); //레이어 팝업창 오픈
+    wrapWindowByMask(); //화면 마스크 효과
+}
+
+</script>

@@ -129,8 +129,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TATICFILES_DIRS=[
-    os.path.join(BASE_DIR, 'home','skincare', 'static')
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
