@@ -4,6 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='//cdn.jsdelivr.net/font-kopub/1.0/kopubdotum.css'>
 
 <!DOCTYPE html>
 <head>
@@ -12,6 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@1.0/nanumbarungothicsubset.css">
+
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
@@ -119,31 +122,40 @@ function goDetail(name) {
       line-height: 20px;
     }
     h3{
-      font-size : 15px;
-      font-weight: bold;
+      font-size : 18px;
+      font-weight: 400;
+      color:black;
+      font-family: 'NanumBarunGothic';
+      
+    }
+    h2{
+      font-size: 22px;
+      font-weight: 600;
+      color:black;
+      /* font-family: 'KoPub Dotum'; font-size: 2em; */
     }
     .t{
-      font-family: "Nanum Gothic";
+      font-family: 'NanumBarunGothic';
       width : 1300px;
       position: relative;
       top : 15%;
       left : 10%;
+      background: #fafafa;
+      
     }
     td{
       height: 300;
       text-align: center;
+      
     }
     .t1{
       float: left;
     }
-    .t2{
+    /* .t2{
       float: right;
-    }
+    } */
 
-    h2{
-      font-size: 20px;
-      font-weight: bold;
-    }
+    
     #titletd{
       height: 50;
     }
@@ -260,11 +272,11 @@ function goDetail(name) {
   <body>
     <div class = "t">
       <div class = "cause">
-      <table class = "t1" style="margin-bottom: 20px;">
-        <tr><td id = "titletd" colspan = "1"><h2>의심제품</h2><h2>(위험도)</h2></td></tr>
+      <table class = "t1" >
+        <tr><td id = "titletd" colspan = "1"><h2>위험순위</h2></td><td id = "titletd" colspan = "1"><h2>제품</h2></td><td id = "titletd" colspan = "1"><h2>제품 정보</h2></td></tr>
         {%for item in item%}
           <tr>
-            <td id = "rank{{forloop.counter}}" width = "200"><h2>{{forloop.counter}}순위</h2><h2 id="danger"></h2></td>
+            <td id = "rank{{forloop.counter}}" width = "200"><h3>{{forloop.counter}}순위</h3><h3 id="danger"></h3></td>
             <td>
               <img src="/static/{{item.brand}}_{{item.name}}.png" style="place-self: center; margin : 30px;" width = 200 height = 200 alt="제품사진">
             </td>
@@ -272,14 +284,14 @@ function goDetail(name) {
               <h3>{{item.brand}}</h3>
               <h3>{{item.categories}}</h3>
               <h3>{{item.name}}</h3>
-              <a  href="#" id="review{{forloop.counter}}" onclick="goDetail('#layerbox'+'{{forloop.counter}}')"><span>{{symptom}}관련 리뷰보기</span></a>
+              <a  href="#" id="review{{forloop.counter}}" style="background-color: #9adada;color: #fff; border-color: #9adada; border-radius: 20px;    padding: 4px 9px 3px 9px; "onclick="goDetail('#layerbox'+'{{forloop.counter}}')"><span> {{symptom}}관련 리뷰보기 </span></a>
             </td>
           </tr>
         {%endfor%}
       </table>
-
-      <table class = "t2" style="margin-top: 20px;">
-        <tr><td id = "titletd" colspan = "2"><h2>원인성분(위험도)</h2></td></tr>
+      
+      <table class = "t2">
+        <tr><td id = "titletd" colspan = "2" ><h2>원인성분(위험도)</h2></td></tr>
         <tr id="compo1"><td>
             {%for compo in components1%}
             <h3>{{compo.component_name}} ({{compo.component_sim}}%)</h3>
@@ -299,7 +311,7 @@ function goDetail(name) {
     </div>
     
   <div class = "recommendproduct" style="clear:both;">
-      <a href="#"><span class = "more"id ="recommendH"></span></a>
+      <a href="#"><span class = "more"id ="recommendH" style="font-size:15px;"></span></a>
     <div class = "card-deck" style="clear:both; text-align: center;">
       {%for recommend in recommend1 %}
         <div class="card">
@@ -416,11 +428,11 @@ function goDetail(name) {
       var text = $("#recommendH").text();
       if(text == (symptom+"에 나쁜 성분들만 뺀 추천제품▼")){
         $("#recommendH").text(symptom+"에 나쁜 성분들만 뺀 추천제품▲");
-        $(".card-deck").show();
+        $(".card-deck").fadeIn("slow");
         return false;
       }else{
         $("#recommendH").text(symptom+"에 나쁜 성분들만 뺀 추천제품▼");
-        $(".card-deck").hide();
+        $(".card-deck").fadeOut("slow");
         return false;
       }
       
