@@ -5,89 +5,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<script src="/js/designSelect_1.4.js"></script> 
+<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
+
 
 <!DOCTYPE html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="styles.css">
-
-<style>
-  ul{
-    float:right;
-    list-style-type: none;
-    margin-top: 30px;
-  }
-  ul li{
-    display : inline-block;
-  }
-  ul li a{
-    text-decoration: none;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    color:white;
-    padding : 5px 20px;
-    border : 1px solid transparent;
-    transition: 0.6s ease;
-  }
-  ul li a:hover{
-    background-color: white;
-    color : white;
-    text-decoration: none;
-  }
- 
-  .logo img{
-    position: absolute;
-    margin-top: 30px;
-    margin-left: 25px;
-    float:left;
-    width:25px;
-    height: auto;
-    left:30px;
-  }
-  .logo a{
-    position: absolute;
-    margin-top: 28px;
-    margin-left: 60px;
-    left:30px;
-    text-decoration: none;
-    font-family: Roboto;
-    font-size: 20px;
-    font-weight: bold;
-    color:white;
-  }
-  .main{
-    max-width: 1200px;
-    margin: auto;
-  }
-  .row{
-    position: relative;
-    top : 13%;
-    left : 12%;
-    color : white;
-    font-family: Noto Sans KR;
-  }
-  .searchComponent{
-    margin : 30 30 0 30;
-  }
-  .title{
-    margin-bottom : 20px;
-  }
-  body{
-      background-image:url("{%static 'cosmetic.png'%}");
-      height: 100vh;
-      background-size : cover;
-      background-repeat:no-repeat;
-      background-position: center;
-      /*min-height: 100%;
-      min-width: 100%;*/
-    }
-  </style>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
 <header>
   <div class = "main">
 <div class="logo">
@@ -100,16 +30,172 @@
   </ul>
 </div>
 </header>
+<style>
+.searchtitle{
+  padding-left:20px;
+}
+ul{
+	float:right;
+	list-style-type: none;
+	margin-top: 30px;
+}
+ul li{
+	display : inline-block;
+}
+ul li a{
+	text-decoration: none;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	color:white;
+	padding : 5px 20px;
+	border : 1px solid transparent;
+	transition: 0.6s ease;
+}
+ul li a:hover{
+	background-color: white;
+	color : white;
+	text-decoration: none;
+}
 
+.logo img{
+	position: absolute;
+	margin-top: 30px;
+	margin-left: 25px;
+	float:left;
+	width:25px;
+	height: auto;
+	left:30px;
+}
+.logo a{
+	position: absolute;
+	margin-top: 28px;
+	margin-left: 60px;
+	left:30px;
+	text-decoration: none;
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: bold;
+	color:white;
+}
+.main{
+	max-width: 1200px;
+	margin: auto;
+}
+.row{
+	position: relative;
+	top : 13%;
+	left : 12%;
+	color : white;
+	font-family: Noto Sans KR;
+}
+.searchComponent{
+	margin : 50 30 0 30;
+}
+.title{
+	margin-bottom : 20px;
+}
+body{
+	background-image:url("{%static 'cosmetic.png'%}");
+	height: 100vh;
+	background-size : cover;
+	background-repeat:no-repeat;
+	background-position: center;
+	/*min-height: 100%;
+	min-width: 100%;*/
+}
+select{
+  border-radius: 7px; 
+}
+select.product{
+	position:relative;
+	z-index:10;
+	width:180px !important;
+	/* height:26px !important;
+	line-height:26px; */
+}
+#plus{
+  border-radius: 20px;
+}
+/* dynamically created SPAN, placed below the SELECT */
+span.product{
+	position:absolute;
+	bottom:0;
+	float:left;
+	left:0;
+	width:166px;
+	height:26px;
+	line-height:26px;
+	text-indent:10px;
+	cursor:default;
+	z-index:1;
+}
+/* #submit{
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	width: 250px;
+	height: 70px;
+	border: 1px solid cyan;
+	border-radius: 40px;
+	background: transparent;
+	color: white;
+	letter-spacing: 1px;
+  font-weight: 700;
+	font-size: 18px;
+	font-family: 'Montserrat', sans-serif;
+	-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+	transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+} */
+</style>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+<style>
+  select{ height:35px; line-height: 30px; box-sizing: border-box; } 
+  .designSelect{ position:relative; display:inline-block; cursor:pointer; border:1px solid #e2e2e4; border-radius: 0px; margin:1px 0px; z-index: 10; } 
+  .designSelect .box{ text-align: left; } 
+  .designSelect .box::after{ font-family: 'Font Awesome 5 Free'; font-weight:900; content:"f107"; position:absolute; right:10px; font-size:14px; top:1px; } 
+  .designSelect .option_container{ position:absolute; display:none; left:0px; height:0; border:1px solid #e2e2e4; border-top-right-radius: 0; border-top-left-radius: 0; background: #fff; } 
+  .designSelect .option_container .option{ background:#fff; text-align: left; color:#bdbdbd; } 
+  .designSelect .option_container .option:hover{ background:#f1f1f1; color:#797979; }
+</style>
 <script type="text/javascript">
+    function submitForm(){
 
+    
+    var maskHeight = $(document).height();
+    var maskWidth  = window.document.body.clientWidth;
+    var mask  ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+    var loadingImg ='';
+    loadingImg +="<div id='loadingImg' style=' position: absolute;    left: 50%;  top: 50%; '>";
+    loadingImg +=" <img src=\'{%static '332 (1).gif'%}\'"+ "style='position: absolute; display: block;'>";
+    loadingImg += "</div>";  
+    $("#loading").show();
+    $('body').append(mask).append(loadingImg);
+    $('#mask').css({
+              'width' : maskWidth,
+              'height': maskHeight,
+              'opacity' :'0.3'
+      });
+    $('#mask').show();
+    document.form.submit();
+
+    return true;
+    };
 
   $(document).ready(function(){
     var productCount = 1;
-    
-    
+
+    $('select.select').each(function(){
+				var title = $(this).attr('title');
+				if( $('option:selected', this).val() != ''  ) title = $('option:selected',this).text();
+				$(this)
+					.css({'z-index':10,'opacity':0,'-khtml-appearance':'none'})
+					.after('<span class="product">' + title + '</span>')
+					.change(function(){
+						val = $('option:selected',this).text();
+						$(this).next().text(val);
+						})
+			});
     
     
     
@@ -125,54 +211,101 @@
     
     });
 
-
-    $("#categories").change(function(){
-    
-    var parentProduct = $(this).closest("div").attr('id');
-    var brandName = $("#"+parentProduct+" #brand option:selected").val();
-    var categoriesName = $("#"+parentProduct+" #categories option:selected").val();
-    
-    $.ajax({
-      method:"GET",
-      url : "{% url 'ajax' %}",
-      dataType:"json",
-      data : {brand:brandName, categories:categoriesName},
-      success:function(data){ 
-        $( "#"+parentProduct+" #product" ).empty();
-        for(var productName in data){          
-          //$("#"+parentProduct+" #product").append("<option value="+"\'"+data[productName]+"\'"+">"+data[productName]+"</option>");
-          $("#"+parentProduct+" #product").append("<option value=\""+data[productName]+"\">"+data[productName]+"</option>");
-        }
-      },
-      error: function(request, status, error){
-      alert("브랜드와 카테고리를 다시 설정해주세요!");
-      }
+    $("#categories").on("change",dropdown);
+    $("#brand").on("change",dropdown);
+    function dropdown(){
+      var parentProduct = $(this).closest("div").attr('id');
+      var brandName = $("#"+parentProduct+" #brand option:selected").val();
+      var categoriesName = $("#"+parentProduct+" #categories option:selected").val();
       
-    });
+      $.ajax({
+        method:"GET",
+        url : "{% url 'ajax' %}",
+        dataType:"json",
+        data : {brand:brandName, categories:categoriesName},
+        success:function(data){ 
+          $( "#"+parentProduct+" #product" ).empty();
+          for(var productName in data){          
+            //$("#"+parentProduct+" #product").append("<option value="+"\'"+data[productName]+"\'"+">"+data[productName]+"</option>");
+            $("#"+parentProduct+" #product").append("<option value=\""+data[productName]+"\">"+data[productName]+"</option>");
+          }
+        },
+        error: function(request, status, error){
+        alert("브랜드와 카테고리를 다시 설정해주세요!");
+        }
+          
+      });
 
-    });
+    }
+
+
+
+
   });
-</script>
 
+</script>
+<style>
+#submit{
+  display: block;
+	margin: 0 auto;
+	padding: 0;
+	width: 250px;
+	height: 70px;
+	border: 1px solid cyan;
+	border-radius: 40px;
+	background: transparent;
+	color: white;
+	letter-spacing: 1px;
+  font-weight: 700;
+	font-size: 18px;
+	font-family: 'Montserrat', sans-serif;
+	-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+	transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+}
+#submit:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+#submit:before,#submit:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+#submit:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#submit:hover:before,#submit:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+</style>
 <body>
 <div class="row">
   <div class="col-md-2">
   </div>
   <div class="col-md-8">
-    <form class="search" action="{% url 'information' %}" method="POST" accept-charset="utf-8">
+    <form class="search" action="{% url 'information' %}" onsubmit="submitForm()" method="POST" accept-charset="utf-8">
       {% csrf_token %}
       <div class="searchtitle">
         <h1>자가진단</h1>
       </div>
-      <div class="searchComponent" style="font-size:17px;">
+      <div class="searchComponent" style="font-size:17px;" >
         <div class = "title"><h3>성별</h3></div>
         <div class="custom-control custom-radio custom-control-inline" >
-          <input type="radio" id="gender1" name="gender"value="male"  class="custom-control-input">
+          <input type="radio" id="gender1" name="gender"value="male"  class="custom-control-input" required>
           <label class="custom-control-label" for="gender1">남성</label>
         </div>
         
         <div class="custom-control custom-radio custom-control-inline" >
-          <input type="radio" id="gender2" name="gender"value="female" class="custom-control-input">
+          <input type="radio" id="gender2" name="gender"value="female" class="custom-control-input" required>
           <label class="custom-control-label" for="gender2">여성</label>
         </div>
       </div>
@@ -181,7 +314,7 @@
       <div class="searchComponent" style="font-size:17px; ">
           <div class = "title"><h3>피부 타입</h3></div>
         <div class="custom-control custom-radio custom-control-inline" >
-          <input type="radio" id="option1" name="skintype"value="option1"  class="custom-control-input">
+          <input type="radio" id="option1" name="skintype"value="option1"  class="custom-control-input" required>
           <label class="custom-control-label" for="option1">모름</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline" >
@@ -217,10 +350,10 @@
             <option value="essence">에센스</option>
             <option value="cream">크림</option>
           </select>
-          <select class="product" id = "product" name = "product" >
+          <select class="product" id = "product" name = "product" style="margin-top:5px;"required >
             
           </select>
-          <input type="button" class="btn btn-default " id="plus"value="+"> 
+          <input type="button"class="btn btn-default " id="plus"value="+"> 
         </div>
 
 
@@ -235,7 +368,7 @@
       <div class="searchComponent" style="font-size:17px;">
           <div class = "title"><h3>증상 타입</h3></div>
         <div class="custom-control custom-radio custom-control-inline" >
-          <input type="radio" id="pimple" name="symptom"value="pimple"  class="custom-control-input">
+          <input type="radio" id="pimple" name="symptom"value="pimple"  class="custom-control-input" required>
           <label class="custom-control-label" for="pimple">여드름</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline" >
@@ -250,18 +383,9 @@
           <input type="radio" id="allergy" name="symptom"value="allergy"  class="custom-control-input">
           <label class="custom-control-label" for="allergy">알레르기</label>
         </div>
-        <div class="custom-control custom-radio custom-control-inline" >
-          <input type="radio" id="other" name="symptom" value="toxicity"  class="custom-control-input">
-          <label class="custom-control-label" for="other">기타</label>
-        </div> 
-      </div>
-      <div class="form-inline  searchComponent">
-        <label for="exampleInputName2" style = "margin-left : 20px;"><h4>세부 증상 : </h4></label>
-        <input type="text" class="form-control" id="" placeholder="" style = "margin-left : 20px;">
-        <input type="button" class="btn btn-default" id="plus"value="+">
       </div>
       <div class="text-center"style="margin-top:30px">
-        <input type="submit" class ="btn btn-primary btn-lg"value="완료">
+        <input type="submit" id="submit"class ="btn btn-primary btn-lg"value="완료">
       </div>
     </form>
   </div>
@@ -271,3 +395,12 @@
 </div>
 
 </body>
+
+<script> 
+    $(function(){ 
+      if ($("select")[0]) {
+         $("select").each(function(){ $(this).designSelect()});
+      }
+    }); 
+    </script>
+    
