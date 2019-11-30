@@ -56,7 +56,7 @@ def information(request):
     components1 = components[:3]
     components2 = components[3:6]
     components3 = components[6:9]
-
+    print(item)
     return render(request, 'information.html',
                   {'item': item, 'components1': components1, 'components2': components2, 'components3': components3,
                    'recommend1': recommend1, 'recommend2': recommend2, 'recommend3': recommend3,
