@@ -19,8 +19,7 @@ def information(request):
 
 
     product = request.POST.getlist('product')
-    symptom = request.POST['symptom']
-    print(product)
+    symptom = request.POST.get('symptom','pimple')
 
     jSymptom = []
     jSymptom.append(koSymptom(symptom))
@@ -31,12 +30,11 @@ def information(request):
     # result = imodel.get_result(symptom, product)
     result = recomment_product.get_result(symptom, product)
 
-    print(result)
     components = component.objects.all()
     components.delete()
 
-    temp = Items.objects.all()
-    item = Items.objects.none()
+    temp = ItemInfo.objects.all()
+    item = ItemInfo.objects.none()
 
     productCount = len(product)
     productReviews = []
@@ -60,16 +58,15 @@ def information(request):
 
     
     recommendItems = _recommendItems(symptom, recomment_product)
-    recommend1 = recommendItems.filter(categories="toner")[:1]
-    recommend2 = recommendItems.filter(categories="lotion")[:1]
-    recommend3 = recommendItems.filter(categories="cream")[:1]
+    recommend1 = recommendItems.filter(category_id=2)[:1]
+    recommend2 = recommendItems.filter(category_id=3)[:1]
+    recommend3 = recommendItems.filter(category_id=0)[:1]
     count = 0
     for elem in result:
         # temp.filter(name = elem[0]).sim = result[pname]["sim"]
-        item |= temp.filter(name=elem[0])
+        item |= temp.filter(item_name=elem[0])
         ingr_vec_list = elem[1]["ingr"]
         componentSim = 0
-        print(elem)
         for ingr_name in ingr_vec_list:
             componentSim = componentSim + ingr_vec_list[ingr_name]
             component.objects.create(component_name=ingr_name, component_sim=str(round(ingr_vec_list[ingr_name]*100, 1)))
@@ -89,19 +86,19 @@ def information(request):
     components1 = components[:3]
     components2 = components[3:6]
     components3 = components[6:9]
-    print(item)
     return render(request, 'information.html',
                   {'item': item, 'components1': components1, 'components2': components2, 'components3': components3,
-                   'recommend1': recommend1, 'recommend2': recommend2, 'recommend3': recommend3,'productReview1': productReview1,'productReview2': productReview2,'productReview3': productReview3,
+                   'recommend1': recommend1, 'recommend2': recommend2, 'recommend3': recommend3,
+                   'productReview1': productReview1,'productReview2': productReview2,'productReview3': productReview3,
                    'productReviews': productReviews,'symptom':','.join(jSymptom),'dangerous':','.join(jDangerous)})
 
 
 def _recommendItems(symptoms, recomment_product):
-    item = Items.objects.none()
-    temp = Items.objects.all()
+    item = ItemInfo.objects.none()
+    temp = ItemInfo.objects.all()
     recommendList = recomment_product.recommend_product(symptoms)
     for elem in recommendList:
-        item |= temp.filter(name=elem[0])
+        item |= temp.filter(item_name=elem[0])
 
     return item
 

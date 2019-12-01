@@ -139,14 +139,21 @@
         {% csrf_token %}
         <p id = "search1">브랜드 </p>
       <select class = "custom-select" id = "selection1" name = "brand" type="text">
-        <option value="전체">전체</option>
+        <option value=10>전체</option>
         {%for brand in brand_list %}
-        <option value={{brand}}>{{brand}}</option>
+        <option value={{brand.brand_id}}>{{brand.brand_name}}</option>
         {% endfor %}
     </select>
 
     <p id = "search2">카테고리 </p>
-    
+    <select class="custom-select" id = "selection2" name = "categories" type="text">
+        <option value=10>전체</option>
+        <option value=2>토너</option>
+        <option value=3>로션</option>
+        <option value=4>에센스</option>
+        <option value=1>미스트</option>
+        <option value=0>크림</option>
+    </select>
 <!--
       <button type="button" class="btn btn-primary" onclick="myFunction()">Search</button>-->
       <button class="btn btn-primary custom" type="submit">Search</button>
@@ -157,19 +164,17 @@
     {%for item in posts %}
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
-          <img src= "/static/{{item.brand}}_{{item.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+          <img src= "/static/{{item.brand_name}}_{{item.item_name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
           <div class="card-body">
-              <a style="font-size: small;"> {{item.categories}} </a><br>
-              <a style="font-size: small;"> {{item.brand}} </a><br>
-              <a style="font-size: small;"> {{item.name}} </a><br>
+              <a style="font-size: small;"> {{item.brand_name}} </a><br>
+              <a style="font-size: small;"> {{item.category_name}} </a><br>
+              <a style="font-size: small;"> {{item.item_name}} </a><br>
 
               <div style="text-align: right;">
-                <form id="godetail" action="{% url 'detail' %}" method="post" accept-charset="utf-8">
+                <form id="{{item.item_id}}" action="{% url 'detail' %}" method="post" accept-charset="utf-8">
                   {% csrf_token %}             
-                  <input type="hidden" name="iname" value="{{item.name}}">
-                  <input type="hidden" name="categories" value={{item.categories}}>
-                  <input type="hidden" name="brand" value={{item.brand}}>
-                  <a href="javascript:;" onclick="document.getElementById('godetail').submit();"><br>자세히보기</a>
+                  <input type="hidden" name="id" value="{{item.item_id}}">
+                  <a href="javascript:;" onclick="document.getElementById('{{item.item_id}}').submit();"><br>자세히보기</a>
                 </form>
               </div>
 
@@ -184,13 +189,11 @@
         <ul class="pagination">
           {%if posts.has_previous%}
           <li class="page-item"><a class="page-link" href = "?page=1">First</a></li>
-          <li class="page-item"><a class="page-link" href = "?page={{posts.previous_page_number}}">Previous</a></li>
-          <li class="page-item"><a class="page-link" href= "?page={{previous_page_number}}">{{posts.previous_page_number}}</a></li>
+          <li class="page-item"><a class="page-link" href= "?page={{posts.previous_page_number}}">{{posts.previous_page_number}}</a></li>
           {%endif%}
           <li class="page-item"><a class="page-link" href= "?page={{posts.number}}">{{posts.number}}</a></li>
           {%if posts.has_next%}
           <li class="page-item"><a class="page-link" href= "?page={{posts.next_page_number}}">{{posts.next_page_number}}</a></li>
-          <li class="page-item"><a class="page-link"  href="?page={{posts.next_page_number}}">Next</a></li>
           <li class="page-item"><a class="page-link"  href = "?page={{posts.paginator.num_pages}}">Last</a></li>
           {%endif%}
         </ul>

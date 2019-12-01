@@ -45,7 +45,7 @@ class RecommentProduct:
         vec_list = []
         for pname in self._items.keys():
             if len(self._items[pname]["ingredients"]) < 2:
-                #print("not exist ingredients data")
+                print("not exist ingredients data")
                 continue
             eng_name_list = []
             for ko_name in self._items[pname]["ingredients"]:
@@ -72,7 +72,7 @@ class RecommentProduct:
 
         for pname in products:
             if len(self._items[pname]["ingredients"]) < 2:
-                #print("not exist ingredients data")
+                print("not exist ingredients data")
                 continue
             vec_dict[pname] = {}
 
@@ -99,6 +99,6 @@ class RecommentProduct:
             vec_dict[pname]["sim"] = self._product_tot_sim(similarities)
 
         vec_dict = sorted(vec_dict.items(), key=(lambda x: x[1]["sim"]), reverse=True)
-        #print("result: ", vec_dict)
+        print("result: ", vec_dict)
 
         return vec_dict

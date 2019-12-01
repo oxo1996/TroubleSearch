@@ -1,50 +1,49 @@
 from django.shortcuts import render
-from .models import Item
-from .models import IngredientsInItems
+from .models import *
 from django.core.paginator import Paginator
 import json
 
 def skincare(request):
-    items = Item.objects
-    brand_list = Item.objects.all().values_list('brand', flat = True).distinct()
-    item_list = Item.objects.all()
-    paginator = Paginator(item_list, 9)
+    brand_list = Brand.objects.all()
+    items = ItemInfo.objects.all()
+    
+    paginator = Paginator(items, 9)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'skin.html', {'brand_list': brand_list, 'items' : items, 'posts' : posts})
 
 def productSearch(request):
-    item_brand = request.POST.get('brand',False)
-    item_categories = request.POST.get('categories',False)
-    brand_list = Item.objects.all().values_list('brand', flat = True).distinct()
-    items = Item.objects
+    item_brand = request.POST.get('brand')
+    item_categories = request.POST.get('categories')
+    brand_list = Brand.objects.all()
 
-    if(item_brand == "전체" and item_categories == "전체"):
-        item_list = Item.objects.all()
-    elif(item_brand != "전체" and item_categories == "전체"):
-        item_list = Item.objects.filter(brand = item_brand)
-    elif(item_brand == "전체" and item_categories != "전체"):
-        item_list = Item.objects.filter(categories = item_categories)
+    if(item_brand == '10' and item_categories == '10'):
+        item_list = ItemInfo.objects.all()
+    elif(item_brand != '10' and item_categories == '10'):
+        item_list = ItemInfo.objects.filter(brand_id = item_brand)
+    elif(item_brand == '10' and item_categories != '10'):
+        item_list = ItemInfo.objects.filter(category_id = item_categories)
     else :
-        item_list = Item.objects.filter(brand = item_brand, categories = item_categories)
- 
+        item_list = ItemInfo.objects.filter(brand_id = item_brand, category_id = item_categories)
+    
+
     paginator = Paginator(item_list, 9)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
-    return render(request, 'skin.html',{'brand_list': brand_list, 'items' : item_list, 'posts' : posts})
+
+    return render(request, 'skin.html',{'brand_list': brand_list, 'posts' : posts})
 
 def detail(request):
-    name = request.POST.get('iname', False)
-    ingrlist =IngredientsInItems.objects.all().filter(item_name = name)
-    
+    itemid = request.POST.get('id', False)
+    item = ItemInfo.objects.filter(item_id = itemid)
+    ingrlist = IngrInfo.objects.filter(item = itemid)
+    '''
     with open("webcrawler/items.json") as data_file:
         items = json.load(data_file)
-    temp_reviews = items[name]["reviews"]
+    temp_reviews = items[itemid]["reviews"]
     raw_reviews = []
     for data in temp_reviews:
-        raw_reviews.append(data[1])
+        raw_reviews.append(data[1])'''
+    raw_reviews = ReviewInfo.objects.filter(item = itemid)
 
-    
-    item_brand = request.POST.get('brand',False)
-    item_categories = request.POST.get('categories',False)
-    return render(request, 'detail.html', {'ingrlist':ingrlist, 'reviews':raw_reviews, 'name': name, 'brand' : item_brand, 'categories' : item_categories})
+    return render(request, 'detail.html', {'ingrlist':ingrlist, 'reviews':raw_reviews, 'item': item})

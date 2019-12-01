@@ -67,9 +67,9 @@ class SVM_model(detector):
 
     def predict(self, review):
         # reviewSamples = ([rating, verified purchases, category, preprocessed token], label)
-        #print(review)
+        print(review)
         token = self.toFeatureVector(review[0], review[1], review[2], self.preProcess(review[3]))
-        #print([token])
+        print([token])
         return self.model.classify_many(map(lambda t: t, [token]))
 
         # 원본

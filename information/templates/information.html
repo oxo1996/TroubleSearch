@@ -278,12 +278,12 @@ function goDetail(name) {
           <tr>
             <td id = "rank{{forloop.counter}}" width = "200"><h3>{{forloop.counter}}순위</h3><h3 id="danger"></h3></td>
             <td>
-              <img src="/static/{{item.brand}}_{{item.name}}.png" style="place-self: center; margin : 30px;" width = 200 height = 200 alt="제품사진">
+              <img src="/static/{{item.brand_name}}_{{item.item_name}}.png" style="place-self: center; margin : 30px;" width = 200 height = 200 alt="제품사진">
             </td>
             <td id="reviewCom"width = "300">
-              <h3>{{item.brand}}</h3>
-              <h3>{{item.categories}}</h3>
-              <h3>{{item.name}}</h3>
+              <h3>{{item.brand_name}}</h3>
+              <h3>{{item.category_name}}</h3>
+              <h3>{{item.item_name}}</h3>
               <a  href="#" id="review{{forloop.counter}}" style="background-color: #9adada;color: #fff; border-color: #9adada; border-radius: 20px;    padding: 4px 9px 3px 9px; "onclick="goDetail('#layerbox'+'{{forloop.counter}}')"><span> {{symptom}}관련 리뷰보기 </span></a>
             </td>
           </tr>
@@ -316,10 +316,10 @@ function goDetail(name) {
       {%for recommend in recommend1 %}
         <div class="card">
           <div class="card-body">
-            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-              <p style = "font-size: 15px;">{{recommend.name}}</p>
-              <p style = "font-size: 15px;">{{recommend.categories}}</p>
-              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+            <img src= "/static/{{recommend.brand_name}}_{{recommend.item_name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.item_name}}</p>
+              <p style = "font-size: 15px;">{{recommend.category_name}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand_name}}</p>
           </div>
         </div>
       {%endfor%}
@@ -327,10 +327,10 @@ function goDetail(name) {
       {%for recommend in recommend2 %}
         <div class="card">
           <div class="card-body">
-            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-              <p style = "font-size: 15px;">{{recommend.name}}</p>
-              <p style = "font-size: 15px;">{{recommend.categories}}</p>
-              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+            <img src= "/static/{{recommend.brand_name}}_{{recommend.item_name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.item_name}}</p>
+              <p style = "font-size: 15px;">{{recommend.category_name}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand_name}}</p>
           </div>
         </div>
       {%endfor%}
@@ -338,10 +338,10 @@ function goDetail(name) {
       {%for recommend in recommend3 %}
         <div class="card">
           <div class="card-body">
-            <img src= "/static/{{recommend.brand}}_{{recommend.name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
-              <p style = "font-size: 15px;">{{recommend.name}}</p>
-              <p style = "font-size: 15px;">{{recommend.categories}}</p>
-              <p style = "font-size: 15px;">{{recommend.brand}}</p>
+            <img src= "/static/{{recommend.brand_name}}_{{recommend.item_name}}.png" style="place-self: center;" width = 200 height = 200 alt="제품사진">
+              <p style = "font-size: 15px;">{{recommend.item_name}}</p>
+              <p style = "font-size: 15px;">{{recommend.category_name}}</p>
+              <p style = "font-size: 15px;">{{recommend.brand_name}}</p>
           </div>
         </div>
       {%endfor%}

@@ -74,6 +74,24 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
+class Brand(models.Model):
+    brand_id = models.IntegerField(primary_key=True)
+    brand_name = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'brand'
+
+
+class Category(models.Model):
+    category_id = models.IntegerField(primary_key=True)
+    category_name = models.CharField(max_length=15, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'category'
+
+
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -118,42 +136,128 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Ingrdesc(models.Model):
-    ingr_name = models.CharField(primary_key=True, max_length=100)
-    description = models.CharField(max_length=15000, blank=True, null=True)
+class DjangoSite(models.Model):
+    domain = models.CharField(unique=True, max_length=100)
+    name = models.CharField(max_length=50)
 
     class Meta:
         managed = False
-        db_table = 'ingrdesc'
+        db_table = 'django_site'
 
 
-class IngredientsInItems(models.Model):
-    item_name = models.CharField(primary_key=True, max_length=40)
-    ingredient = models.CharField(max_length=40)
-
-    class Meta:
-        managed = False
-        db_table = 'ingredients_in_items'
-        unique_together = (('item_name', 'ingredient'),)
-
-
-class Ingrko2Eng(models.Model):
-    ko_name = models.CharField(primary_key=True, max_length=50)
-    eng_name = models.CharField(max_length=100)
+class InformationComponent(models.Model):
+    component_name = models.CharField(max_length=50)
+    component_sim = models.CharField(max_length=50)
 
     class Meta:
         managed = False
-        db_table = 'ingrko2eng'
-        unique_together = (('ko_name', 'eng_name'),)
+        db_table = 'information_component'
 
-class Items(models.Model):
-    name = models.CharField(primary_key=True, max_length=40)
-    categories = models.CharField(max_length=20)
-    brand = models.CharField(max_length=30)
+
+class Ingredient(models.Model):
+    id = models.IntegerField(primary_key=True)
+    ko_name = models.CharField(max_length=500, blank=True, null=True)
+    eng_name = models.CharField(max_length=1000, blank=True, null=True)
+    ewg_rank = models.IntegerField(blank=True, null=True)
+    ko_desc = models.CharField(max_length=5000, blank=True, null=True)
+    eng_desc = models.CharField(max_length=5000, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'items'
+        db_table = 'ingredient'
+
+
+class IngredientsInItem(models.Model):
+    item = models.ForeignKey('Item', models.DO_NOTHING, primary_key=True)
+    ingredient = models.ForeignKey(Ingredient, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'ingredients_in_item'
+        unique_together = (('item', 'ingredient'),)
+
+class IngrInfo(models.Model):
+    id = models.IntegerField()
+    ko_name = models.CharField(max_length=500, blank=True, null=True)
+    eng_name = models.CharField(max_length=1000, blank=True, null=True)
+    ewg_rank = models.IntegerField(blank=True, null=True)
+    ko_desc = models.CharField(max_length=5000, blank=True, null=True)
+    eng_desc = models.CharField(max_length=5000, blank=True, null=True)
+    item = models.ForeignKey('Item', models.DO_NOTHING, primary_key=True)
+    ingredient = models.ForeignKey(Ingredient, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'ingr_info'
+        unique_together = (('item', 'ingredient'),)
+
+class ItemInfo(models.Model):
+    item_id = models.IntegerField(primary_key=True)
+    item_name = models.CharField(max_length=50, blank=True, null=True)
+    brand_id = models.IntegerField()
+    brand_name = models.CharField(max_length=20, blank=True, null=True)
+    category_id = models.IntegerField()
+    category_name = models.CharField(max_length=15, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'item_info'
+
+class Item(models.Model):
+    item_id = models.IntegerField(primary_key=True)
+    item_name = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'item'
+
+
+class ItemsInBrand(models.Model):
+    item_id = models.ForeignKey(Item, models.DO_NOTHING, primary_key=True)
+    brand_id = models.ForeignKey(Brand, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'items_in_brand'
+
+
+class ItemsInCategory(models.Model):
+    item_id = models.ForeignKey(Item, models.DO_NOTHING, primary_key=True)
+    category_id = models.ForeignKey(Category, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'items_in_category'
+
+
+class Review(models.Model):
+    id = models.IntegerField(primary_key=True)
+    score = models.IntegerField()
+    content = models.CharField(max_length=5000)
+
+    class Meta:
+        managed = False
+        db_table = 'review'
+
+
+class ReviewsInItem(models.Model):
+    review = models.ForeignKey(Review, models.DO_NOTHING, primary_key=True)
+    item = models.ForeignKey(Item, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'reviews_in_item'
+
+class ReviewInfo(models.Model):
+    id = models.IntegerField(primary_key=True)
+    score = models.IntegerField()
+    content = models.CharField(max_length=5000)
+    item = models.ForeignKey(Item, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'review_info'
+        
 
 class component(models.Model):
     component_name = models.CharField(max_length=50)

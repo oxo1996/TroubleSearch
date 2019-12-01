@@ -166,20 +166,22 @@ function goDetail(name) {
     <div class = "t">
         <table class = "t1" style="margin-bottom: 20px;">
             <tr>
+                {%for item in item %}
                 <td width = "350">
-                    <img src="/static/{{brand}}_{{name}}.png" style="place-self: center; margin : 30px;" width = 300 height = 300 alt="제품사진">
+                    <img src="/static/{{item.brand_name}}_{{item.item_name}}.png" style="place-self: center; margin : 30px;" width = 300 height = 300 alt="제품사진">
                 </td>
                 <td width = "500">
-                    <h5>{{brand}}</h3></h5><br>
-                    <h5>{{categories}}</h3><br>
-                    <h5>{{name}}</h3>
+                    <h5>{{item.brand_name}}</h3></h5><br>
+                    <h5>{{item.category_name}}</h3><br>
+                    <h5>{{item.item_name}}</h3>
                 </td>
+                {% endfor %}
             </tr>
             <tr><td height = "50"></td></tr>
               <td colspan = "2">
                 <h3>전성분</h3><br>
                 {% for ingr in ingrlist %}
-                  <span>{{ingr.ingredient}} &nbsp; </span>
+                  <span>{{ingr.ko_name}} &nbsp; </span>
                 {% endfor %}
               </td>
             <tr><td height = "80"></td></tr>
@@ -189,7 +191,7 @@ function goDetail(name) {
         {% for review in reviews %}
     <div class="card">
       <div class="card-body">
-        <p style = "font-size: 15px;">{{review}}</p>
+        <p style = "font-size: 15px;">{{review.content}}</p>
       </div>
     </div>
     {% endfor %}  

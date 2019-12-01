@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'cd_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'troublesearch', # DB명
+        'NAME': 'tsdb', # DB명
         'USER': 'root', # 데이터베이스 계정
         'PASSWORD': 'tjdals7337', # 계정 비밀번호
         'HOST': '127.0.0.1', # 데이테베이스 주소(IP)
-        'PORT': '3306'
+        'PORT': '3306',
 }
 }
 
@@ -133,7 +133,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS=[
-    os.path.join(BASE_DIR, 'home','skincare', 'static')
+    os.path.join(BASE_DIR, 'skincare', 'static'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

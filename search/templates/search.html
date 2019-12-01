@@ -341,14 +341,15 @@ span.product{
         <div id= "product1" display="inline-block" style="color:black;">
           <select class = "brand" id = "brand" name = "brand" type="text">
             {%for brand in brand_list %}
-            <option value={{brand}}>{{brand}}</option>
+            <option value={{brand.brand_id}}>{{brand.brand_name}}</option>
             {% endfor %}
           </select>
           <select class="categories" id = "categories" name = "categories" type="text">
-            <option value="toner">토너</option>
-            <option value="lotion">로션</option>
-            <option value="essence">에센스</option>
-            <option value="cream">크림</option>
+            <option value=2>토너</option>
+            <option value=3>로션</option>
+            <option value=4>에센스</option>
+            <option value=1>미스트</option>
+            <option value=0>크림</option>
           </select>
           <select class="product" id = "product" name = "product" style="margin-top:5px;"required >
             

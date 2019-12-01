@@ -3,127 +3,125 @@
 <html>
 <head>
   <title>TroubleSearch</title>
-  <meta name="description" content="피부 증상과 스킨케어 제품의 간단한 입력만으로 원인을 찾아보세요!">
   <meta name="google-site-verification" content="BaKP9FJPtjBbRuZPCbTSZ4JwqW0UApPKlsqRmKntGTg" />
   <meta name="naver-site-verification" content="572d8e0b0b068a8400f542b61e7d6cddb2374d39"/>
-  <meta name="robots" content="index,follow">
-  <link rel="stylesheet" href="{% static 'admin/css/style.css' %}">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
 
   <meta charset="utf-8">
-<style>
-*{
-    margin: 0;
-    padding : 0;
-  }
-  header{
-    background-image:url("{%static 'cosmetic.png'%}");
-    height: 100vh;
-    background-size : cover;
-    background-repeat:no-repeat;
-    background-position: center;
-  }
-  body{
-    min-height: 700px;
-    min-width: 1500px;
-  }
-  ul{
-    float:right;
-    list-style-type: none;
-    margin-top: 30px;
-  }
-  ul li{
-    display : inline-block;
-  }
-  ul li a{
-    text-decoration: none;
-    font-family: Noto Sans KR;
-    font-size: 15px;
-    font-weight: bold;
-    color:white;
-    padding : 5px 20px;
-    border : 1px solid transparent;
-    transition: 0.6s ease;
-  }
-  ul li a:hover{
-    background-color: #fff;
-    color : #000;
-    text-decoration: none;
-  }
-  .logo img{
-    position: absolute;
-    margin-top: 30px;
-    margin-left: 25px;
-    float:left;
-    width:25px;
-    height: auto;
-    left:30px;
-  }
-  .logo a{
-    position: absolute;
-    margin-top: 28px;
-    margin-left: 60px;
-    left:30px;
-    text-decoration: none;
-    font-family: Roboto;
-    font-size: 20px;
-    font-weight: bold;
-    color:white;
-  }
-  .main{
-    max-width: 1200px;
-    margin: auto;
-  }
-  .title{
-    position: absolute;
-    top : 35%;
-    left : 30%;
-    transform: translate(-30%,-50%);
-  }
-  .title2{
-    position:absolute;
-    top : 57%;
-    left : 30%;
-    transform: translate(-30%,-50%);
-  }
-  .title h1{
-    color:white;
-    font-family: Roboto;
-    font-size:50px;
-    font-weight: bolder;
-  }
-  .title2 h2{
-    color:white;
-    font-family: Roboto;
-    font-size:30px;
-    font-weight: 900;
-    line-height:1.5em;
-  }
-  .button{
-    position: absolute;
-    top : 75%;
-    left : 43%;
-    transform: translate(-50%,-50%);
-  }
-  button{
-    width: 150px;
-    height: 60px;
-  }
-  .btnfont{
-    font-family: Roboto;
-    font-weight: bold;
-    color: white;
-    font-size : 20px;
-  }
-  .btn btn-primary{
-    text-decoration: none;
-    transition: 0.6s ease;
-  }
-  .btn btn-primary:hover{
-    background-color: #fff;
-    color : #000;
-  }
+  <style>
+    *{
+      margin: 0;
+      padding : 0;
+    }
+    header{
+      background-image:url("{%static 'cosmetic.png'%}");
+      height: 100vh;
+      background-size : cover;
+      background-repeat:no-repeat;
+      background-position: center;
+    }
+    body{
+      min-height: 700px;
+      min-width: 1500px;
+    }
+    ul{
+      float:right;
+      list-style-type: none;
+      margin-top: 30px;
+    }
+    ul li{
+      display : inline-block;
+    }
+    ul li a{
+      text-decoration: none;
+      font-family: Noto Sans KR;
+      font-size: 15px;
+      font-weight: bold;
+      color:white;
+      padding : 5px 20px;
+      border : 1px solid transparent;
+      transition: 0.6s ease;
+    }
+    ul li a:hover{
+      background-color: #fff;
+      color : #000;
+      text-decoration: none;
+    }
+    .logo img{
+      position: absolute;
+      margin-top: 30px;
+      margin-left: 25px;
+      float:left;
+      width:25px;
+      height: auto;
+      left:30px;
+    }
+    .logo a{
+      position: absolute;
+      margin-top: 28px;
+      margin-left: 60px;
+      left:30px;
+      text-decoration: none;
+      font-family: Roboto;
+      font-size: 20px;
+      font-weight: bold;
+      color:white;
+    }
+    .main{
+      max-width: 1200px;
+      margin: auto;
+    }
+    .title{
+      position: absolute;
+      top : 35%;
+      left : 30%;
+      transform: translate(-30%,-50%);
+    }
+    .title2{
+      position:absolute;
+      top : 57%;
+      left : 30%;
+      transform: translate(-30%,-50%);
+    }
+    .title h1{
+      color:white;
+      font-family: Roboto;
+      font-size:50px;
+      font-weight: bolder;
+    }
+    .title2 h2{
+      color:white;
+      font-family: Roboto;
+      font-size:30px;
+      font-weight: 900;
+      line-height:1.5em;
+    }
+    .button{
+      position: absolute;
+      top : 75%;
+      left : 43%;
+      transform: translate(-50%,-50%);
+    }
+    button{
+      width: 150px;
+      height: 60px;
+    }
+    .btnfont{
+      font-family: Roboto;
+      font-weight: bold;
+      color: white;
+      font-size : 20px;
+    }
+    .btn btn-primary{
+      text-decoration: none;
+      transition: 0.6s ease;
+    }
+    .btn btn-primary:hover{
+      background-color: #fff;
+      color : #000;
+    }
   </style>
 </head>
 <body>
